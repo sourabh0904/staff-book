@@ -323,7 +323,6 @@ function DevelopmentContent() {
           menuItems={developmentMenuItems}
           activeTab={activeTab}
           onTabChange={(key) => setActiveTab(key as any)}
-          showInputSection={false}
         />
         <div className="max-w-7xl mx-auto">
         {/* Enhanced Breadcrumb */}

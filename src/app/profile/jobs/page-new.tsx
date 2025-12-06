@@ -209,7 +209,7 @@ function JobsPageContent() {
             menuItems={jobsMenuItems}
             activeTab={activeTab}
             onTabChange={(key) => setActiveTab(key)}
-            showInputSection={false}
+
           />
 
           {/* Recommended Jobs */}
