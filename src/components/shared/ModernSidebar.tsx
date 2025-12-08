@@ -13,6 +13,7 @@ import {
   FiCalendar,
   FiSettings,
 } from "react-icons/fi";
+import { THEME } from "@/styles/theme";
 
 interface MenuItem {
   id: string;
@@ -56,7 +57,7 @@ export default function ModernSidebar({ mode }: { mode: "seeker" | "employer" })
             href={item.href}
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
               isActive(item.href)
-                ? "bg-gradient-to-r from-[#8B7FD8] to-[#D88BB8] text-white shadow-md"
+                ? `bg-gradient-to-r from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] text-white shadow-md`
                 : "text-gray-700 hover:bg-gray-100"
             }`}
           >

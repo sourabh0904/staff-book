@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef } from "react";
-import { FiMenu, FiX, FiBell, FiMessageSquare, FiCalendar, FiMoreVertical } from "react-icons/fi";
+import { FiMenu, FiX, FiBell, FiMessageSquare, FiCalendar, FiMoreVertical, FiSearch } from "react-icons/fi";
 import { LOGGED_IN_LINKS, SITE_CONFIG } from "../constants/siteconfig";
 import GradientButton from "./shared/GradientButton";
 import { useAuth } from "../context/AuthContext";
@@ -13,6 +13,7 @@ import { profileCompletion } from "../data/profile";
 import NavbarSearch from "./navbar/NavbarSearch";
 import NavbarDesktop from "./navbar/NavbarDesktop";
 import NavbarMobile from "./navbar/NavbarMobile";
+import MeetingModal from "./shared/MeetingModal";
 import { NavLink } from "@/types/navigation";
 import { THEME } from "@/styles/theme";
 
@@ -20,23 +21,55 @@ const Navbar = () => {
   const path = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [meetingModalOpen, setMeetingModalOpen] = useState(false);
   const bellButtonRef = useRef<HTMLButtonElement>(null);
   const navLinks = SITE_CONFIG.navbar.navLinks as NavLink[];
   const signUpText = SITE_CONFIG.navbar.signUp;
-  const { user, isSidebarOpen, setIsSidebarOpen } = useAuth();
+  const { user, isSidebarOpen, setIsSidebarOpen, isEmployer } = useAuth();
   const router = useRouter();
 
   // Get profile completion percentage
   const completionPercentage = profileCompletion.percent;
 
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  // Filter links based on isEmployer state
+  const getFilteredLinks = () => {
+    if (!user) return navLinks;
+
+    return (LOGGED_IN_LINKS as NavLink[]).map(link => {
+      if (link.label === 'Jobs' && link.submenu) {
+        // If employer, show only Employer Mode submenu
+        if (isEmployer) {
+          const employerMode = link.submenu.find(item => item.label === 'Employer Mode');
+          return {
+            ...link,
+            submenu: employerMode ? employerMode.submenu : []
+          };
+        } 
+        // If job seeker (default), show only Job Seeking Mode submenu
+        else {
+          const seekerMode = link.submenu.find(item => item.label === 'Job Seeking Mode');
+          return {
+            ...link,
+            submenu: seekerMode ? seekerMode.submenu : []
+          };
+        }
+      }
+      return link;
+    });
+  };
+
+  const filteredLinks = getFilteredLinks();
+
   return (
-    <div className={`w-full h-[70px] fixed top-0 z-50 ${THEME.components.glass} border-x-0 border-t-0 rounded-none`}>
+    <div className={`w-full h-[70px] fixed top-0 z-50 ${THEME.components.glass} border-x-0 border-t-0 rounded-none transition-all duration-300`}>
       <div className="w-full max-w-[1360px] mx-auto h-full flex items-center justify-between px-4 md:px-6">
-        <div className="flex flex-row gap-2">
-          <div className="lg:hidden flex items-center gap-4 z-50">
+        <div className="flex flex-row gap-3 items-center">
+          <div className="lg:hidden flex items-center z-50">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="relative bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+              className="relative bg-white rounded-full shadow-md hover:bg-gray-50 transition-all active:scale-95"
               aria-label="Toggle sidebar"
               style={{
                 background: `conic-gradient(from 0deg, ${THEME.colors.gradient.start} 0deg ${(completionPercentage / 100) * 360
@@ -45,30 +78,31 @@ const Navbar = () => {
                 borderRadius: "50%",
               }}
             >
-              <div className="rounded-full overflow-hidden h-10 w-10 bg-white flex items-center justify-center">
+              <div className="rounded-full overflow-hidden h-9 w-9 bg-white flex items-center justify-center">
                 <Image
                   src={user?.picture || "/homePage/profile.png"}
                   alt={user ? `${user.first_name} ${user.last_name}` : "Profile"}
-                  width={40}
-                  height={40}
+                  width={36}
+                  height={36}
                   className="rounded-full object-cover"
                 />
               </div>
             </button>
           </div>
           {/* Logo Section */}
-          <div className="w-[180px] h-[70px] flex items-center">
+          <div className="w-[140px] md:w-[180px] h-[70px] flex items-center justify-center lg:justify-start">
             <Image
               src="/logo.png"
               alt="Staff Book"
-              width={140}
-              height={50}
+              width={130}
+              height={46}
               priority
+              className="object-contain"
             />
           </div>
         </div>
 
-        {/* Search Bar */}
+        {/* Search Bar (Desktop) */}
         {user && (
           <div className="hidden lg:flex flex-1 max-w-md mx-8">
             <NavbarSearch />
@@ -77,10 +111,11 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         {user ? (
-          <div className="flex items-center gap-8">
-            <NavbarDesktop links={LOGGED_IN_LINKS as NavLink[]} currentPath={path} />
+          <div className="hidden lg:flex items-center gap-8">
+            <NavbarDesktop links={filteredLinks} currentPath={path} />
             <NavbarIconButton
               onNotificationsClick={() => setNotificationsOpen(true)}
+              onMeetingsClick={() => setMeetingModalOpen(true)}
               bellButtonRef={bellButtonRef}
             />
             <ProfileAvatar
@@ -89,7 +124,7 @@ const Navbar = () => {
             />
           </div>
         ) : (
-          <div className="flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             <NavbarDesktop links={navLinks} currentPath={path} />
             <Link key={"signup"} href={"/signup"}>
               <GradientButton className="w-[110px] h-[42px] ml-4 text-[16px] font-poppins">
@@ -99,27 +134,47 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Mobile Toggle */}
-        <div className="lg:hidden">
-          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+        {/* Mobile Actions */}
+        <div className="lg:hidden flex items-center gap-3">
+          {user && (
+            <button 
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="p-2 rounded-full hover:bg-gray-100/50 transition-colors text-gray-700"
+            >
+              <FiSearch size={22} />
+            </button>
+          )}
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" className="p-1">
             {menuOpen ? (
-              <FiX size={28} color="#101022" />
+              <FiX size={26} color="#101022" />
             ) : (
-              <FiMoreVertical size={28} color="#101022" />
+              <FiMoreVertical size={26} color="#101022" />
             )}
           </button>
         </div>
+      </div>
+
+      {/* Mobile Search Overlay */}
+      <div className={`absolute top-[70px] left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 p-4 shadow-lg transition-all duration-300 origin-top ${searchOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}>
+        <NavbarSearch className="w-full" />
       </div>
 
       {/* Mobile Menu */}
       <NavbarMobile 
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
-        links={user ? (LOGGED_IN_LINKS as NavLink[]) : navLinks}
+        links={user ? filteredLinks : navLinks}
         user={user}
         signUpText={signUpText}
         onNotificationsClick={() => setNotificationsOpen(true)}
+        onMeetingsClick={() => setMeetingModalOpen(true)}
         bellButtonRef={bellButtonRef}
+      />
+
+      {/* Meeting Modal */}
+      <MeetingModal 
+        isOpen={meetingModalOpen}
+        onClose={() => setMeetingModalOpen(false)}
       />
 
       {/* Notifications Modal */}
@@ -134,9 +189,11 @@ const Navbar = () => {
 
 export const NavbarIconButton = ({
   onNotificationsClick,
+  onMeetingsClick,
   bellButtonRef,
 }: {
   onNotificationsClick: () => void;
+  onMeetingsClick: () => void;
   bellButtonRef?: React.RefObject<HTMLButtonElement | null>;
 }) => {
   const router = useRouter();
@@ -156,7 +213,7 @@ export const NavbarIconButton = ({
       {/* Calendar Button - Redirect to Schedule Meeting in Jobs page with EMPLOYER mode */}
       <button
         className="ml-1 p-2 rounded-full hover:bg-gray-100 transition-colors"
-        onClick={() => router.push('/profile/jobs?tab=meetings&mode=employer')}
+        onClick={onMeetingsClick}
       >
         <FiCalendar size={22} className="text-gray-500" />
       </button>

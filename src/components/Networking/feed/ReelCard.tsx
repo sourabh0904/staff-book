@@ -19,7 +19,7 @@ const ReelCard: React.FC<{ reel: Reel }> = ({ reel }) => {
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-8 h-8 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
-              <FiPlay className="w-4 h-4 text-purple-600 ml-0.5" />
+              <FiPlay className={`w-4 h-4 ${THEME.components.icon.primary} ml-0.5`} />
             </div>
           </div>
         </div>

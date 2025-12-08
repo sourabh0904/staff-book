@@ -17,6 +17,7 @@ import {
   FiChevronRight,
   FiBriefcase,
 } from "react-icons/fi";
+import { THEME } from "@/styles/theme";
 
 interface Message {
   id: string;
@@ -222,7 +223,7 @@ export default function Messages() {
 
         {/* Messages Interface */}
         <div
-          className="bg-white rounded-2xl shadow-sm border border-[#E8E4FF] overflow-hidden"
+          className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
           style={{ height: "600px" }}
         >
           <div className="flex h-full">
@@ -238,7 +239,7 @@ export default function Messages() {
                   <input
                     type="text"
                     placeholder="Search conversations..."
-                    className="w-full pl-10 pr-4 py-2 border border-[#E8E4FF] rounded-lg focus:outline-none focus:border-gradient-end transition-colors duration-300"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300 transition-all duration-300 placeholder-gray-400 bg-gray-50 focus:bg-white text-gray-700"
                   />
                 </div>
               </div>
@@ -249,15 +250,15 @@ export default function Messages() {
                   <div
                     key={conversation.id}
                     onClick={() => setSelectedConversation(conversation.id)}
-                    className={`p-4 border-b border-[#F3EFFF] cursor-pointer hover:bg-light-bg transition-colors duration-300 ${
+                    className={`p-4 border-b border-gray-50 cursor-pointer hover:bg-gray-50 transition-colors duration-300 ${
                       selectedConversation === conversation.id
-                        ? "bg-light-bg border-l-4 border-l-[#5B5BE7]"
+                        ? "bg-indigo-50/50 border-l-4 border-l-indigo-400"
                         : ""
                     }`}
                   >
                     <div className="flex gap-3">
                       <div className="relative">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gradient-start to-gradient-end text-white font-bold flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-300 to-purple-300 text-white font-bold flex items-center justify-center shadow-sm">
                           {conversation.avatar}
                         </div>
                         {conversation.isOnline && (
@@ -277,7 +278,7 @@ export default function Messages() {
                           {conversation.lastMessage}
                         </p>
                         {conversation.unreadCount > 0 && (
-                          <div className="inline-flex items-center justify-center w-5 h-5 bg-primary text-white text-xs font-bold rounded-full">
+                          <div className="inline-flex items-center justify-center w-5 h-5 bg-indigo-400 text-white text-xs font-bold rounded-full shadow-sm">
                             {conversation.unreadCount}
                           </div>
                         )}
@@ -296,7 +297,7 @@ export default function Messages() {
                   <div className="p-4 border-b border-[#E8E4FF] flex justify-between items-center">
                     <div className="flex items-center gap-3">
                       <div className="relative">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gradient-start to-gradient-end text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-300 to-purple-300 text-white font-bold flex items-center justify-center shadow-sm">
                           {currentConversation.avatar}
                         </div>
                         {currentConversation.isOnline && (
@@ -337,8 +338,8 @@ export default function Messages() {
                         <div
                           className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
                             message.isOwn
-                              ? "bg-gradient-to-r from-gradient-start to-gradient-end text-white"
-                              : "bg-light-bg text-[#222]"
+                              ? "bg-gradient-to-r from-indigo-300 to-purple-300 text-white shadow-md"
+                              : "bg-gray-100 text-gray-800"
                           }`}
                         >
                           <p className="text-sm">{message.content}</p>
@@ -374,15 +375,14 @@ export default function Messages() {
                           value={newMessage}
                           onChange={(e) => setNewMessage(e.target.value)}
                           placeholder="Type a message..."
-                          className="w-full px-4 py-3 border border-[#E8E4FF] rounded-xl focus:outline-none focus:border-gradient-end transition-colors duration-300"
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300 transition-all duration-300 placeholder-gray-400 bg-gray-50 focus:bg-white text-gray-700"
                           onKeyPress={(e) =>
                             e.key === "Enter" && handleSendMessage()
                           }
                         />
                       </div>
                       <button
-                        onClick={handleSendMessage}
-                        className="p-3 bg-gradient-to-r from-gradient-start to-gradient-end hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white rounded-xl transition-all duration-300 transform hover:scale-105"
+                        className="p-3 bg-gradient-to-r from-indigo-300 to-purple-300 hover:shadow-lg hover:scale-105 text-white rounded-xl transition-all duration-300 transform"
                       >
                         <FiSend size={18} />
                       </button>
@@ -392,8 +392,8 @@ export default function Messages() {
               ) : (
                 <div className="flex-1 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-gradient-start to-gradient-end text-white flex items-center justify-center">
-                      <FiMessageCircle size={32} />
+                    <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-indigo-300 to-purple-300 text-white flex items-center justify-center shadow-lg opacity-80">
+                      <FiMessageCircle size={40} />
                     </div>
                     <h3 className="text-2xl font-bold text-[#222] mb-2">
                       Select a conversation

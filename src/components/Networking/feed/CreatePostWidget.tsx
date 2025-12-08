@@ -39,20 +39,20 @@ const CreatePostWidget: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
-            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors">
-              <FiEdit3 className={`w-4 h-4 sm:w-5 sm:h-5 text-[${THEME.colors.primary}]`} />
+            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
+              <FiEdit3 className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
               <span className="text-xs sm:text-sm font-bold text-black">Write Blog</span>
             </button>
-            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors">
-              <FiImage className={`w-4 h-4 sm:w-5 sm:h-5 text-[${THEME.colors.primary}]`} />
+            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
+              <FiImage className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
               <span className="text-xs sm:text-sm font-bold text-black">Upload Image</span>
             </button>
-            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors">
-              <FiVideoIcon className={`w-4 h-4 sm:w-5 sm:h-5 text-[${THEME.colors.primary}]`} />
+            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
+              <FiVideoIcon className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
               <span className="text-xs sm:text-sm font-bold text-black">Upload Video</span>
             </button>
-            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors">
-              <FiVideo className={`w-4 h-4 sm:w-5 sm:h-5 text-[${THEME.colors.primary}]`} />
+            <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
+              <FiVideo className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
               <span className="text-xs sm:text-sm font-bold text-black">Upload Reel</span>
             </button>
           </div>
@@ -63,7 +63,7 @@ const CreatePostWidget: React.FC = () => {
                 <h3 className="font-semibold text-gray-900">Create Post</h3>
                 <button
                 onClick={() => setIsExpanded(false)}
-                className={`text-gray-600 hover:text-[${THEME.colors.primary}] transition-colors`}
+                className={`text-gray-600 hover:text-indigo-300 transition-colors`}
                 >
                 <FiX className="w-5 h-5" />
                 </button>
@@ -72,13 +72,13 @@ const CreatePostWidget: React.FC = () => {
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
             <div className="flex flex-col items-center gap-4">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
-                <FiVideo className={`w-8 h-8 text-[${THEME.colors.primary}]`} />
+                <FiVideo className={`w-8 h-8 ${THEME.components.icon.primary}`} />
               </div>
               <div>
                 <h4 className="font-medium text-gray-900 mb-2">Create your content</h4>
                 <p className="text-sm text-gray-600 mb-4">Share your professional insights and tips</p>
                 <div className="flex gap-3">
-                  <button className={`flex items-center gap-2 bg-[${THEME.colors.primary}] text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors`}>
+                  <button className={`flex items-center gap-2 ${THEME.components.button.primary} px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors`}>
                     <FiVideo className="w-4 h-4" />
                     Upload
                   </button>
@@ -123,7 +123,7 @@ const CreatePostWidget: React.FC = () => {
             >
               {SITE_CONFIG.networking.reels.cancel}
             </button>
-            <button className={`flex-1 bg-[${THEME.colors.primary}] text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors`}>
+            <button className={`flex-1 ${THEME.components.button.primary} text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors`}>
               {SITE_CONFIG.networking.reels.publish}
             </button>
           </div>

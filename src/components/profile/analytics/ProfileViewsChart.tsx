@@ -10,7 +10,7 @@ const ProfileViewsChart: React.FC = () => {
           Profile Views Trend
         </h3>
         <div className="flex items-center gap-2">
-          <FiBarChart className={`text-[${THEME.colors.primary}]`} size={20} />
+          <FiBarChart className={THEME.components.icon.primary} size={20} />
           <span className={THEME.components.typography.meta}>Last 30 days</span>
         </div>
       </div>
@@ -18,7 +18,7 @@ const ProfileViewsChart: React.FC = () => {
         <div className="text-gray-500 text-center">
           <FiActivity
             size={48}
-            className={`mx-auto mb-2 text-[${THEME.colors.primary}]`}
+            className={`mx-auto mb-2 ${THEME.components.icon.primary}`}
           />
           <p className={THEME.components.typography.body}>Chart visualization would go here</p>
         </div>

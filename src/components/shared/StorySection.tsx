@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { THEME } from "@/styles/theme";
 
 const profiles = [
   { 
@@ -253,7 +254,7 @@ const StorySection = () => {
                         fill="none"
                         viewBox="0 0 20 20"
                       >
-                        <circle cx="10" cy="10" r="10" fill="#7C3AED" />
+                        <circle cx="10" cy="10" r="10" fill={THEME.colors.primary} />
                         <path
                           d="M10 6v8M6 10h8"
                           stroke="#fff"

@@ -6,9 +6,9 @@ module.exports = {
         'infinite-scroll-reverse': 'scroll-reverse 25s linear infinite',
       },
       colors: {
-        primary: '#8B8DF2',
-        'gradient-start': '#8B8DF2',
-        'gradient-end': '#C44BC2',
+        primary: '#a5b4fc',
+        'gradient-start': '#a5b4fc',
+        'gradient-end': '#d8b4fe',
         secondary: '#7C58E6',
         dark: '#18192B',
         'light-bg': '#F3EFFF',

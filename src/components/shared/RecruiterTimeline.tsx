@@ -107,7 +107,7 @@ const RecruiterTimeline: React.FC<RecruiterTimelineProps> = ({ steps, isVisible 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                 <h4
                   className={`font-bold text-sm transition-colors duration-300 ${
-                    step.data.completed ? `text-[${THEME.colors.primary}]` : 'text-gray-400'
+                    step.data.completed ? `text-indigo-300` : 'text-gray-400'
                   }`}
                 >
                   {step.label}

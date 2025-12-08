@@ -4,6 +4,7 @@ import { FiX, FiStar, FiSettings, FiHelpCircle, FiLogOut } from 'react-icons/fi'
 import Image from 'next/image';
 import { PROFILE_MODAL } from '@/constants/siteconfig';
 import ProfileViewsIcon from '@/components/svgs/ProfileViewsIcon';
+import { THEME } from '@/styles/theme';
 import ConnectionsIcon from '@/components/svgs/ConnectionsIcon';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -116,18 +117,18 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, buttonRef 
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs text-gray-600 mb-1">{PROFILE_MODAL.whoSearchedYou}</p>
-                    <p className="text-lg font-bold text-purple-600">{profileViews}</p>
+                    <p className={`text-lg font-bold text-[${THEME.colors.primary}]`}>{profileViews}</p>
                   </div>
-                  <ProfileViewsIcon className="text-purple-600 w-8 h-8" />
+                  <ProfileViewsIcon className={`${THEME.components.icon.primary} w-8 h-8`} />
                 </div>
               </div>
               <div className="bg-[#F3EFFF] rounded-lg p-3 cursor-pointer hover:bg-[#E8E4FF] transition-colors">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs text-gray-600 mb-1">{PROFILE_MODAL.connections}</p>
-                    <p className="text-lg font-bold text-purple-600">{totalConnections}</p>
+                    <p className={`text-lg font-bold text-[${THEME.colors.primary}]`}>{totalConnections}</p>
                   </div>
-                  <ConnectionsIcon className="text-purple-600 w-8 h-8" />
+                  <ConnectionsIcon className={`${THEME.components.icon.primary} w-8 h-8`} />
                 </div>
               </div>
             </div>
@@ -143,7 +144,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, buttonRef 
               className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
             >
               <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
-                <FiStar className="text-orange-500" size={16} />
+                <FiStar className={`${THEME.components.icon.primary}`} size={16} />
               </div>
               <span className="text-sm text-gray-700">{PROFILE_MODAL.exploreSubscriptions}</span>
             </div>
@@ -156,7 +157,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, buttonRef 
               className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
             >
               <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                <FiSettings className="text-gray-600" size={16} />
+                <FiSettings className="text-gray-600 group-hover:text-indigo-300 transition-colors" size={16} />
               </div>
               <span className="text-sm text-gray-700">{PROFILE_MODAL.settings}</span>
             </div>
@@ -169,7 +170,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, buttonRef 
               className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
             >
               <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                <FiHelpCircle className="text-gray-600" size={16} />
+                <FiHelpCircle className="text-gray-600 group-hover:text-indigo-300 transition-colors" size={16} />
               </div>
               <span className="text-sm text-gray-700">{PROFILE_MODAL.faqs}</span>
             </div>

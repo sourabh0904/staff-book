@@ -16,6 +16,8 @@ import {
 } from "react-icons/fi";
 import { BsFileBarGraph } from "react-icons/bs";
 import { useAuth } from "@/context/AuthContext";
+import { THEME } from "@/styles/theme";
+import EmployerVerificationModal from "./EmployerVerificationModal";
 // (no external types needed)
 
 type SubmenuItem = {
@@ -138,6 +140,28 @@ export default function ProfileSidebar() {
 
   const [openSectionId, setOpenSectionId] = useState<string | null>(null);
   const [showSubscriptionCard, setShowSubscriptionCard] = useState(true);
+  
+  // Profile Display Settings State
+  const { isEmployer, setIsEmployer } = useAuth();
+  const [isOnline, setIsOnline] = useState(true);
+  const [profileLabel, setProfileLabel] = useState<'None' | 'Job Seeking' | 'Hiring'>('None');
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
+
+  const handleEmployerSwitch = () => {
+    if (!isEmployer) {
+      // If turning ON, show verification modal first
+      setShowVerificationModal(true);
+    } else {
+      // If turning OFF, just switch
+      setIsEmployer(false);
+    }
+  };
+
+  const handleVerificationSuccess = (details: { companyName: string; gstNumber: string }) => {
+    console.log("Verified Employer Details:", details);
+    setIsEmployer(true);
+    setShowVerificationModal(false);
+  };
 
   // Initialize and update open section when pathname changes
   useEffect(() => {
@@ -250,7 +274,7 @@ export default function ProfileSidebar() {
                             : "text-[#333] hover:text-primary hover:bg-light-bg hover:pl-5"
                             }`}
                         >
-                          <span className={itemIsActive ? "text-primary" : "text-secondary group-hover:text-primary"}>
+                          <span className={itemIsActive ? THEME.components.icon.primary : "text-gray-500 group-hover:text-indigo-300"}>
                             {item.icon}
                           </span>
                           <span>{item.label}</span>
@@ -263,6 +287,78 @@ export default function ProfileSidebar() {
             </div>
           ))}
         </nav>
+
+        {/* Profile Display Settings */}
+        <div className="w-full mb-4 bg-white rounded-2xl border border-[#E8E4FF] shadow-sm p-4">
+          <h3 className="text-sm font-bold text-[#222] mb-4">Profile Display Settings</h3>
+          
+          {/* Switch to Employer */}
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-sm text-[#666] font-medium">Switch to Employer</span>
+            <button
+              onClick={handleEmployerSwitch}
+              className={`relative w-11 h-6 rounded-full transition-colors ${
+                isEmployer ? 'bg-gradient-to-r from-indigo-300 to-purple-300' : 'bg-gray-200'
+              }`}
+            >
+              <span
+                className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                  isEmployer ? 'translate-x-5' : ''
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Show as Online */}
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-sm text-[#666] font-medium">Show as Online</span>
+            <button
+              onClick={() => setIsOnline(!isOnline)}
+              className={`relative w-11 h-6 rounded-full transition-colors ${
+                isOnline ? 'bg-gradient-to-r from-indigo-300 to-purple-300' : 'bg-gray-200'
+              }`}
+            >
+              <span
+                className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                  isOnline ? 'translate-x-5' : ''
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Profile Label */}
+          <div className="space-y-2">
+            <span className="text-sm text-[#666] font-medium block mb-2">Profile Label</span>
+            <div className="flex flex-col gap-2">
+              {['None', 'Job Seeking', 'Hiring'].map((label) => (
+                <label key={label} className="flex items-center gap-2 cursor-pointer group">
+                  <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                    profileLabel === label 
+                      ? 'border-indigo-300' 
+                      : 'border-gray-300 group-hover:border-indigo-300'
+                  }`}>
+                    {profileLabel === label && (
+                      <div className="w-2 h-2 rounded-full bg-indigo-300" />
+                    )}
+                  </div>
+                  <input
+                    type="radio"
+                    name="profileLabel"
+                    value={label}
+                    checked={profileLabel === label}
+                    onChange={(e) => setProfileLabel(e.target.value as any)}
+                    className="hidden"
+                  />
+                  <span className={`text-sm ${
+                    profileLabel === label ? 'text-indigo-500 font-medium' : 'text-gray-600'
+                  }`}>
+                    {label}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
 
         {/* Subscription Balance Card */}
         {showSubscriptionCard && (
@@ -307,6 +403,11 @@ export default function ProfileSidebar() {
           </div>
         )}
       </div>
+      <EmployerVerificationModal
+        isOpen={showVerificationModal}
+        onClose={() => setShowVerificationModal(false)}
+        onVerify={handleVerificationSuccess}
+      />
     </aside>
   );
 }

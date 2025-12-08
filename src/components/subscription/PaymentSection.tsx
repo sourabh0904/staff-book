@@ -124,19 +124,19 @@ export const PaymentSection = memo<PaymentSectionProps>(({ plan, billingCycle })
         {/* Additional Info */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="flex flex-col items-center text-center p-4 rounded-lg bg-gray-50">
-            <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2">
+            <div className={`w-8 h-8 rounded-full bg-indigo-50 ${THEME.components.icon.primary} flex items-center justify-center mb-2`}>
               <FiCheck size={16} />
             </div>
             <span className="text-xs text-gray-600">Instant Activation</span>
           </div>
           <div className="flex flex-col items-center text-center p-4 rounded-lg bg-gray-50">
-            <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2">
+            <div className={`w-8 h-8 rounded-full bg-indigo-50 ${THEME.components.icon.primary} flex items-center justify-center mb-2`}>
               <FiCheck size={16} />
             </div>
             <span className="text-xs text-gray-600">Cancel Anytime</span>
           </div>
           <div className="flex flex-col items-center text-center p-4 rounded-lg bg-gray-50">
-            <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2">
+            <div className={`w-8 h-8 rounded-full bg-indigo-50 ${THEME.components.icon.primary} flex items-center justify-center mb-2`}>
               <FiCheck size={16} />
             </div>
             <span className="text-xs text-gray-600">Money-back Guarantee</span>

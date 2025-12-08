@@ -67,7 +67,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
-                      <FiPlay className={`w-5 h-5 sm:w-6 sm:h-6 text-[${THEME.colors.primary}] ml-1`} />
+                      <FiPlay className={`w-5 h-5 sm:w-6 sm:h-6 ${THEME.components.icon.primary} ml-1`} />
                     </div>
                   </div>
                 </div>
@@ -99,7 +99,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
                 <span className="text-[10px] sm:text-xs">{post.shares}</span>
               </button>
             </div>
-            <button className={`text-gray-600 hover:text-[${THEME.colors.primary}] transition-colors`}>
+            <button className={`text-gray-600 hover:text-indigo-300 transition-colors`}>
               <FiSend className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </Card.Footer>

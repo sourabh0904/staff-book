@@ -1,13 +1,33 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../context/AuthContext';
 import { FiUser, FiFileText, FiCreditCard, FiBarChart2 } from 'react-icons/fi';
 import { THEME } from '../../styles/theme';
+import EmployerVerificationModal from '../shared/EmployerVerificationModal';
 
 const NetworkingLeftSidebar: React.FC = () => {
-  const { user } = useAuth();
+  const { user, isEmployer, setIsEmployer } = useAuth();
+  
+  // Profile Display Settings State
+  const [isOnline, setIsOnline] = useState(true);
+  const [profileLabel, setProfileLabel] = useState<'None' | 'Job Seeking' | 'Hiring'>('None');
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
+
+  const handleEmployerSwitch = () => {
+    if (!isEmployer) {
+      setShowVerificationModal(true);
+    } else {
+      setIsEmployer(false);
+    }
+  };
+
+  const handleVerificationSuccess = (details: { companyName: string; gstNumber: string }) => {
+    console.log("Verified Employer Details:", details);
+    setIsEmployer(true);
+    setShowVerificationModal(false);
+  };
 
   if (!user) return null;
 
@@ -63,18 +83,90 @@ const NetworkingLeftSidebar: React.FC = () => {
           </div>
 
           <div className="border-t border-gray-100 mt-3 pt-3 text-left space-y-1">
-            <Link href="/profile/analytics" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-[${THEME.colors.primary}] font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors`}>
-                <FiBarChart2 className="w-3.5 h-3.5" />
+            <Link href="/profile/analytics" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-indigo-300 font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors group`}>
+                <FiBarChart2 className={`w-3.5 h-3.5 group-hover:text-indigo-300 transition-colors`} />
                 Profile Analytics
             </Link>
-            <Link href="/profile/resume" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-[${THEME.colors.primary}] font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors`}>
-                <FiFileText className="w-3.5 h-3.5" />
+            <Link href="/profile/resume" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-indigo-300 font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors group`}>
+                <FiFileText className={`w-3.5 h-3.5 group-hover:text-indigo-300 transition-colors`} />
                 Resume & Portfolio
             </Link>
-            <Link href="/subscription" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-[${THEME.colors.primary}] font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors`}>
-                <FiCreditCard className="w-3.5 h-3.5" />
+            <Link href="/subscription" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-indigo-300 font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors group`}>
+                <FiCreditCard className={`w-3.5 h-3.5 group-hover:text-indigo-300 transition-colors`} />
                 My Subscriptions
             </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Profile Display Settings */}
+      <div className={`${THEME.components.card.default} p-4`}>
+        <h3 className="text-sm font-bold text-[#222] mb-4">Profile Display Settings</h3>
+        
+        {/* Switch to Employer */}
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm text-[#666] font-medium">Switch to Employer</span>
+          <button
+            onClick={handleEmployerSwitch}
+            className={`relative w-11 h-6 rounded-full transition-colors ${
+              isEmployer ? 'bg-gradient-to-r from-indigo-300 to-purple-300' : 'bg-gray-200'
+            }`}
+          >
+            <span
+              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                isEmployer ? 'translate-x-5' : ''
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Show as Online */}
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm text-[#666] font-medium">Show as Online</span>
+          <button
+            onClick={() => setIsOnline(!isOnline)}
+            className={`relative w-11 h-6 rounded-full transition-colors ${
+              isOnline ? 'bg-gradient-to-r from-indigo-300 to-purple-300' : 'bg-gray-200'
+            }`}
+          >
+            <span
+              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                isOnline ? 'translate-x-5' : ''
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Profile Label */}
+        <div className="space-y-2">
+          <span className="text-sm text-[#666] font-medium block mb-2">Profile Label</span>
+          <div className="flex flex-col gap-2">
+            {['None', 'Job Seeking', 'Hiring'].map((label) => (
+              <label key={label} className="flex items-center gap-2 cursor-pointer group">
+                <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                  profileLabel === label 
+                    ? 'border-indigo-300' 
+                    : 'border-gray-300 group-hover:border-indigo-300'
+                }`}>
+                  {profileLabel === label && (
+                    <div className="w-2 h-2 rounded-full bg-indigo-300" />
+                  )}
+                </div>
+                <input
+                  type="radio"
+                  name="profileLabel"
+                  value={label}
+                  checked={profileLabel === label}
+                  onChange={(e) => setProfileLabel(e.target.value as any)}
+                  className="hidden"
+                />
+                <span className={`text-sm ${
+                  profileLabel === label ? 'text-indigo-500 font-medium' : 'text-gray-600'
+                }`}>
+                  {label}
+                </span>
+              </label>
+            ))}
           </div>
         </div>
       </div>
@@ -109,6 +201,11 @@ const NetworkingLeftSidebar: React.FC = () => {
             </div>
         </div>
       </div>
+      <EmployerVerificationModal
+        isOpen={showVerificationModal}
+        onClose={() => setShowVerificationModal(false)}
+        onVerify={handleVerificationSuccess}
+      />
     </div>
   );
 };

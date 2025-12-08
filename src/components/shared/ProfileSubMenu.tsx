@@ -76,10 +76,8 @@ export default function ProfileSubMenu({
                     ? "border-none text-[#18192B] shadow-md scale-105 rounded-2xl"
                     : "border-transparent text-gray-500 hover:text-primary hover:bg-gray-100 rounded-2xl"
                 }
-                  style={isActive ? { background: 'linear-gradient(to right, #8e97f7, #c9ccf8)' } : {}}
-                  snap-center shrink-0
-                  active:scale-95
                 `}
+                style={isActive ? { background: `linear-gradient(to right, ${THEME.colors.gradient.start}, ${THEME.colors.gradient.end})` } : {}}
               >
                 <span
                   className={`block w-4 h-4 md:w-5 md:h-5 mb-1 transition-transform duration-300 group-hover:scale-110 ${

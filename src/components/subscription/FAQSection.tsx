@@ -72,7 +72,7 @@ export const FAQSection = memo<FAQSectionProps>(({ faqs }) => {
       aria-labelledby="faq-title"
     >
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-purple-600 mb-4">
+        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-50 ${THEME.components.icon.primary} mb-4`}>
           <FiHelpCircle size={24} />
         </div>
         <h2 

@@ -58,7 +58,7 @@ const MapComponent = () => {
   if (!process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY) {
      return (
       <div className="w-full h-[300px] bg-gray-50 rounded-2xl flex flex-col items-center justify-center text-gray-500 gap-3 border border-gray-200 p-6 text-center">
-        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-2">
+        <div className={`w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center ${THEME.components.icon.primary} mb-2`}>
             <FiMapPin size={24} />
         </div>
         <h3 className="font-semibold text-gray-900">Map Integration</h3>

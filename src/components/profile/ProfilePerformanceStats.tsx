@@ -29,7 +29,7 @@ const ProfilePerformanceStats: React.FC = () => {
           const Icon = icons[stat.label];
           return (
             <div key={stat.label} className={`flex flex-col items-center bg-white ${THEME.components.card.radius} shadow p-4 gap-2 border border-gray-100`}>
-              {Icon && <Icon className={`text-[${THEME.colors.primary}]`} />}
+              {Icon && <Icon className={THEME.components.icon.primary} />}
               <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
               <div className={THEME.components.typography.meta}>{stat.label}</div>
             </div>

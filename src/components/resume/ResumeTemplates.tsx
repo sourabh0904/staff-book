@@ -94,15 +94,15 @@ const ResumeTemplates: React.FC = () => {
 
             <div className="p-5">
               <div className="flex items-center justify-between mb-2">
-                <h3 className={`${THEME.components.typography.cardTitle} group-hover:text-[${THEME.colors.primary}] transition-colors`}>
+                <h3 className={`${THEME.components.typography.cardTitle} group-hover:text-indigo-300 transition-colors`}>
                   {template.name}
                 </h3>
-                <FiLayout className="text-gray-400 group-hover:text-[${THEME.colors.primary}] transition-colors" />
+                <FiLayout className="text-gray-400 group-hover:text-indigo-300 transition-colors" />
               </div>
               <p className={`${THEME.components.typography.body} line-clamp-2 mb-4 h-10`}>
                 {template.description}
               </p>
-              <button className={`w-full py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-600 group-hover:border-[${THEME.colors.primary}] group-hover:text-[${THEME.colors.primary}] group-hover:bg-[${THEME.colors.primaryLight}] transition-all`}>
+              <button className={`w-full py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-600 group-hover:border-indigo-300 group-hover:text-indigo-300 group-hover:bg-indigo-50 transition-all`}>
                 Use Template
               </button>
             </div>

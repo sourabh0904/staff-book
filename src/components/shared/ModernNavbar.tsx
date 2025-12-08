@@ -12,6 +12,7 @@ import {
   FiHome,
   FiGrid
 } from "react-icons/fi";
+import { THEME } from "@/styles/theme";
 
 export default function ModernNavbar() {
   const [modeToggle, setModeToggle] = useState<"networking" | "seeker" | "employer">("networking");
@@ -22,7 +23,7 @@ export default function ModernNavbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#8B7FD8] to-[#D88BB8] flex items-center justify-center text-white font-bold text-xl">
+            <div className={`w-10 h-10 rounded-lg bg-gradient-to-br from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] flex items-center justify-center text-white font-bold text-xl`}>
               S
             </div>
             <span className="text-xl font-bold text-gray-900 hidden md:block">StaffBook</span>
@@ -34,7 +35,7 @@ export default function ModernNavbar() {
               onClick={() => setModeToggle("networking")}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 modeToggle === "networking"
-                  ? "bg-white text-[#8B7FD8] shadow-sm"
+                  ? `bg-white text-[${THEME.colors.primary}] shadow-sm`
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
@@ -45,7 +46,7 @@ export default function ModernNavbar() {
               onClick={() => setModeToggle("seeker")}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 modeToggle === "seeker"
-                  ? "bg-white text-[#8B7FD8] shadow-sm"
+                  ? `bg-white text-[${THEME.colors.primary}] shadow-sm`
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
@@ -56,7 +57,7 @@ export default function ModernNavbar() {
               onClick={() => setModeToggle("employer")}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 modeToggle === "employer"
-                  ? "bg-white text-[#8B7FD8] shadow-sm"
+                  ? `bg-white text-[${THEME.colors.primary}] shadow-sm`
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
@@ -85,7 +86,7 @@ export default function ModernNavbar() {
             </button>
 
             {/* Profile */}
-            <button className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B7FD8] to-[#D88BB8] text-white font-bold flex items-center justify-center hover:scale-105 transition-transform">
+            <button className={`w-10 h-10 rounded-full bg-gradient-to-br from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] text-white font-bold flex items-center justify-center hover:scale-105 transition-transform`}>
               JD
             </button>
           </div>

@@ -1,9 +1,9 @@
 export const colors = {
-  primary: '#8B8DF2',
-  primaryLight: '#f3e8ff',
+  primary: '#a5b4fc',
+  primaryLight: '#e0e7ff',
   gradient: {
-    start: '#8B8DF2',
-    end: '#C44BC2',
+    start: '#a5b4fc',
+    end: '#d8b4fe',
     sky: 'from-theme-bg-start to-theme-bg-end', // Theme gradient (Centralized)
     light: 'from-light-bg to-light-bg', // Light purple gradient
   },
@@ -55,13 +55,18 @@ export const components = {
   button: {
     icon: 'w-9 h-9 rounded-full bg-light-bg flex items-center justify-center cursor-pointer',
     iconSmall: 'w-8 h-8 rounded-full bg-light-bg flex items-center justify-center cursor-pointer',
-    primary: 'bg-gradient-to-r from-primary to-gradient-end text-white rounded-full font-medium hover:bg-purple-700 transition-colors',
+    primary: 'font-semibold py-2 px-6 rounded-full transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-opacity-50 shadow-lg hover:shadow-xl text-white bg-gradient-to-r from-indigo-300 to-purple-300 hover:from-indigo-400 hover:to-purple-400 focus:ring-indigo-100',
     secondary: 'bg-purple-100 text-purple-700 hover:bg-purple-200 rounded-lg font-medium transition-colors',
     outline: 'border border-gray-200 bg-transparent hover:bg-gray-50 text-gray-700 rounded-lg font-medium transition-colors',
     ghost: 'bg-transparent hover:bg-gray-100 text-gray-700 rounded-lg font-medium transition-colors',
     danger: 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 rounded-lg font-medium transition-colors',
     success: 'bg-green-50 text-green-600 hover:bg-green-100 border border-green-200 rounded-lg font-medium transition-colors',
     warning: 'bg-yellow-50 text-yellow-600 hover:bg-yellow-100 border border-yellow-200 rounded-lg font-medium transition-colors',
+  },
+  icon: {
+    default: 'text-gray-500',
+    primary: 'text-indigo-300',
+    gradient: 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300',
   },
   typography: {
     sectionTitle: `text-lg font-bold ${colors.text.heading}`,

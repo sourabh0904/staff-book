@@ -10,6 +10,8 @@ interface AuthContextType {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
+  isEmployer: boolean;
+  setIsEmployer: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface SignupData {
@@ -28,6 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmployer, setIsEmployer] = useState(false);
 
   useEffect(() => {
     // Load user from localStorage on mount
@@ -92,11 +95,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     setUser(null);
+    setIsEmployer(false);
     logoutUser();
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, isSidebarOpen, setIsSidebarOpen, isLoading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, isSidebarOpen, setIsSidebarOpen, isLoading, isEmployer, setIsEmployer }}>
       {children}
     </AuthContext.Provider>
   );

@@ -109,12 +109,19 @@ export default function ChatbotWidget() {
       {!open && (
         <button
           aria-label="Open chatbot"
-          className="group relative w-16 h-16 rounded-full shadow-2xl bg-gradient-to-br from-[#6366f1] via-[#8b5cf6] to-[#d946ef] text-white hover:scale-110 transition-all duration-300 flex items-center justify-center animate-bounce-slow ring-4 ring-white/30"
+          className={`group relative w-24 h-24 rounded-full shadow-2xl bg-gradient-to-r from-indigo-300 to-purple-300 text-white hover:scale-105 transition-all duration-500 ease-out flex items-center justify-center ring-4 ring-white/30`}
           onClick={() => setOpen(true)}
         >
-          <div className="absolute inset-0 rounded-full bg-white/20 animate-pulse" />
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#6366f1] to-[#d946ef] opacity-50 blur-md group-hover:opacity-75 transition-opacity duration-300" />
-          <RiRobot2Fill className="w-8 h-8 relative z-10 transform group-hover:rotate-12 transition-transform duration-300 drop-shadow-md" />
+          {/* Outer glow/pulse ring - smoother */}
+          <div className="absolute -inset-1 rounded-full bg-indigo-400/30 animate-pulse" />
+          
+          {/* Inner ambient glow */}
+          <div className="absolute inset-0 rounded-full bg-white/10 animate-pulse delay-75" />
+          
+          {/* Gradient background with blur effect */}
+          <div className={`absolute -inset-0.5 rounded-full bg-gradient-to-r from-indigo-300 to-purple-300 opacity-40 blur-md group-hover:opacity-60 transition-opacity duration-500`} />
+          
+          <RiRobot2Fill className="w-12 h-12 relative z-10 transform group-hover:rotate-6 transition-transform duration-500 ease-out drop-shadow-md" />
         </button>
       )}
 
@@ -122,7 +129,7 @@ export default function ChatbotWidget() {
       {open && (
         <div className={`w-[90vw] md:w-[380px] bg-white/60 backdrop-blur-2xl rounded-[2rem] overflow-hidden flex flex-col shadow-2xl border border-white/50 ring-1 ring-white/60 transform transition-all duration-300 origin-bottom-right animation-fade-in-up`}>
           {/* Header */}
-          <div className="relative px-6 py-5 bg-gradient-to-r from-[#6366f1] to-[#d946ef]">
+          <div className={`relative px-6 py-5 bg-gradient-to-r from-indigo-300 to-purple-300`}>
             <div className="absolute inset-0 bg-white/10 pattern-dots opacity-20" />
             <div className="relative z-10 flex items-center justify-between text-white">
               <div className="flex items-center gap-3">
@@ -164,7 +171,7 @@ export default function ChatbotWidget() {
                     <div
                       className={`max-w-[85%] px-5 py-3.5 rounded-2xl shadow-sm relative ${
                         message.sender === 'user'
-                          ? 'bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] text-white rounded-tr-sm'
+                          ? `bg-gradient-to-br from-indigo-300 to-purple-300 text-white rounded-tr-sm`
                           : 'bg-white text-gray-800 rounded-tl-sm border border-gray-100'
                       }`}
                     >
@@ -182,7 +189,7 @@ export default function ChatbotWidget() {
 
               {/* Input Area */}
               <div className="p-4 bg-white/60 backdrop-blur-xl border-t border-white/50">
-                <div className="flex items-center gap-3 bg-white rounded-[1.5rem] p-1.5 shadow-sm border border-gray-100 focus-within:ring-2 focus-within:ring-[#6366f1]/50 transition-all duration-300">
+                <div className={`flex items-center gap-3 bg-white rounded-[1.5rem] p-1.5 shadow-sm border border-gray-100 focus-within:ring-2 focus-within:ring-[${THEME.colors.primary}]/50 transition-all duration-300`}>
                   <input
                     type="text"
                     value={inputMessage}
@@ -194,7 +201,7 @@ export default function ChatbotWidget() {
                   <button
                     onClick={handleSendMessage}
                     disabled={!inputMessage.trim()}
-                    className="p-3 rounded-full bg-gradient-to-r from-[#6366f1] to-[#d946ef] text-white shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className={`p-3 rounded-full bg-gradient-to-r from-indigo-300 to-purple-300 text-white shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
                   >
                     <FiSend className="w-4 h-4 ml-0.5" />
                   </button>

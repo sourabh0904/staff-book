@@ -27,7 +27,7 @@ const ResumeShare: React.FC = () => {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <div className="p-2 bg-purple-50 text-purple-600 rounded-lg">
+                <div className={`p-2 bg-purple-50 ${THEME.components.icon.primary} rounded-lg`}>
                   <FiGlobe size={20} />
                 </div>
                 <h3 className={THEME.components.typography.cardTitle}>

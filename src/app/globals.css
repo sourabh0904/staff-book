@@ -3,8 +3,8 @@
 :root {
   --background: #F7F7F8;
   --foreground: #101022;
-  --primary: #8B8DF2;
-  --primary-dark: #6B6DD2;
+  --primary: #a5b4fc;
+  --primary-dark: #818cf8;
   --accent: #F97316;
   --accent-dark: #C2410C;
   --error: #E11D48;
@@ -14,9 +14,9 @@
   --gray-200: #9CA3AF;
   --gray-400: #9CA3AF;
   --text-main: #18192B;
-  --text-gradient-to: #C44BC2;
-  --theme-bg-start: #8e97f7;
-  --theme-bg-end: #c9ccf8;
+  --text-gradient-to: #d8b4fe;
+  --theme-bg-start: #a5b4fc;
+  --theme-bg-end: #d8b4fe;
 }
 
 @theme inline {

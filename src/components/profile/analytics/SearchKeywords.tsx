@@ -16,7 +16,7 @@ const SearchKeywords: React.FC = () => {
         <h3 className={THEME.components.typography.cardTitle}>
           Top Search Keywords
         </h3>
-        <FiSearch className={`text-[${THEME.colors.primary}]`} size={20} />
+        <FiSearch className={THEME.components.icon.primary} size={20} />
       </div>
       <div className="space-y-4">
         {keywords.map((item, index) => (
@@ -33,11 +33,11 @@ const SearchKeywords: React.FC = () => {
             <div className="flex items-center gap-3">
               <div className="w-20 h-2 bg-[#F3EFFF] rounded-full overflow-hidden">
                 <div
-                  className={`h-full bg-gradient-to-r from-[${THEME.colors.primary}] to-gradient-end rounded-full transition-all duration-500`}
+                  className={`h-full bg-gradient-to-r from-indigo-300 to-purple-300 rounded-full transition-all duration-500`}
                   style={{ width: `${item.percentage}%` }}
                 ></div>
               </div>
-              <span className={`text-sm font-medium text-[${THEME.colors.primary}]`}>
+              <span className={`text-sm font-medium text-indigo-300`}>
                 {item.percentage}%
               </span>
             </div>

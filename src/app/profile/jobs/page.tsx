@@ -35,7 +35,6 @@ const menuItems = [
   { icon: <FiBriefcase size={18} />, label: 'Job Invites', key: 'applications' },
   { icon: <FiTarget size={18} />, label: 'Applied Jobs', key: 'recommendations' },
   { icon: <FiBookmark size={18} />, label: 'Saved Jobs', key: 'saved' },
-  { icon: <FiCalendar size={18} />, label: 'Meetings', key: 'meetings' },
 ];
 
 const inputLabels = [
@@ -134,7 +133,7 @@ export default function JobManagement() {
     <Suspense fallback={
       <div className={`profile-page min-h-screen ${THEME.colors.background.page} pt-4 md:pt-6 lg:pt-8 mt-[50px]`}>
         <div className="flex gap-6 w-full">
-          <div className="w-[20%] flex-shrink-0 -mt-[50px]">
+          <div className="w-[20%] flex-shrink-0 -mt-[50px] sticky top-[80px] h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
             <ProfileSidebar />
           </div>
           <div className="w-[80%] flex-1 m-4">

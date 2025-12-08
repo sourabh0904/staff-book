@@ -3,6 +3,7 @@ import React from 'react';
 import { userStats } from '../../data/networking';
 import { SITE_CONFIG } from '../../constants/siteconfig';
 import { FiChevronDown, FiMapPin } from 'react-icons/fi';
+import { THEME } from '@/styles/theme';
 import Image from 'next/image';
 
 const NetworkingSidebar: React.FC = () => {
@@ -23,7 +24,7 @@ const NetworkingSidebar: React.FC = () => {
             <p className="text-sm text-gray-600">HR of appxone.com (2 yrs)</p>
           </div>
         </div>
-        <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors">
+        <button className={`w-full ${THEME.components.button.primary} text-white py-2 px-4 rounded-lg text-sm font-medium hover:shadow-lg transition-all`}>
           {SITE_CONFIG.networking.viewProfile}
         </button>
       </div>

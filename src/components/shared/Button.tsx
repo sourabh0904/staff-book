@@ -58,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         {...props}
       >
-        {isLoading && <FiLoader className="mr-2 h-4 w-4 animate-spin" />}
+        {isLoading && <FiLoader className={`mr-2 h-4 w-4 animate-spin ${variant === 'outline' || variant === 'ghost' ? THEME.components.icon.primary : ''}`} />}
         {!isLoading && leftIcon && <span className="mr-2">{leftIcon}</span>}
         {children}
         {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}

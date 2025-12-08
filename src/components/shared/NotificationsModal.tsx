@@ -173,7 +173,7 @@ const NotificationsModal: React.FC<NotificationsModalProps> = ({ isOpen, onClose
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <p className={`${THEME.components.typography.body} text-gray-900 font-medium leading-snug group-hover:text-primary transition-colors`}>
+                  <p className={`${THEME.components.typography.body} text-gray-900 font-medium leading-snug group-hover:text-indigo-300 transition-colors`}>
                     {notification.title}
                   </p>
                   {notification.subtitle && (

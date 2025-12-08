@@ -30,7 +30,7 @@ const ResumeAnalytics: React.FC<ResumeAnalyticsProps> = ({ resumeVersions }) => 
         </h2>
         <div className="flex gap-4">
           <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gray-100 shadow-sm">
-            <div className="p-1.5 bg-purple-50 text-purple-600 rounded-lg">
+            <div className={`p-1.5 bg-purple-50 ${THEME.components.icon.primary} rounded-lg`}>
               <FiEye size={16} />
             </div>
             <div>
@@ -55,7 +55,7 @@ const ResumeAnalytics: React.FC<ResumeAnalyticsProps> = ({ resumeVersions }) => 
         <Card>
           <Card.Header>
             <div className="flex items-center gap-2">
-              <div className="p-2 bg-purple-50 text-purple-600 rounded-lg">
+              <div className={`p-2 bg-purple-50 ${THEME.components.icon.primary} rounded-lg`}>
                 <FiTrendingUp size={20} />
               </div>
               <h3 className={THEME.components.typography.cardTitle}>
@@ -71,13 +71,13 @@ const ResumeAnalytics: React.FC<ResumeAnalyticsProps> = ({ resumeVersions }) => 
                     <span className={`${THEME.components.typography.body} font-medium`}>
                       {resume.name}
                     </span>
-                    <span className={`text-sm font-bold text-[${THEME.colors.primary}]`}>
+                    <span className={`text-sm font-bold text-indigo-300`}>
                       {resume.views} views
                     </span>
                   </div>
                   <div className="w-full h-2.5 bg-[#F3EFFF] rounded-full overflow-hidden">
                     <div
-                      className={`h-full bg-gradient-to-r from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] rounded-full transition-all duration-1000 ease-out`}
+                      className={`h-full bg-gradient-to-r from-indigo-300 to-purple-300 rounded-full transition-all duration-1000 ease-out`}
                       style={{ width: `${(resume.views / 200) * 100}%` }}
                     ></div>
                   </div>
@@ -140,7 +140,7 @@ const ResumeAnalytics: React.FC<ResumeAnalyticsProps> = ({ resumeVersions }) => 
         <Card.Content>
           <div className={`grid grid-cols-1 md:grid-cols-3 ${THEME.layout.spacing.lg}`}>
             <div className="p-5 bg-light-bg rounded-xl border border-purple-100 hover:shadow-sm transition-all">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-purple-600 mb-3 shadow-sm">
+              <div className={`w-10 h-10 bg-white rounded-full flex items-center justify-center ${THEME.components.icon.primary} mb-3 shadow-sm`}>
                 <span className="font-bold">1</span>
               </div>
               <h4 className={`${THEME.components.typography.cardTitle} mb-2`}>Add Keywords</h4>
@@ -149,7 +149,7 @@ const ResumeAnalytics: React.FC<ResumeAnalyticsProps> = ({ resumeVersions }) => 
               </p>
             </div>
             <div className="p-5 bg-light-bg rounded-xl border border-purple-100 hover:shadow-sm transition-all">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-purple-600 mb-3 shadow-sm">
+              <div className={`w-10 h-10 bg-white rounded-full flex items-center justify-center ${THEME.components.icon.primary} mb-3 shadow-sm`}>
                 <span className="font-bold">2</span>
               </div>
               <h4 className={`${THEME.components.typography.cardTitle} mb-2`}>
@@ -160,7 +160,7 @@ const ResumeAnalytics: React.FC<ResumeAnalyticsProps> = ({ resumeVersions }) => 
               </p>
             </div>
             <div className="p-5 bg-light-bg rounded-xl border border-purple-100 hover:shadow-sm transition-all">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-purple-600 mb-3 shadow-sm">
+              <div className={`w-10 h-10 bg-white rounded-full flex items-center justify-center ${THEME.components.icon.primary} mb-3 shadow-sm`}>
                 <span className="font-bold">3</span>
               </div>
               <h4 className={`${THEME.components.typography.cardTitle} mb-2`}>
