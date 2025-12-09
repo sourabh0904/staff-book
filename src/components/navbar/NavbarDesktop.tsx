@@ -15,12 +15,12 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
   const getIcon = (iconName?: string) => {
     if (!iconName) return null;
     const iconMap: { [key: string]: React.ReactNode } = {
-      FiBriefcase: <FiBriefcase className="w-4 h-4 text-secondary" />,
-      FiEye: <FiEye className="w-4 h-4 text-secondary" />,
-      FiTrendingUp: <FiTrendingUp className="w-4 h-4 text-secondary" />,
-      FiUsers: <FiUsers className="w-4 h-4 text-secondary" />,
-      FiFileText: <FiFileText className="w-4 h-4 text-secondary" />,
-      FiUserCheck: <FiUserCheck className="w-4 h-4 text-secondary" />,
+      FiBriefcase: <FiBriefcase className="w-4 h-4 text-gray-600" />,
+      FiEye: <FiEye className="w-4 h-4 text-gray-600" />,
+      FiTrendingUp: <FiTrendingUp className="w-4 h-4 text-gray-600" />,
+      FiUsers: <FiUsers className="w-4 h-4 text-gray-600" />,
+      FiFileText: <FiFileText className="w-4 h-4 text-gray-600" />,
+      FiUserCheck: <FiUserCheck className="w-4 h-4 text-gray-600" />,
     };
     return iconMap[iconName] || null;
   };
@@ -74,9 +74,10 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
                         ) : (
                           <Link
                             href={sublink.href}
-                            className="block px-4 py-2 text-black text-[14px] font-medium hover:bg-light-bg hover:text-primary transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 text-black text-[14px] font-medium hover:bg-light-bg hover:text-primary transition-colors"
                             onClick={() => setOpenDropdown(null)}
                           >
+                            {getIcon(sublink.icon)}
                             {sublink.label}
                           </Link>
                         )}

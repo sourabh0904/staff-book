@@ -69,20 +69,20 @@ const NetworkingRightSidebar: React.FC = () => {
   const [activeTab, setActiveTab] = useState("All");
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2 pb-4">
       {/* Map Section */}
       <div className={THEME.components.card.default}>
-        <div className="flex items-center gap-2 mb-4">
-          <FiMapPin className="text-primary" />
-          <h3 className={THEME.components.typography.cardTitle}>
-            Map showing job locations
-          </h3>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <FiMapPin className="text-primary" />
+            <h3 className={THEME.components.typography.cardTitle}>
+              Job Locations
+            </h3>
+          </div>
         </div>
         
         {/* Map Component */}
-        <div className="w-full rounded-2xl overflow-hidden border border-gray-100">
-          <MapComponent />
-        </div>
+        <MapComponent users={mapProfiles} />
       </div>
 
       {/* Suggested for Networking */}
@@ -106,45 +106,9 @@ const NetworkingRightSidebar: React.FC = () => {
                   <p className={`${THEME.components.typography.meta} truncate`}>{profile.role}</p>
                 </div>
               </div>
-              <button className={`flex-shrink-0 px-3 py-1.5 rounded-full border border-primary text-primary text-xs font-medium hover:bg-light-bg active:scale-95 transition-all flex items-center gap-1 shadow-sm hover:shadow`}>
+              <button className={`flex-shrink-0 px-4 py-1.5 rounded-full ${THEME.components.button.primary} text-xs font-medium flex items-center gap-1 shadow-sm`}>
                 <FiUserPlus size={14} />
                 Connect
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Recruiters Online */}
-      <div className={`${THEME.components.card.default} sticky top-24`}>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className={THEME.components.typography.cardTitle}>
-            Recruiters Online
-          </h3>
-          <button className={THEME.components.typography.link}>View all</button>
-        </div>
-        <div className="space-y-3">
-          {recruitersList.map((recruiter) => (
-            <div key={recruiter.id} className={`${THEME.components.card.base} p-3 flex items-center justify-between gap-2 hover:shadow-md transition-all group`}>
-              <div className="flex items-center gap-3 min-w-0 cursor-pointer">
-                <div className="relative flex-shrink-0">
-                  <Image
-                    src={recruiter.avatar}
-                    alt={recruiter.name}
-                    width={40}
-                    height={40}
-                    className="w-10 h-10 rounded-full object-cover border border-gray-100 group-hover:border-primary transition-colors"
-                  />
-                  <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
-                </div>
-                <div className="min-w-0">
-                  <h4 className={`${THEME.colors.text.main} text-sm font-semibold truncate group-hover:text-primary transition-colors`}>{recruiter.name}</h4>
-                  <p className={`${THEME.components.typography.meta} truncate`}>{recruiter.role}</p>
-                </div>
-              </div>
-              <button className={`flex-shrink-0 px-3 py-1.5 rounded-full bg-gradient-to-r from-primary to-gradient-end text-white text-xs font-medium hover:opacity-90 active:scale-95 transition-all flex items-center gap-1 shadow-sm hover:shadow-md`}>
-                <FiMessageSquare size={14} />
-                Chat
               </button>
             </div>
           ))}

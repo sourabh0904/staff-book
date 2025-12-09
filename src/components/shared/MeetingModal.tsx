@@ -17,25 +17,19 @@ interface MeetingModalProps {
 }
 
 const MeetingModal: React.FC<MeetingModalProps> = ({ isOpen, onClose }) => {
-  // Mock data for demonstration - in a real app this would come from props or a store
-  const [meetings, setMeetings] = useState<MeetingItem[]>([
-    {
-      id: "m1",
-      candidateId: "c1",
-      candidateName: "Riya Gopi",
-      datetime: new Date(Date.now() + 86400000).toISOString(), // Tomorrow
-      notes: "Initial screening",
-    },
-    {
-      id: "m2",
-      candidateId: "c2",
-      candidateName: "Arun Verma",
-      datetime: new Date(Date.now() + 172800000).toISOString(), // Day after tomorrow
-      notes: "Technical Interview",
-    }
+  const [activeTab, setActiveTab] = useState<'requests' | 'past' | 'schedule'>('requests');
+  
+  // Mock data for demonstration
+  const [meetingRequests, setMeetingRequests] = useState([
+    { id: 'r1', employer: 'TechCorp Inc.', role: 'Senior React Dev', time: 'Tomorrow, 10:00 AM' },
+    { id: 'r2', employer: 'StartupHub', role: 'Frontend Lead', time: 'Fri, 2:00 PM' },
   ]);
 
-  const [showAddForm, setShowAddForm] = useState(false);
+  const [pastMeetings, setPastMeetings] = useState([
+    { id: 'p1', employer: 'Global Systems', role: 'UI Engineer', date: 'Last Week', status: 'Completed' },
+    { id: 'p2', employer: 'Design Studio', role: 'UX Developer', date: '2 weeks ago', status: 'Completed' },
+  ]);
+
   const [newMeeting, setNewMeeting] = useState({
     candidateName: '',
     datetime: '',
@@ -62,19 +56,10 @@ const MeetingModal: React.FC<MeetingModalProps> = ({ isOpen, onClose }) => {
   }, [isOpen, onClose]);
 
   const handleAddMeeting = () => {
-    if (!newMeeting.candidateName || !newMeeting.datetime) return;
-    
-    const m: MeetingItem = {
-      id: "m" + (meetings.length + 1),
-      candidateId: "new",
-      candidateName: newMeeting.candidateName,
-      datetime: newMeeting.datetime,
-      notes: newMeeting.notes,
-    };
-    
-    setMeetings([...meetings, m]);
+    // Logic to add meeting would go here
+    console.log("Meeting scheduled:", newMeeting);
     setNewMeeting({ candidateName: '', datetime: '', notes: '' });
-    setShowAddForm(false);
+    // Switch to requests or show success message
   };
 
   if (!isOpen) return null;
@@ -105,100 +90,133 @@ const MeetingModal: React.FC<MeetingModalProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
+        {/* Tabs */}
+        <div className="flex border-b border-gray-100">
+          <button
+            onClick={() => setActiveTab('requests')}
+            className={`flex-1 py-3 text-sm font-medium transition-colors relative ${
+              activeTab === 'requests' ? 'text-purple-600' : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            Requests
+            {activeTab === 'requests' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab('past')}
+            className={`flex-1 py-3 text-sm font-medium transition-colors relative ${
+              activeTab === 'past' ? 'text-purple-600' : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            Past
+            {activeTab === 'past' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab('schedule')}
+            className={`flex-1 py-3 text-sm font-medium transition-colors relative ${
+              activeTab === 'schedule' ? 'text-purple-600' : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            Schedule
+            {activeTab === 'schedule' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
+            )}
+          </button>
+        </div>
+
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {/* Add Meeting Button */}
-          {!showAddForm ? (
-            <button 
-              onClick={() => setShowAddForm(true)}
-              className="w-full py-3 border-2 border-dashed border-indigo-200 rounded-xl text-indigo-400 font-medium hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-center justify-center gap-2"
-            >
-              <FiPlus /> Schedule New Meeting
-            </button>
-          ) : (
-            <div className="bg-gray-50 p-4 rounded-xl space-y-3 border border-gray-100">
-              <h3 className="font-semibold text-gray-900">New Meeting</h3>
+          
+          {activeTab === 'requests' && (
+            <div className="space-y-3">
+              {meetingRequests.map(req => (
+                <div key={req.id} className="bg-white border border-gray-100 rounded-xl p-4 hover:shadow-md transition-shadow">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{req.employer}</h4>
+                      <p className="text-xs text-gray-500">{req.role}</p>
+                    </div>
+                    <span className="text-xs font-medium px-2 py-1 bg-blue-50 text-blue-600 rounded-full">
+                      New
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                    <FiClock size={14} className="text-gray-400" />
+                    <span>{req.time}</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <button className={`flex-1 py-1.5 text-xs font-medium ${THEME.components.button.primary} rounded-lg transition-colors`}>
+                      Accept
+                    </button>
+                    <button className="flex-1 py-1.5 text-xs font-medium bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
+                      Decline
+                    </button>
+                  </div>
+                </div>
+              ))}
+              {meetingRequests.length === 0 && (
+                <p className="text-center text-gray-400 py-8">No meeting requests</p>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'past' && (
+            <div className="space-y-3">
+              {pastMeetings.map(meeting => (
+                <div key={meeting.id} className="bg-gray-50 border border-gray-100 rounded-xl p-4 opacity-75">
+                  <div className="flex justify-between items-start mb-1">
+                    <h4 className="font-semibold text-gray-900">{meeting.employer}</h4>
+                    <span className="text-xs font-medium px-2 py-1 bg-gray-200 text-gray-600 rounded-full">
+                      {meeting.status}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-500 mb-2">{meeting.role}</p>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <FiCalendar size={14} className="text-gray-400" />
+                    <span>{meeting.date}</span>
+                  </div>
+                </div>
+              ))}
+              {pastMeetings.length === 0 && (
+                <p className="text-center text-gray-400 py-8">No past meetings</p>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'schedule' && (
+            <div className="space-y-3">
+              <h3 className="font-semibold text-gray-900">Schedule with Employer</h3>
               <input
                 type="text"
-                placeholder="Candidate Name"
-                className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300"
+                placeholder="Employer Name"
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300 text-gray-900 placeholder-gray-400"
                 value={newMeeting.candidateName}
                 onChange={e => setNewMeeting({...newMeeting, candidateName: e.target.value})}
               />
               <input
                 type="datetime-local"
-                className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300"
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300 text-gray-900 placeholder-gray-400"
                 value={newMeeting.datetime}
                 onChange={e => setNewMeeting({...newMeeting, datetime: e.target.value})}
               />
               <textarea
-                placeholder="Notes"
-                className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300 min-h-[80px]"
+                placeholder="Message / Notes"
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-300 min-h-[80px] text-gray-900 placeholder-gray-400"
                 value={newMeeting.notes}
                 onChange={e => setNewMeeting({...newMeeting, notes: e.target.value})}
               />
-              <div className="flex gap-2 justify-end">
-                <button 
-                  onClick={() => setShowAddForm(false)}
-                  className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700"
-                >
-                  Cancel
-                </button>
-                <button 
-                  onClick={handleAddMeeting}
-                  className="px-3 py-1.5 text-sm bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 shadow-sm"
-                >
-                  Schedule
-                </button>
-              </div>
+              <button 
+                onClick={handleAddMeeting}
+                className={`w-full py-2.5 ${THEME.components.button.primary} rounded-lg shadow-sm font-medium`}
+              >
+                Send Request
+              </button>
             </div>
           )}
 
-          {/* Meetings List */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Upcoming</h3>
-            {meetings.length === 0 ? (
-              <p className="text-center text-gray-400 py-4">No upcoming meetings</p>
-            ) : (
-              meetings.map((meeting) => (
-                <div key={meeting.id} className="bg-white border border-gray-100 rounded-xl p-4 hover:shadow-md transition-shadow group">
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center">
-                        <FiUser size={14} />
-                      </div>
-                      <span className="font-semibold text-gray-900">{meeting.candidateName}</span>
-                    </div>
-                    <span className="text-xs font-medium px-2 py-1 bg-green-50 text-green-600 rounded-full">
-                      Confirmed
-                    </span>
-                  </div>
-                  
-                  <div className="space-y-1 ml-10">
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <FiCalendar size={14} className="text-gray-400" />
-                      <span>{new Date(meeting.datetime).toLocaleDateString()}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <FiClock size={14} className="text-gray-400" />
-                      <span>{new Date(meeting.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                    </div>
-                    {meeting.notes && (
-                      <p className="text-xs text-gray-400 mt-2 pl-2 border-l-2 border-gray-100">
-                        {meeting.notes}
-                      </p>
-                    )}
-                  </div>
-                  
-                  <div className="mt-3 pt-3 border-t border-gray-50 flex justify-end">
-                    <button className="text-xs font-medium text-indigo-500 hover:text-indigo-600">
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
         </div>
       </div>
     </div>

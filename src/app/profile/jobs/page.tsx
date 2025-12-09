@@ -32,7 +32,7 @@ import { THEME } from "@/styles/theme";
 
 
 const menuItems = [
-  { icon: <FiSearch size={18} />, label: 'Recommended Job', key: 'browse' },
+  { icon: <FiSearch size={18} />, label: 'Find Jobs', key: 'browse' },
   { icon: <FiBriefcase size={18} />, label: 'Job Invites', key: 'applications' },
   { icon: <FiTarget size={18} />, label: 'Applied Jobs', key: 'recommendations' },
   { icon: <FiBookmark size={18} />, label: 'Saved Jobs', key: 'saved' },
@@ -1462,7 +1462,7 @@ function JobManagementContent() {
                   Start saving jobs you're interested in to view them here
                 </p>
                 <button className="px-6 py-3 bg-gradient-to-r from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-bold rounded-lg transition-all duration-300">
-                 Recommended Jobs
+                 Find Jobs
                 </button>
               </div>
             )}
@@ -1471,7 +1471,7 @@ function JobManagementContent() {
               <div className="space-y-6 mt-[4rem]">
                 <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
                   <h2 className="text-2xl font-bold text-[#222] font-Montserrat">
-                    Recommended Jobs
+                    Find Jobs
                   </h2>
                   <Link
                     href="/profile/jobs/category/recommended"

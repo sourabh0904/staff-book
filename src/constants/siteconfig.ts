@@ -200,7 +200,7 @@ export const SITE_CONFIG = {
             label: 'Job Seeking Mode',
             href: '/job-market/seeker',
             submenu: [
-              { label: "Jobs", href: "/profile/jobs" },
+              { label: "Find Job", href: "/profile/jobs" },
               { label: 'Recruiter Interest', href: '/profile/insights' },
               { label: 'Career Growth', href: '/profile/development' }
             ]
@@ -255,10 +255,10 @@ export const SITE_CONFIG = {
     subtitle: 'Connect with professionals',
     writePost: 'Write a post',
     postTypes: {
-      blog: 'Write Blog',
-      image: 'Upload Image',
-      video: 'Upload Video',
-      reel: 'Upload Reel',
+      blog: 'Blog',
+      image: 'Image',
+      video: 'Video',
+      reel: 'Reel',
     },
     reels: {
       title: 'Reels',
@@ -370,7 +370,7 @@ export const LOGGED_IN_LINKS = [
         label: 'Job Seeking Mode',
         href: '/profile/jobs?mode=seeker',
         submenu: [
-          { label: "Jobs", href: "/profile/jobs", icon: "FiBriefcase" },
+          { label: "Find Job", href: "/profile/jobs", icon: "FiBriefcase" },
           { label: 'Recruiter Interest', href: '/profile/insights', icon: "FiEye" },
           { label: 'Career Growth', href: '/profile/development', icon: "FiTrendingUp" }
         ]

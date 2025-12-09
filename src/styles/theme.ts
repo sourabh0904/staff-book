@@ -46,11 +46,11 @@ export const layout = {
 
 export const components = {
   card: {
-    base: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150 border border-white/60 shadow-xl ring-1 ring-white/40 rounded-xl', // Mirror glass effect
+    base: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150 border border-white/50 shadow-lg ring-1 ring-white/30 rounded-xl', // Mirror glass effect
     radius: 'rounded-xl',
     padding: 'p-4 sm:p-5',
     // Composite for convenience
-    default: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150 border border-white/60 shadow-xl ring-1 ring-white/40 rounded-xl p-4 sm:p-5',
+    default: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150 border border-white/50 shadow-lg ring-1 ring-white/30 rounded-xl p-4 sm:p-5',
   },
   button: {
     icon: 'w-9 h-9 rounded-full bg-light-bg flex items-center justify-center cursor-pointer',

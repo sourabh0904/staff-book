@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { Edit2 } from 'lucide-react';
 import { SITE_CONFIG } from '../../constants/siteconfig';
+import { basicDetails } from '../../data/profile';
 import { useAuth } from '@/context/AuthContext';
 import { THEME } from '../../styles/theme';
 
@@ -56,7 +57,7 @@ export default function ProfileHeader() {
               </div>
             </div>
             {/* Progress badge */}
-            <div className={`absolute left-1/2 -bottom-3 -translate-x-1/2 bg-white rounded-full px-3 py-0.5 border-2 border-[${THEME.colors.primary}] text-[${THEME.colors.primary}] font-bold text-xs md:text-sm shadow text-center whitespace-nowrap`}>
+            <div className={`absolute left-1/2 -bottom-3 -translate-x-1/2 bg-white rounded-full px-3 py-0.5 border-2 border-purple-600 text-purple-600 font-bold text-xs md:text-sm shadow text-center whitespace-nowrap`}>
               {progress}%
             </div>
           </div>
@@ -78,12 +79,20 @@ export default function ProfileHeader() {
             <p className={`${THEME.components.typography.cardTitle} text-sm md:text-base`}>{displayLocation}</p>
           </div>
           <div className="flex flex-col gap-1">
-            <p className={THEME.components.typography.meta}>Email</p>
-            <p className={`${THEME.components.typography.cardTitle} text-sm md:text-base break-all`}>{displayEmail}</p>
+            <p className={THEME.components.typography.meta}>Personal Email</p>
+            <p className={`${THEME.components.typography.cardTitle} text-sm md:text-base break-all`}>{basicDetails.personalEmail || displayEmail}</p>
           </div>
           <div className="flex flex-col gap-1">
-            <p className={THEME.components.typography.meta}>Phone</p>
-            <p className={`${THEME.components.typography.cardTitle} text-sm md:text-base`}>{displayPhone}</p>
+            <p className={THEME.components.typography.meta}>Work Email</p>
+            <p className={`${THEME.components.typography.cardTitle} text-sm md:text-base break-all`}>{basicDetails.workEmail || "Not specified"}</p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <p className={THEME.components.typography.meta}>Personal Phone</p>
+            <p className={`${THEME.components.typography.cardTitle} text-sm md:text-base`}>{basicDetails.personalContact || displayPhone}</p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <p className={THEME.components.typography.meta}>Work Phone</p>
+            <p className={`${THEME.components.typography.cardTitle} text-sm md:text-base`}>{basicDetails.workContact || "Not specified"}</p>
           </div>
           <div className="flex flex-col gap-1">
             <p className={THEME.components.typography.meta}>Profile Views</p>

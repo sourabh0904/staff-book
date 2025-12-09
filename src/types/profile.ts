@@ -26,6 +26,7 @@ export interface BasicDetails {
   personalEmail: string;
   workEmail: string;
   personalContact: string;
+  workContact?: string;
   workNoticePeriod: string;
 } 
 

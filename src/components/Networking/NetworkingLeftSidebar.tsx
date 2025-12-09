@@ -32,11 +32,18 @@ const NetworkingLeftSidebar: React.FC = () => {
   if (!user) return null;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 pb-4">
       {/* Profile Card */}
       <div className={`${THEME.components.card.default} overflow-hidden relative p-0`}>
         {/* Cover Image */}
-        <div className={`h-16 bg-gradient-to-r from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}]`}></div>
+        <div className="h-24 relative w-full">
+          <Image
+            src="/homePage/job-photo.png"
+            alt="Cover"
+            fill
+            className="object-cover"
+          />
+        </div>
         
         {/* Profile Info */}
         <div className="px-4 pb-4 text-center relative">

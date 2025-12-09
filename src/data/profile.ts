@@ -51,6 +51,7 @@ export const basicDetails = {
   personalEmail: 'riyagoyal.du@gmail.com',
   workEmail: 'riyagoyal.du@gmail.com',
   personalContact: '+91-9560104339',
+  workContact: '+91-9876543210',
   workNoticePeriod: '1 month',
 };
 

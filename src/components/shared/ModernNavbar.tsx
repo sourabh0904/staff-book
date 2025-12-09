@@ -13,9 +13,12 @@ import {
   FiGrid
 } from "react-icons/fi";
 import { THEME } from "@/styles/theme";
+import MeetingModal from "./MeetingModal";
+import { FiCalendar } from "react-icons/fi";
 
 export default function ModernNavbar() {
   const [modeToggle, setModeToggle] = useState<"networking" | "seeker" | "employer">("networking");
+  const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50 shadow-sm">
@@ -73,6 +76,14 @@ export default function ModernNavbar() {
               <FiSearch size={20} className="text-gray-600" />
             </button>
 
+            {/* Meetings */}
+            <button 
+              onClick={() => setIsMeetingModalOpen(true)}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <FiCalendar size={20} className="text-gray-600" />
+            </button>
+
             {/* Messages */}
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
               <FiMessageCircle size={20} className="text-gray-600" />
@@ -92,6 +103,7 @@ export default function ModernNavbar() {
           </div>
         </div>
       </div>
+      <MeetingModal isOpen={isMeetingModalOpen} onClose={() => setIsMeetingModalOpen(false)} />
     </nav>
   );
 }

@@ -41,19 +41,19 @@ const CreatePostWidget: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
             <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
               <FiEdit3 className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
-              <span className="text-xs sm:text-sm font-bold text-black">Write Blog</span>
+              <span className="text-xs sm:text-sm font-bold text-black">{SITE_CONFIG.networking.postTypes.blog}</span>
             </button>
             <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
               <FiImage className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
-              <span className="text-xs sm:text-sm font-bold text-black">Upload Image</span>
+              <span className="text-xs sm:text-sm font-bold text-black">{SITE_CONFIG.networking.postTypes.image}</span>
             </button>
             <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
               <FiVideoIcon className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
-              <span className="text-xs sm:text-sm font-bold text-black">Upload Video</span>
+              <span className="text-xs sm:text-sm font-bold text-black">{SITE_CONFIG.networking.postTypes.video}</span>
             </button>
             <button className="flex items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 md:p-3 hover:bg-purple-50 hover:border-purple-200 transition-colors group">
               <FiVideo className={`w-4 h-4 sm:w-5 sm:h-5 ${THEME.components.icon.primary}`} />
-              <span className="text-xs sm:text-sm font-bold text-black">Upload Reel</span>
+              <span className="text-xs sm:text-sm font-bold text-black">{SITE_CONFIG.networking.postTypes.reel}</span>
             </button>
           </div>
         </>

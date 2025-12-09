@@ -305,8 +305,9 @@ export default function JobCategoryPage() {
   ];
 
   return (
-    <div className="min-h-screen p-4 md:p-6 lg:p-8 mt-[60px]">
-      <div className="flex gap-6 w-full px-6">
+    <div className="min-h-screen w-full bg-[#F7F7F8]">
+      <div className="max-w-7xl mx-auto pt-[80px] px-4 sm:px-6 lg:px-8">
+        <div className="flex gap-6 w-full">
         {/* Left Sidebar - 20% width to match main page */}
         <div className="w-[20%] flex-shrink-0 hidden lg:block">
           {/* Filters Sidebar */}
@@ -963,6 +964,7 @@ export default function JobCategoryPage() {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
