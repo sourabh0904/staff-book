@@ -28,31 +28,12 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
   return (
     <div className="min-h-screen w-full bg-[#F7F7F8]">
       <div className="max-w-7xl mx-auto pt-[80px] px-4 sm:px-6 lg:px-8">
-        {/* Mobile Sidebar Toggle Button */}
-        {showSidebar && (
-          <div className="hidden fixed top-18 left-2 z-50">
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className=" bg-white rounded-full shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors"
-              aria-label="Toggle sidebar"
-            >
-              <div className='rounded-full border border-gray-200 overflow-hidden h-10 w-10 bg-red-500 flex items-center justify-center'>
-                <Image
-                  src={"/homePage/profile.png"}
-                  alt={"profile"}
-                  width={40}
-                  height={40}
-                  className="rounded-full object-cover"
-                />
-              </div>
-            </button>
-          </div>
-        )}
+
 
         {/* Mobile Sidebar Overlay */}
         {showSidebar && isSidebarOpen && (
           <div
-            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 mt-[70px]"
+            className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40 mt-[70px]"
             onClick={() => setIsSidebarOpen(false)}
           />
         )}

@@ -109,7 +109,7 @@ export default function ChatbotWidget() {
       {!open && (
         <button
           aria-label="Open chatbot"
-          className={`group relative w-24 h-24 rounded-full shadow-2xl bg-gradient-to-r from-indigo-300 to-purple-300 text-white hover:scale-105 transition-all duration-500 ease-out flex items-center justify-center ring-4 ring-white/30`}
+          className={`group relative w-14 h-14 md:w-20 md:h-20 rounded-full shadow-2xl bg-gradient-to-r from-indigo-300 to-purple-300 text-white hover:scale-105 transition-all duration-500 ease-out flex items-center justify-center ring-4 ring-white/30`}
           onClick={() => setOpen(true)}
         >
           {/* Outer glow/pulse ring - smoother */}
@@ -121,7 +121,7 @@ export default function ChatbotWidget() {
           {/* Gradient background with blur effect */}
           <div className={`absolute -inset-0.5 rounded-full bg-gradient-to-r from-indigo-300 to-purple-300 opacity-40 blur-md group-hover:opacity-60 transition-opacity duration-500`} />
           
-          <RiRobot2Fill className="w-12 h-12 relative z-10 transform group-hover:rotate-6 transition-transform duration-500 ease-out drop-shadow-md" />
+          <RiRobot2Fill className="w-6 h-6 md:w-10 md:h-10 relative z-10 transform group-hover:rotate-6 transition-transform duration-500 ease-out drop-shadow-md" />
         </button>
       )}
 

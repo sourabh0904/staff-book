@@ -198,7 +198,7 @@ export const NavbarIconButton = ({
 }) => {
   const router = useRouter();
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-2 md:gap-4">
       <button className=" p-2 rounded-full hover:bg-gray-100 transition-colors">
         <FiMessageSquare size={22} className="text-gray-500" />
       </button>

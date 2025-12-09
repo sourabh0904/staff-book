@@ -4,7 +4,7 @@ import NetworkingLayout from '../../components/Networking/NetworkingLayout';
 
 export default function Page() {
   return (
-    <ProfileLayout showSidebar={false} showStories={false} showJobSearchBar={false}>
+    <ProfileLayout showSidebar={true} showStories={false} showJobSearchBar={false}>
       <NetworkingLayout />
     </ProfileLayout>
   );
