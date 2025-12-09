@@ -17,6 +17,8 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import Button from "@/components/shared/Button";
+import Card from "@/components/shared/Card";
+import { THEME } from "@/styles/theme";
 
 
 // Mock job data - in real app, fetch from API
@@ -206,115 +208,121 @@ export default function JobDetailPage() {
             <div className="col-span-3">
               <div className="sticky top-6 space-y-4">
                 {/* Company Logo */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-[#E8E4FF]">
-                  <div className="w-full h-24 bg-gradient-to-br from-light-bg to-light-bg rounded-xl flex items-center justify-center mb-4">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-gradient-start to-gradient-end bg-clip-text text-transparent">
+                {/* Company Logo */}
+                <Card className="p-6">
+                  <div className={`w-full h-24 bg-gradient-to-br ${THEME.colors.gradient.light} rounded-xl flex items-center justify-center mb-4`}>
+                    <div className={`text-4xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
                       {job.company.charAt(0)}
                     </div>
                   </div>
-                  <h3 className="text-lg font-bold text-[#222] text-center">
+                  <h3 className={`text-lg font-bold ${THEME.colors.text.heading} text-center`}>
                     {job.company}
                   </h3>
-                </div>
+                </Card>
 
                 {/* Quick Info */}
-                <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#E8E4FF] space-y-4">
-                  <h4 className="font-bold text-[#222] mb-4">Job Details</h4>
+                {/* Quick Info */}
+                <Card className="p-6 space-y-4">
+                  <h4 className={`font-bold ${THEME.colors.text.heading} mb-4`}>Job Details</h4>
                   
                   <div className="space-y-3 text-sm">
                     <div className="flex items-start gap-3">
-                      <FiDollarSign className="text-primary mt-0.5" size={16} />
+                      <FiDollarSign className={`text-[${THEME.colors.primary}] mt-0.5`} size={16} />
                       <div>
-                        <p className="text-[#666]">Salary</p>
-                        <p className="font-semibold text-[#222]">{job.salary}</p>
+                        <p className={THEME.colors.text.body}>Salary</p>
+                        <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.salary}</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <FiMapPin className="text-primary mt-0.5" size={16} />
+                      <FiMapPin className={`text-[${THEME.colors.primary}] mt-0.5`} size={16} />
                       <div>
-                        <p className="text-[#666]">Location</p>
-                        <p className="font-semibold text-[#222]">{job.location}</p>
+                        <p className={THEME.colors.text.body}>Location</p>
+                        <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.location}</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <FiNavigation className="text-primary mt-0.5" size={16} />
+                      <FiNavigation className={`text-[${THEME.colors.primary}] mt-0.5`} size={16} />
                       <div>
-                        <p className="text-[#666]">Distance</p>
-                        <p className="font-semibold text-[#222]">
+                        <p className={THEME.colors.text.body}>Distance</p>
+                        <p className={`font-semibold ${THEME.colors.text.heading}`}>
                           {job.distance} km away
                         </p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <FiBriefcase className="text-primary mt-0.5" size={16} />
+                      <FiBriefcase className={`text-[${THEME.colors.primary}] mt-0.5`} size={16} />
                       <div>
-                        <p className="text-[#666]">Job Type</p>
-                        <p className="font-semibold text-[#222]">{job.type}</p>
+                        <p className={THEME.colors.text.body}>Job Type</p>
+                        <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.type}</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <FiClock className="text-primary mt-0.5" size={16} />
+                      <FiClock className={`text-[${THEME.colors.primary}] mt-0.5`} size={16} />
                       <div>
-                        <p className="text-[#666]">Posted</p>
-                        <p className="font-semibold text-[#222]">{job.postedDate}</p>
+                        <p className={THEME.colors.text.body}>Posted</p>
+                        <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.postedDate}</p>
                       </div>
                     </div>
                   </div>
-                </div>
+                </Card>
 
                 {/* Posted By */}
-                <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#E8E4FF]">
-                  <h4 className="font-bold text-[#222] mb-4">Posted By</h4>
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gradient-start to-gradient-end p-[2px]">
-                        <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                          <img
-                            src={job.posterImage}
-                            alt={job.posterName}
-                            className="w-full h-full object-cover"
-                          />
+                {/* Posted By */}
+                <Card className="p-6">
+                  <h4 className={`font-bold ${THEME.colors.text.heading} mb-4`}>Posted By</h4>
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="relative">
+                        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[2px]`}>
+                          <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+                            <img
+                              src={job.posterImage}
+                              alt={job.posterName}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
                         </div>
+                        {job.isOnline && (
+                          <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+                        )}
                       </div>
-                      {job.isOnline && (
-                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
-                      )}
+                      <div>
+                        <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.posterName}</p>
+                        <p className={`text-xs ${THEME.colors.text.body}`}>{job.posterDesignation}</p>
+                        <p className={`text-xs ${THEME.colors.text.muted}`}>{job.lastActive}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-semibold text-[#222]">{job.posterName}</p>
-                      <p className="text-xs text-[#666]">{job.posterDesignation}</p>
-                      <p className="text-xs text-[#999]">{job.lastActive}</p>
-                    </div>
+                    <Button
+                      variant="ghost"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-light-bg text-primary hover:bg-[#E5E3FF] rounded-xl font-medium transition-all text-sm"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                        <path
+                          d="M9 4V14M4 9H14"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      Connect
+                    </Button>
                   </div>
-                </div>
-              <Button
-                variant="ghost"
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-light-bg text-primary hover:bg-[#E5E3FF] rounded-xl font-medium transition-all"
-              >
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path
-                    d="M9 4V14M4 9H14"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                Connect
-              </Button>
+                </Card>
                   </div>
             </div>
 
             {/* Center Column - Job Description */}
+            {/* Center Column - Job Description */}
             <div className="col-span-6">
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-[#E8E4FF]">
-                <h1 className="text-3xl font-bold text-[#222] mb-2">
+              <Card className="p-8">
+                <h1 className={`text-3xl font-bold ${THEME.colors.text.heading} mb-2`}>
                   {job.position}
                 </h1>
-                <div className="flex items-center gap-4 text-sm text-[#666] mb-6">
+                <div className={`flex items-center gap-4 text-sm ${THEME.colors.text.body} mb-6`}>
                   <span className="flex items-center gap-1">
                     <FiBriefcase size={14} />
                     {job.workMode}
@@ -327,24 +335,24 @@ export default function JobDetailPage() {
 
                 {/* Job Description */}
                 <section className="mb-8">
-                  <h2 className="text-xl font-bold text-[#222] mb-4">
+                  <h2 className={`text-xl font-bold ${THEME.colors.text.heading} mb-4`}>
                     Job Description
                   </h2>
-                  <p className="text-[#444] leading-relaxed whitespace-pre-line">
+                  <p className={`${THEME.colors.text.body} leading-relaxed whitespace-pre-line`}>
                     {job.description}
                   </p>
                 </section>
 
                 {/* Responsibilities */}
                 <section className="mb-8">
-                  <h2 className="text-xl font-bold text-[#222] mb-4">
+                  <h2 className={`text-xl font-bold ${THEME.colors.text.heading} mb-4`}>
                     Key Responsibilities
                   </h2>
                   <ul className="space-y-3">
                     {job.responsibilities.map((item: string, index: number) => (
                       <li key={index} className="flex items-start gap-3">
-                        <FiCheckCircle className="text-primary mt-1 flex-shrink-0" size={18} />
-                        <span className="text-[#444]">{item}</span>
+                        <FiCheckCircle className={`text-[${THEME.colors.primary}] mt-1 flex-shrink-0`} size={18} />
+                        <span className={THEME.colors.text.body}>{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -352,14 +360,14 @@ export default function JobDetailPage() {
 
                 {/* Requirements */}
                 <section className="mb-8">
-                  <h2 className="text-xl font-bold text-[#222] mb-4">
+                  <h2 className={`text-xl font-bold ${THEME.colors.text.heading} mb-4`}>
                     Requirements
                   </h2>
                   <ul className="space-y-3">
                     {job.requirements.map((item: string, index: number) => (
                       <li key={index} className="flex items-start gap-3">
-                        <FiCheckCircle className="text-primary mt-1 flex-shrink-0" size={18} />
-                        <span className="text-[#444]">{item}</span>
+                        <FiCheckCircle className={`text-[${THEME.colors.primary}] mt-1 flex-shrink-0`} size={18} />
+                        <span className={THEME.colors.text.body}>{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -367,41 +375,41 @@ export default function JobDetailPage() {
 
                 {/* Benefits */}
                 <section className="mb-8">
-                  <h2 className="text-xl font-bold text-[#222] mb-4">
+                  <h2 className={`text-xl font-bold ${THEME.colors.text.heading} mb-4`}>
                     Benefits & Perks
                   </h2>
                   <ul className="space-y-3">
                     {job.benefits.map((item: string, index: number) => (
                       <li key={index} className="flex items-start gap-3">
                         <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={18} />
-                        <span className="text-[#444]">{item}</span>
+                        <span className={THEME.colors.text.body}>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </section>
 
                 {/* Company Info */}
-                <section className="bg-gradient-to-br from-light-bg to-light-bg rounded-xl p-6">
-                  <h2 className="text-xl font-bold text-[#222] mb-4">
+                <section className={`bg-gradient-to-br ${THEME.colors.gradient.light} rounded-xl p-6`}>
+                  <h2 className={`text-xl font-bold ${THEME.colors.text.heading} mb-4`}>
                     About {job.companyInfo.name}
                   </h2>
-                  <p className="text-[#444] mb-4">{job.companyInfo.about}</p>
+                  <p className={`${THEME.colors.text.body} mb-4`}>{job.companyInfo.about}</p>
                   <div className="grid grid-cols-3 gap-4 text-sm">
                     <div>
-                      <p className="text-[#666]">Company Size</p>
-                      <p className="font-semibold text-[#222]">{job.companyInfo.size}</p>
+                      <p className={THEME.colors.text.body}>Company Size</p>
+                      <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.companyInfo.size}</p>
                     </div>
                     <div>
-                      <p className="text-[#666]">Industry</p>
-                      <p className="font-semibold text-[#222]">{job.companyInfo.industry}</p>
+                      <p className={THEME.colors.text.body}>Industry</p>
+                      <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.companyInfo.industry}</p>
                     </div>
                     <div>
-                      <p className="text-[#666]">Founded</p>
-                      <p className="font-semibold text-[#222]">{job.companyInfo.founded}</p>
+                      <p className={THEME.colors.text.body}>Founded</p>
+                      <p className={`font-semibold ${THEME.colors.text.heading}`}>{job.companyInfo.founded}</p>
                     </div>
                   </div>
                 </section>
-              </div>
+              </Card>
             </div>
 
             {/* Right Column - Call to Action (Sticky) */}
@@ -409,17 +417,17 @@ export default function JobDetailPage() {
               <div className="sticky top-6 space-y-4">
                 {/* Apply Button */}
                 {/* Apply Button */}
-                <Button className="w-full px-6 py-4 bg-gradient-to-r from-gradient-start to-[#7F37C9] hover:from-[#4A4AD6] hover:to-[#6E2BB8] text-white font-bold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
+                <Button className={`${THEME.components.button.primary} w-full text-lg`}>
                   Apply Now
                 </Button>
 
                 {/* Action Buttons */}
-                <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#E8E4FF] space-y-3">
+                <Card className="p-4 space-y-3">
                   <Button
                     onClick={() => setIsSaved(!isSaved)}
                     className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium transition-all ${
                       isSaved
-                        ? "bg-primary text-white"
+                        ? `bg-[${THEME.colors.primary}] text-white`
                         : "bg-light-bg text-primary hover:bg-[#E5E3FF]"
                     }`}
                   >
@@ -431,13 +439,11 @@ export default function JobDetailPage() {
                     <FiCalendar size={18} />
                     Schedule Meet
                   </Button>
-
-                  
-                </div>
+                </Card>
 
                 {/* Share */}
-                <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#E8E4FF]">
-                  <p className="text-sm text-[#666] mb-2">Share this job</p>
+                <Card className="p-4">
+                  <p className={`text-sm ${THEME.colors.text.body} mb-2`}>Share this job</p>
                   <div className="flex gap-2">
                     <Button className="flex-1 px-3 py-2 bg-light-bg hover:bg-[#E5E3FF] rounded-lg text-xs font-medium text-primary transition-colors">
                       Copy Link
@@ -446,7 +452,7 @@ export default function JobDetailPage() {
                       Share
                     </Button>
                   </div>
-                </div>
+                </Card>
               </div>
             </div>
           </div>

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { FiX, FiCheck, FiBriefcase, FiGlobe, FiFileText } from 'react-icons/fi';
+import { FiX, FiCheck, FiBriefcase, FiMail, FiFileText, FiUpload } from 'react-icons/fi';
 import { THEME } from '@/styles/theme';
 
 interface EmployerVerificationModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onVerify: (details: { companyName: string; gstNumber: string; website?: string }) => void;
+  onVerify: (details: { companyName: string; gstNumber: string; email: string; file: File | null }) => void;
 }
 
 const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
@@ -16,9 +16,11 @@ const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
 }) => {
   const [companyName, setCompanyName] = useState('');
   const [gstNumber, setGstNumber] = useState('');
-  const [website, setWebsite] = useState('');
-  const [errors, setErrors] = useState<{ companyName?: string; gstNumber?: string }>({});
+  const [email, setEmail] = useState('');
+  const [file, setFile] = useState<File | null>(null);
+  const [errors, setErrors] = useState<{ companyName?: string; gstNumber?: string; email?: string; file?: string }>({});
   const [mounted, setMounted] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -40,11 +42,19 @@ const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
   if (!isOpen || !mounted) return null;
 
   const validate = () => {
-    const newErrors: { companyName?: string; gstNumber?: string } = {};
+    const newErrors: { companyName?: string; gstNumber?: string; email?: string; file?: string } = {};
     let isValid = true;
 
     if (!companyName.trim()) {
       newErrors.companyName = 'Company name is required';
+      isValid = false;
+    }
+
+    if (!email.trim()) {
+      newErrors.email = 'Professional Email is required';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Invalid email format';
       isValid = false;
     }
 
@@ -57,6 +67,14 @@ const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
       isValid = false;
     }
 
+    if (!file) {
+      newErrors.file = 'Registration Document is required';
+      isValid = false;
+    } else if (file.size > 5 * 1024 * 1024) {
+      newErrors.file = 'File size must be less than 5MB';
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
   };
@@ -64,12 +82,20 @@ const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      onVerify({ companyName, gstNumber, website });
+      onVerify({ companyName, gstNumber, email, file });
       // Reset form
       setCompanyName('');
       setGstNumber('');
-      setWebsite('');
+      setEmail('');
+      setFile(null);
       setErrors({});
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+      setErrors({ ...errors, file: undefined });
     }
   };
 
@@ -124,13 +150,48 @@ const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
                   className={`w-full pl-11 pr-4 py-3.5 rounded-2xl bg-gray-50 border ${
                     errors.companyName ? 'border-red-300 bg-red-50' : 'border-gray-200 hover:border-gray-300'
                   } focus:bg-white focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100 focus:outline-none transition-all font-medium text-gray-800 placeholder-gray-400`}
-                  placeholder="e.g. Tech Solutions Pvt Ltd"
+                  placeholder="Enter your company name"
                 />
               </div>
               {errors.companyName && (
                 <p className="mt-2 ml-1 text-xs font-medium text-red-500 flex items-center gap-1">
                   <span className="w-1 h-1 rounded-full bg-red-500"></span>
                   {errors.companyName}
+                </p>
+              )}
+            </div>
+
+            {/* Professional Email */}
+            <div className="group">
+              <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
+                Professional Email <span className="text-red-500">*</span>
+              </label>
+              <div className="flex gap-2">
+                <div className="relative flex-1 transition-all duration-300 transform group-focus-within:-translate-y-1">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-indigo-400 transition-colors">
+                    <FiMail size={18} />
+                  </div>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={`w-full pl-11 pr-4 py-3.5 rounded-2xl bg-gray-50 border ${
+                      errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200 hover:border-gray-300'
+                    } focus:bg-white focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100 focus:outline-none transition-all font-medium text-gray-800 placeholder-gray-400`}
+                    placeholder="hr@yourcompany.com"
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="px-4 py-3.5 bg-indigo-50 text-indigo-600 font-semibold rounded-2xl hover:bg-indigo-100 transition-colors"
+                >
+                  Verify
+                </button>
+              </div>
+              {errors.email && (
+                <p className="mt-2 ml-1 text-xs font-medium text-red-500 flex items-center gap-1">
+                  <span className="w-1 h-1 rounded-full bg-red-500"></span>
+                  {errors.email}
                 </p>
               )}
             </div>
@@ -151,7 +212,7 @@ const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
                   className={`w-full pl-11 pr-4 py-3.5 rounded-2xl bg-gray-50 border ${
                     errors.gstNumber ? 'border-red-300 bg-red-50' : 'border-gray-200 hover:border-gray-300'
                   } focus:bg-white focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100 focus:outline-none transition-all font-medium text-gray-800 placeholder-gray-400`}
-                  placeholder="e.g. 22AAAAA0000A1Z5"
+                  placeholder="22AAAAA0000A1Z5"
                   maxLength={15}
                 />
               </div>
@@ -163,23 +224,38 @@ const EmployerVerificationModal: React.FC<EmployerVerificationModalProps> = ({
               )}
             </div>
 
-            {/* Website (Optional) */}
+            {/* Registration Document */}
             <div className="group">
               <label className="block text-sm font-semibold text-gray-700 mb-2 ml-1">
-                Company Website <span className="text-gray-400 font-normal text-xs ml-1">(Optional)</span>
+                Registration Document <span className="text-red-500">*</span>
               </label>
-              <div className="relative transition-all duration-300 transform group-focus-within:-translate-y-1">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-indigo-400 transition-colors">
-                  <FiGlobe size={18} />
-                </div>
+              <div 
+                className={`relative border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all ${
+                  errors.file ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-indigo-400 hover:bg-indigo-50'
+                }`}
+                onClick={() => fileInputRef.current?.click()}
+              >
                 <input
-                  type="url"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-gray-50 border border-gray-200 hover:border-gray-300 focus:bg-white focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100 focus:outline-none transition-all font-medium text-gray-800 placeholder-gray-400"
-                  placeholder="https://example.com"
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="hidden"
+                  accept=".pdf,.jpg,.jpeg,.png"
                 />
+                <div className="flex flex-col items-center gap-2">
+                  <FiUpload size={24} className="text-gray-400" />
+                  <p className="text-sm font-medium text-gray-600">
+                    {file ? file.name : 'Choose file (PDF, JPG, PNG)'}
+                  </p>
+                  <p className="text-xs text-gray-400">Max file size: 5MB</p>
+                </div>
               </div>
+              {errors.file && (
+                <p className="mt-2 ml-1 text-xs font-medium text-red-500 flex items-center gap-1">
+                  <span className="w-1 h-1 rounded-full bg-red-500"></span>
+                  {errors.file}
+                </p>
+              )}
             </div>
 
             {/* Actions */}

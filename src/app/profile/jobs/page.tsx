@@ -19,6 +19,7 @@ import {
   FiExternalLink,
   FiChevronRight,
   FiNavigation,
+  FiMessageCircle,
 } from "react-icons/fi";
 import { useAuth } from "@/context/AuthContext";
 import ProfileSidebar from "@/components/shared/ProfileSidebar";
@@ -1055,12 +1056,12 @@ function JobManagementContent() {
                     My Applications
                   </h2>
                   <div className="flex gap-3">
-                    <button className={`flex items-center gap-2 px-4 py-2 text-[${THEME.colors.primary}] border-[1px] border-[${THEME.colors.primary}] rounded-lg hover:bg-purple-50 transition-colors duration-300`}>
-                      <FiFilter className={`text-[${THEME.colors.primary}]`} size={16} />
+                    <button className="flex items-center gap-2 px-4 py-2 text-purple-600 border border-purple-200 rounded-lg hover:bg-purple-50 transition-colors duration-300 font-medium">
+                      <FiFilter className="text-purple-600" size={16} />
                       Filter
                     </button>
-                    <button className={`flex items-center gap-2 px-4 py-2 text-[${THEME.colors.primary}] border-[1px] border-[${THEME.colors.primary}] rounded-lg hover:bg-purple-50 transition-colors duration-300`}>
-                      <FiSearch className={`text-[${THEME.colors.primary}]`} size={16} />
+                    <button className="flex items-center gap-2 px-4 py-2 text-purple-600 border border-purple-200 rounded-lg hover:bg-purple-50 transition-colors duration-300 font-medium">
+                      <FiSearch className="text-purple-600" size={16} />
                       Search
                     </button>
                   </div>
@@ -1146,7 +1147,7 @@ function JobManagementContent() {
                     Recommended for You
                   </h2>
                   <div className="flex gap-3">
-                    <button className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} border ${THEME.colors.border} rounded-lg hover:border-[${THEME.colors.primary}] transition-colors duration-300 text-white`}>
+                    <button className={`${THEME.components.button.primary} flex items-center gap-2`}>
                       <FiFilter size={16} />
                       Preferences
                     </button>
@@ -1436,10 +1437,9 @@ function JobManagementContent() {
                             Save
                           </button>
                           <button
-                            className={`w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-bold rounded-lg transition-all duration-300`}
+                            className={THEME.components.button.primary}
                             onClick={() => applyFromRecommendation(job)}
                           >
-                            <FiExternalLink size={16} />
                             Apply Now
                           </button>
                         </div>
@@ -1475,10 +1475,10 @@ function JobManagementContent() {
                   </h2>
                   <Link
                     href="/profile/jobs/category/recommended"
-                    className="px-6 py-2 bg-gradient-to-r from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-semibold rounded-lg transition-all duration-300 flex items-center gap-2"
+                    className="text-sm text-purple-600 font-semibold hover:text-purple-700 hover:underline flex items-center gap-1"
                   >
                     See More
-                    <FiChevronRight size={18} />
+                    <FiChevronRight size={16} />
                   </Link>
                 </div>
 
@@ -1627,7 +1627,7 @@ function JobManagementContent() {
                         </button>
                         <button
                           onClick={() => applyToPosting(p)}
-                          className={`flex-1 px-4 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#6E2BB8] text-white font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-sm text-center`}
+                          className={`${THEME.components.button.primary} flex-1`}
                         >
                           Apply Now
                         </button>
@@ -1644,10 +1644,10 @@ function JobManagementContent() {
                     </h2>
                     <Link
                       href="/profile/jobs/category/skills-match"
-                      className={`px-6 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-semibold rounded-lg transition-all duration-300 flex items-center gap-2`}
+                      className="text-sm text-purple-600 font-semibold hover:text-purple-700 hover:underline flex items-center gap-1"
                     >
                       See More
-                      <FiChevronRight size={18} />
+                      <FiChevronRight size={16} />
                     </Link>
                   </div>
 
@@ -1689,7 +1689,7 @@ function JobManagementContent() {
                                 <h3 className={`text-base font-bold ${THEME.colors.text.heading} leading-tight`}>
                                   {p.posterName || p.company}
                                 </h3>
-                                <div className={`flex items-center gap-1 text-xs text-[${THEME.colors.primary}]`}>
+                                <div className="flex items-center gap-1 text-xs text-purple-600">
                                   <FiNavigation size={12} />
                                   <span>{p.distance?.toFixed(1) || "0.0"} km away</span>
                                 </div>
@@ -1722,7 +1722,7 @@ function JobManagementContent() {
                           </div>
 
                           <div className="px-4 pb-3">
-                            <div className="w-full h-20 bg-gradient-to-br ${THEME.colors.gradient.light} rounded-lg flex items-center justify-center">
+                            <div className={`w-full h-20 bg-gradient-to-br ${THEME.colors.gradient.light} rounded-lg flex items-center justify-center`}>
                               <div className={`text-3xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
                                 {p.company.charAt(0)}
                               </div>
@@ -1779,7 +1779,7 @@ function JobManagementContent() {
                           </button>
                           <button
                             onClick={() => applyToPosting(p)}
-                            className={`flex-1 px-4 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#6E2BB8] text-white font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-sm text-center`}
+                            className={`${THEME.components.button.primary} flex-1`}
                           >
                             Apply Now
                           </button>
@@ -1797,10 +1797,10 @@ function JobManagementContent() {
                     </h2>
                     <Link
                       href="/profile/jobs/category/recent"
-                      className={`px-6 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-semibold rounded-lg transition-all duration-300 flex items-center gap-2`}
+                      className="text-sm text-purple-600 font-semibold hover:text-purple-700 hover:underline flex items-center gap-1"
                     >
                       See More
-                      <FiChevronRight size={18} />
+                      <FiChevronRight size={16} />
                     </Link>
                   </div>
 
@@ -1842,7 +1842,7 @@ function JobManagementContent() {
                                 <h3 className={`text-base font-bold ${THEME.colors.text.heading} leading-tight`}>
                                   {p.posterName || p.company}
                                 </h3>
-                                <div className={`flex items-center gap-1 text-xs text-[${THEME.colors.primary}]`}>
+                                <div className="flex items-center gap-1 text-xs text-purple-600">
                                   <FiNavigation size={12} />
                                   <span>{p.distance?.toFixed(1) || "0.0"} km away</span>
                                 </div>
@@ -1875,7 +1875,7 @@ function JobManagementContent() {
                           </div>
 
                           <div className="px-4 pb-3">
-                            <div className="w-full h-20 bg-gradient-to-br ${THEME.colors.gradient.light} rounded-lg flex items-center justify-center">
+                            <div className={`w-full h-20 bg-gradient-to-br ${THEME.colors.gradient.light} rounded-lg flex items-center justify-center`}>
                               <div className={`text-3xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
                                 {p.company.charAt(0)}
                               </div>
@@ -1932,7 +1932,7 @@ function JobManagementContent() {
                           </button>
                           <button
                             onClick={() => applyToPosting(p)}
-                            className={`flex-1 px-4 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#6E2BB8] text-white font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-sm text-center`}
+                            className={`${THEME.components.button.primary} flex-1`}
                           >
                             Apply Now
                           </button>
@@ -1973,9 +1973,9 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
   };
 
   return (
-    <div className="space-y-6">
+    <Card className="p-0 overflow-hidden border border-[#E8E4FF] shadow-sm" noPadding>
       {/* Header with Controls */}
-      <div className={`bg-white rounded-2xl p-6 shadow-sm border ${THEME.colors.border}`}>
+      <div className="p-6 border-b border-gray-100">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h3 className={`text-xl font-bold ${THEME.colors.text.heading} flex items-center gap-2`}>
@@ -1993,7 +1993,7 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
               <select
                 value={radius}
                 onChange={(e) => setRadius(Number(e.target.value))}
-                className={`px-3 py-2 border ${THEME.colors.border} rounded-lg focus:ring-2 focus:ring-[${THEME.colors.primary}] text-sm`}
+                className={`px-3 py-2 border ${THEME.colors.border} rounded-lg focus:ring-2 focus:ring-[${THEME.colors.primary}] text-sm bg-gray-50`}
               >
                 <option value={5}>5 km</option>
                 <option value={10}>10 km</option>
@@ -2002,23 +2002,23 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
               </select>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-1 bg-gray-100 p-1 rounded-lg">
               <button
                 onClick={() => setViewMode("list")}
-                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                className={`px-3 py-1.5 rounded-md font-medium transition-all text-xs ${
                   viewMode === "list"
-                    ? `bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white`
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 List
               </button>
               <button
                 onClick={() => setViewMode("map")}
-                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                className={`px-3 py-1.5 rounded-md font-medium transition-all text-xs ${
                   viewMode === "map"
-                    ? `bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white`
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 Map
@@ -2028,151 +2028,133 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
         </div>
       </div>
 
-      {/* Map/List View */}
-      {viewMode === "map" ? (
-        <div className={`bg-white rounded-2xl p-6 shadow-sm border ${THEME.colors.border} h-[500px] flex items-center justify-center`}>
-          <div className="text-center">
-            <div className="w-full h-full bg-gradient-to-br ${THEME.colors.gradient.light} rounded-xl flex flex-col items-center justify-center">
-              <FiMapPin size={64} className={`text-[${THEME.colors.primary}] mb-4`} />
-              <p className="text-gray-600 font-medium">Interactive Map View</p>
-              <p className="text-sm text-gray-500 mt-2">Google Maps / Mapbox integration</p>
+      {/* Map/List View Content */}
+      <div className="p-6 bg-gray-50/50">
+        {viewMode === "map" ? (
+          <div className={`bg-white rounded-xl shadow-sm border ${THEME.colors.border} h-[500px] flex items-center justify-center overflow-hidden relative`}>
+             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-50"></div>
+             <div className="text-center relative z-10">
+              <div className="w-20 h-20 mx-auto bg-white rounded-full shadow-md flex items-center justify-center mb-4">
+                <FiMapPin size={32} className={`text-[${THEME.colors.primary}]`} />
+              </div>
+              <p className="text-gray-900 font-semibold text-lg">Interactive Map View</p>
+              <p className="text-sm text-gray-500 mt-1">Explore jobs in your area</p>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredJobs.map((job) => (
-            <div
-              key={job.id}
-              className={`bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border ${THEME.colors.border}`}
-            >
-              {/* Clickable Card Content Area */}
-              <Link
-                href={`/profile/jobs/${job.id}`}
-                className="block relative group/card"
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredJobs.map((job) => (
+              <div
+                key={job.id}
+                className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border ${THEME.colors.border} group`}
               >
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center pointer-events-none">
-                  <div className="bg-white px-6 py-3 rounded-full flex items-center gap-2 transform scale-90 group-hover/card:scale-100 transition-transform duration-300">
-                    <FiEye size={18} className={`text-[${THEME.colors.primary}]`} />
-                    <span className={`text-[${THEME.colors.primary}] font-bold`}>View Details</span>
-                  </div>
-                </div>
-
-                {/* Header with Profile */}
-                <div className="p-4 pb-3 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {/* Profile Image with Online Status */}
-                  <div className="relative">
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[2px]`}>
-                      <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                        <img
-                          src={job.posterImage || "/homePage/profile.png"}
-                          alt={job.posterName || "Poster"}
-                          className="w-full h-full object-cover"
-                        />
+                {/* Clickable Card Content Area */}
+                <Link
+                  href={`/profile/jobs/${job.id}`}
+                  className="block relative"
+                >
+                  {/* Header with Profile */}
+                  <div className="p-4 pb-3 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    {/* Profile Image with Online Status */}
+                    <div className="relative">
+                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[1.5px]`}>
+                        <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+                          <img
+                            src={job.posterImage || "/homePage/profile.png"}
+                            alt={job.posterName || "Poster"}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      {/* Online Status Dot */}
+                      {job.isOnline && (
+                        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+                      )}
+                    </div>
+                    
+                    {/* Name and Distance */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className={`text-sm font-bold ${THEME.colors.text.heading} truncate`}>
+                        {job.posterName || job.company}
+                      </h3>
+                      <div className={`flex items-center gap-1 text-[10px] text-[${THEME.colors.primary}]`}>
+                        <FiNavigation size={10} />
+                        <span>{job.distance.toFixed(1)} km away</span>
                       </div>
                     </div>
-                    {/* Online Status Dot */}
-                    {job.isOnline && (
-                      <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
-                    )}
                   </div>
-                  
-                  {/* Name and Distance */}
-                  <div className="flex-1">
-                    <h3 className={`text-base font-bold ${THEME.colors.text.heading} leading-tight`}>
-                      {job.posterName || job.company}
-                    </h3>
-                    <div className={`flex items-center gap-1 text-xs text-[${THEME.colors.primary}]`}>
-                      <FiNavigation size={12} />
-                      <span>{job.distance.toFixed(1)} km away</span>
-                    </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-1 relative z-20" onClick={(e) => e.preventDefault()}>
+                    <button className="w-7 h-7 rounded-lg bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-600">
+                      <FiMessageCircle size={14} />
+                    </button>
+                    <button className="w-7 h-7 rounded-lg bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-600">
+                      <FiCalendar size={14} />
+                    </button>
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex items-center gap-2 relative z-20" onClick={(e) => e.preventDefault()}>
-                  {/* Connect Button */}
-                  <button className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <path d="M9 4V14M4 9H14" stroke={THEME.colors.primary} strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
+                  {/* Company Logo Section - Smaller */}
+                  <div className="px-4 py-2">
+                    <div className="w-full h-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center border border-gray-100">
+                      <div className={`text-2xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
+                        {job.company.charAt(0)}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Job Details */}
+                  <div className="px-4 pb-4">
+                    <div className="mb-2">
+                      <h4 className={`text-base font-bold ${THEME.colors.text.heading} mb-0.5 truncate`}>
+                        {job.position}
+                      </h4>
+                      <p className={`text-xs ${THEME.colors.text.body} truncate`}>
+                        {job.company}
+                      </p>
+                    </div>
+
+                    {/* Job Info */}
+                    <div className={`space-y-1.5 mt-3 text-xs ${THEME.colors.text.body}`}>
+                      <div className="flex items-center gap-2">
+                        <FiBriefcase size={12} className="text-gray-400" />
+                        <span>{job.workMode || "Work from office"} • {job.experienceLevel || "Both"}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <FiMapPin size={12} className="text-gray-400" />
+                        <span className="truncate">{job.location}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <FiDollarSign size={12} className="text-gray-400" />
+                        <span className={`font-semibold ${THEME.colors.text.heading}`}>{job.salary}</span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+
+                {/* Apply Button Row */}
+                <div className="px-4 pb-4 flex items-center gap-2 relative z-20 border-t border-gray-50 pt-3 mt-1">
+                  <button 
+                    className="w-8 h-8 flex items-center justify-center bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-gray-400 hover:text-[${THEME.colors.primary}]"
+                  >
+                    <FiBookmark size={14} />
                   </button>
-                  
-                  {/* Video Call Button */}
-                  <button className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors">
-                    <FiCalendar size={16} className={`text-[${THEME.colors.primary}]`} />
+                  <button
+                    onClick={() => handleApply(job)}
+                    className={`${THEME.components.button.primary} flex-1`}
+                  >
+                    Apply Now
                   </button>
                 </div>
               </div>
-
-                {/* Company Logo Section - Smaller */}
-                <div className="px-4 pb-3">
-                  <div className="w-full h-20 bg-gradient-to-br ${THEME.colors.gradient.light} rounded-lg flex items-center justify-center">
-                    <div className={`text-3xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
-                      {job.company.charAt(0)}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Job Details */}
-                <div className="px-4 pb-4">
-                  <div className="mb-2">
-                    <h4 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>
-                      {job.position}
-                    </h4>
-                    <p className={`text-sm ${THEME.colors.text.body}`}>
-                      {job.company}
-                    </p>
-                  </div>
-
-                  {/* Job Info */}
-                  <div className={`space-y-2 mt-4 text-sm ${THEME.colors.text.body}`}>
-                    <div className="flex items-center gap-2">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="currentColor" className="text-gray-400" strokeWidth="1.5"/>
-                        <path d="M8 4V8L10.5 9.5" stroke="currentColor" className="text-gray-400" strokeWidth="1.5" strokeLinecap="round"/>
-                      </svg>
-                      <span>{job.workMode || "Work from office"}</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <FiBriefcase size={14} className="text-gray-400" />
-                      <span>{job.experienceLevel || "Both"}</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <FiMapPin size={14} className="text-gray-400" />
-                      <span>{job.location}</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <FiDollarSign size={14} className="text-gray-400" />
-                      <span className={`font-semibold ${THEME.colors.text.heading}`}>{job.salary}</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Apply Button Row with Save Icon - Outside Link for direct interaction */}
-              <div className="px-4 pb-4 flex items-center gap-2 relative z-20">
-                <button 
-                  className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors"
-                >
-                  <FiBookmark size={16} className={`text-[${THEME.colors.primary}]`} />
-                </button>
-                <button
-                  onClick={() => handleApply(job)}
-                  className={`flex-1 px-4 py-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#6E2BB8] text-white font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-sm text-center`}
-                >
-                  Apply Now
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Card>
   );
 }

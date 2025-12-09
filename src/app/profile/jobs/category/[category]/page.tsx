@@ -839,7 +839,7 @@ export default function JobCategoryPage() {
                             <h3 className="text-base font-bold text-[#222] leading-tight">
                               {job.posterName}
                             </h3>
-                            <div className="flex items-center gap-1 text-xs text-primary">
+                            <div className="flex items-center gap-1 text-xs text-purple-600">
                               <FiNavigation size={12} />
                               <span>{job.distance.toFixed(1)} km away</span>
                             </div>
@@ -953,7 +953,7 @@ export default function JobCategoryPage() {
                           Save the job
                         </span>
                       </button>
-                      <button className="flex-1 px-4 py-2 bg-gradient-to-r from-gradient-start to-[#7F37C9] hover:from-[#4A4AD6] hover:to-[#6E2BB8] text-white font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-sm text-center">
+                      <button className={`${THEME.components.button.primary} flex-1`}>
                         Apply Now
                       </button>
                     </div>

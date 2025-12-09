@@ -15,8 +15,11 @@ import {
   FiNavigation,
   FiPhone,
   FiMessageSquare,
-  FiClock
+  FiClock,
+  FiMail,
+  FiMessageCircle
 } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 
 interface Candidate {
   id: string;
@@ -31,6 +34,8 @@ interface Candidate {
   image: string;
   lastActive: string;
   isOnline?: boolean;
+  phone?: string;
+  email?: string;
 }
 
 const nearbyCandidates: Candidate[] = [
@@ -47,6 +52,8 @@ const nearbyCandidates: Candidate[] = [
     image: '/homePage/profile.png',
     lastActive: '2 hours ago',
     isOnline: true,
+    phone: '919876543210',
+    email: 'sarah.johnson@example.com'
   },
   {
     id: '2',
@@ -61,6 +68,8 @@ const nearbyCandidates: Candidate[] = [
     image: '/homePage/profile.png',
     lastActive: '1 day ago',
     isOnline: false,
+    phone: '919876543211',
+    email: 'rahul.sharma@example.com'
   },
 ];
 
@@ -77,6 +86,8 @@ const readyToJoinCandidates: Candidate[] = [
     image: '/homePage/profile.png',
     lastActive: '5 hours ago',
     isOnline: true,
+    phone: '919876543212',
+    email: 'priya.patel@example.com'
   },
   {
     id: '4',
@@ -90,6 +101,8 @@ const readyToJoinCandidates: Candidate[] = [
     image: '/homePage/profile.png',
     lastActive: '3 days ago',
     isOnline: false,
+    phone: '919876543213',
+    email: 'amit.kumar@example.com'
   },
 ];
 
@@ -106,6 +119,8 @@ const sameSkillsCandidates: Candidate[] = [
     image: '/homePage/profile.png',
     lastActive: '1 hour ago',
     isOnline: true,
+    phone: '919876543214',
+    email: 'neha.singh@example.com'
   },
 ];
 
@@ -240,6 +255,30 @@ export default function FindCandidatesPage() {
             <button className={`p-2 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white rounded-lg hover:opacity-90 transition-opacity`}>
               <FiMessageSquare size={18} />
             </button>
+          </div>
+
+          <div className="flex gap-2 w-full mt-3 justify-center">
+             <button 
+               className="p-2 bg-green-50 text-green-600 rounded-full hover:bg-green-100 transition-colors" 
+               title="WhatsApp"
+               onClick={() => candidate.phone && window.open(`https://wa.me/${candidate.phone}`, '_blank')}
+             >
+               <FaWhatsapp size={20} />
+             </button>
+             <button 
+               className="p-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors" 
+               title="Email"
+               onClick={() => candidate.email && (window.location.href = `mailto:${candidate.email}`)}
+             >
+               <FiMail size={20} />
+             </button>
+             <button 
+               className="p-2 bg-purple-50 text-purple-600 rounded-full hover:bg-purple-100 transition-colors" 
+               title="Message"
+               onClick={() => candidate.phone && (window.location.href = `sms:${candidate.phone}`)}
+             >
+               <FiMessageCircle size={20} />
+             </button>
           </div>
         </div>
       </div>
