@@ -63,100 +63,102 @@ const Navbar = () => {
   const filteredLinks = getFilteredLinks();
 
   return (
-    <div className={`w-full h-[70px] fixed top-0 z-50 ${THEME.components.glass} border-x-0 border-t-0 rounded-none transition-all duration-300`}>
-      <div className="w-full max-w-[1360px] mx-auto h-full flex items-center justify-between px-4 md:px-6">
-        <div className="flex flex-row gap-3 items-center">
-          <div className="lg:hidden flex items-center z-50">
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="relative bg-white rounded-full shadow-md hover:bg-gray-50 transition-all active:scale-95"
-              aria-label="Toggle sidebar"
-              style={{
-                background: `conic-gradient(from 0deg, ${THEME.colors.gradient.start} 0deg ${(completionPercentage / 100) * 360
-                  }deg, #e5e7eb ${(completionPercentage / 100) * 360}deg 360deg)`,
-                padding: "2px",
-                borderRadius: "50%",
-              }}
-            >
-              <div className="rounded-full overflow-hidden h-9 w-9 bg-white flex items-center justify-center">
-                <Image
-                  src={user?.picture || "/homePage/profile.png"}
-                  alt={user ? `${user.first_name} ${user.last_name}` : "Profile"}
-                  width={36}
-                  height={36}
-                  className="rounded-full object-cover"
-                />
-              </div>
-            </button>
+    <>
+      <div className={`w-full h-[70px] fixed top-0 z-[100] bg-white/95 backdrop-blur-md lg:bg-transparent ${THEME.components.glass} border-x-0 border-t-0 rounded-none transition-all duration-300`}>
+        <div className="w-full max-w-[1360px] mx-auto h-full flex items-center justify-between px-4 md:px-6">
+          <div className="flex flex-row gap-3 items-center">
+            <div className="lg:hidden flex items-center z-50">
+              <button
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="relative bg-white rounded-full shadow-md hover:bg-gray-50 transition-all active:scale-95"
+                aria-label="Toggle sidebar"
+                style={{
+                  background: `conic-gradient(from 0deg, ${THEME.colors.gradient.start} 0deg ${(completionPercentage / 100) * 360
+                    }deg, #e5e7eb ${(completionPercentage / 100) * 360}deg 360deg)`,
+                  padding: "2px",
+                  borderRadius: "50%",
+                }}
+              >
+                <div className="rounded-full overflow-hidden h-9 w-9 bg-white flex items-center justify-center">
+                  <Image
+                    src={user?.picture || "/homePage/profile.png"}
+                    alt={user ? `${user.first_name} ${user.last_name}` : "Profile"}
+                    width={36}
+                    height={36}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+              </button>
+            </div>
+            {/* Logo Section */}
+            <div className="w-[140px] md:w-[180px] h-[70px] flex items-center justify-center lg:justify-start">
+              <Image
+                src="/logo.png"
+                alt="Staff Book"
+                width={130}
+                height={46}
+                priority
+                className="object-contain"
+              />
+            </div>
           </div>
-          {/* Logo Section */}
-          <div className="w-[140px] md:w-[180px] h-[70px] flex items-center justify-center lg:justify-start">
-            <Image
-              src="/logo.png"
-              alt="Staff Book"
-              width={130}
-              height={46}
-              priority
-              className="object-contain"
-            />
-          </div>
-        </div>
 
-        {/* Search Bar (Desktop) */}
-        {user && (
-          <div className="hidden lg:flex flex-1 max-w-md mx-8">
-            <NavbarSearch />
-          </div>
-        )}
-
-        {/* Desktop Menu */}
-        {user ? (
-          <div className="hidden lg:flex items-center gap-8">
-            <NavbarDesktop links={filteredLinks} currentPath={path} />
-            <NavbarIconButton
-              onNotificationsClick={() => setNotificationsOpen(true)}
-              onMeetingsClick={() => setMeetingModalOpen(true)}
-              bellButtonRef={bellButtonRef}
-            />
-            <ProfileAvatar
-              name={user ? `${user.first_name} ${user.last_name}` : 'User'}
-              src={user?.picture}
-            />
-          </div>
-        ) : (
-          <div className="hidden lg:flex items-center gap-8">
-            <NavbarDesktop links={navLinks} currentPath={path} />
-            <Link key={"signup"} href={"/signup"}>
-              <GradientButton className="w-[110px] h-[42px] ml-4 text-[16px] font-poppins">
-                {signUpText}
-              </GradientButton>
-            </Link>
-          </div>
-        )}
-
-        {/* Mobile Actions */}
-        <div className="lg:hidden flex items-center gap-3">
+          {/* Search Bar (Desktop) */}
           {user && (
-            <button 
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 rounded-full hover:bg-gray-100/50 transition-colors text-gray-700"
-            >
-              <FiSearch size={22} />
-            </button>
+            <div className="hidden lg:flex flex-1 max-w-md mx-8">
+              <NavbarSearch />
+            </div>
           )}
-          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" className="p-1">
-            {menuOpen ? (
-              <FiX size={26} color="#101022" />
-            ) : (
-              <FiMoreVertical size={26} color="#101022" />
-            )}
-          </button>
-        </div>
-      </div>
 
-      {/* Mobile Search Overlay */}
-      <div className={`absolute top-[70px] left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 p-4 shadow-lg transition-all duration-300 origin-top ${searchOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}>
-        <NavbarSearch className="w-full" />
+          {/* Desktop Menu */}
+          {user ? (
+            <div className="hidden lg:flex items-center gap-8">
+              <NavbarDesktop links={filteredLinks} currentPath={path} />
+              <NavbarIconButton
+                onNotificationsClick={() => setNotificationsOpen(true)}
+                onMeetingsClick={() => setMeetingModalOpen(true)}
+                bellButtonRef={bellButtonRef}
+              />
+              <ProfileAvatar
+                name={user ? `${user.first_name} ${user.last_name}` : 'User'}
+                src={user?.picture}
+              />
+            </div>
+          ) : (
+            <div className="hidden lg:flex items-center gap-8">
+              <NavbarDesktop links={navLinks} currentPath={path} />
+              <Link key={"signup"} href={"/signup"}>
+                <GradientButton className="w-[110px] h-[42px] ml-4 text-[16px] font-poppins">
+                  {signUpText}
+                </GradientButton>
+              </Link>
+            </div>
+          )}
+
+          {/* Mobile Actions */}
+          <div className="lg:hidden flex items-center gap-3">
+            {user && (
+              <button 
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="p-2 rounded-full hover:bg-gray-100/50 transition-colors text-gray-700"
+              >
+                <FiSearch size={22} />
+              </button>
+            )}
+            <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" className="p-1">
+              {menuOpen ? (
+                <FiX size={26} color="#101022" />
+              ) : (
+                <FiMoreVertical size={26} color="#101022" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Search Overlay */}
+        <div className={`absolute top-[70px] left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 p-4 shadow-lg transition-all duration-300 origin-top ${searchOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}>
+          <NavbarSearch className="w-full" />
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -183,7 +185,7 @@ const Navbar = () => {
         onClose={() => setNotificationsOpen(false)}
         buttonRef={bellButtonRef}
       />
-    </div >
+    </>
   );
 };
 

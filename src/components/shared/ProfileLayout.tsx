@@ -27,7 +27,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
 
   return (
     <div className="min-h-screen w-full bg-[#F7F7F8]">
-      <div className="max-w-7xl mx-auto pt-[80px] px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto pt-[90px] px-4 sm:px-6 lg:px-8">
 
 
         {/* Mobile Sidebar Overlay */}
