@@ -44,17 +44,16 @@ export default function ProfileSubMenu({
         {/* Floating Menu */}
         <div className={`
           relative md:absolute md:top-[-46px] md:left-1/2 md:-translate-x-1/2 
-          w-full md:w-fit md:max-w-[95%] 
-          h-[50px] md:h-[80px] 
+          w-fit max-w-[95%] mx-auto
+          h-auto py-2 md:py-0 md:h-[80px] 
           ${THEME.components.glass}
-          rounded-none md:rounded-full shadow-2xl ring-1 ring-black/5
+          border border-gray-100 md:border-none
+          rounded-2xl md:rounded-full shadow-lg md:shadow-2xl md:ring-1 md:ring-black/5
           flex items-center justify-start md:justify-around 
           px-4 md:px-8 z-10 
           overflow-x-auto scrollbar-hide snap-x snap-mandatory
-          gap-4 md:gap-0 
-          transition-all duration-300 hover:shadow-2xl
-          [mask-image:linear-gradient(to_right,transparent,black_10px,black_calc(100%_-_10px),transparent)]
-          md:[mask-image:none]
+          gap-2 md:gap-0 
+          transition-all duration-300
         `}>
           {menuItems.map((item) => {
             const isActive = activeTab === item.key;
@@ -63,24 +62,24 @@ export default function ProfileSubMenu({
                 key={item.key}
                 onClick={() => handleTabChange(item.key)}
                 className={`
-                  group flex flex-col items-center justify-center 
-                  text-[11px] md:text-sm 
-                  min-w-[auto] md:min-w-[80px] 
-                  h-full md:h-[60px] 
+                  group flex md:flex-col flex-row items-center justify-center gap-2 md:gap-0
+                  text-xs md:text-sm font-medium
+                  min-w-fit md:min-w-[80px] 
+                  px-4 py-2 md:px-4 md:py-0
+                  h-auto md:h-[60px] 
                   cursor-pointer transition-all duration-300 
-                  rounded-none md:rounded-2xl 
-                  px-2 md:px-4 
-                  border-b-2 md:border-b-0
+                  rounded-full md:rounded-2xl 
+                  snap-center
                   ${
                   isActive
-                    ? "border-none text-[#18192B] shadow-md scale-105 rounded-2xl"
-                    : "border-transparent text-gray-500 hover:text-primary hover:bg-gray-100 rounded-2xl"
+                    ? "text-[#18192B] shadow-sm md:shadow-md md:scale-105"
+                    : "text-gray-500 hover:text-primary hover:bg-gray-50"
                 }
                 `}
                 style={isActive ? { background: `linear-gradient(to right, ${THEME.colors.gradient.start}, ${THEME.colors.gradient.end})` } : {}}
               >
                 <span
-                  className={`block w-4 h-4 md:w-5 md:h-5 mb-1 transition-transform duration-300 group-hover:scale-110 ${
+                  className={`block w-4 h-4 md:w-5 md:h-5 md:mb-1 transition-transform duration-300 group-hover:scale-110 ${
                     isActive ? "text-[#18192B]" : "text-gray-400 group-hover:text-primary"
                   }`}
                 >
