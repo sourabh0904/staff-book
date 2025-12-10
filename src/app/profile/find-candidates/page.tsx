@@ -174,7 +174,6 @@ const sentInvites = [
 const menuItems = [
   { icon: <FiMapPin size={18} />, label: 'Find Candidates', key: 'find-candidates' },
   { icon: <FiUserPlus size={18} />, label: 'Candidate Invite', key: 'invites' },
-  { icon: <FiFileText size={18} />, label: 'Resume Download', key: 'downloads' },
 ];
 
 const inputLabels = [
@@ -634,49 +633,50 @@ export default function FindCandidatesPage() {
                   </Card>
                 ))}
               </div>
+
+              
+              {/* Downloaded Resumes Section (Merged) */}
+              <Card className="mt-8" noPadding>
+                <div className="p-6 border-b border-gray-100">
+                  <h2 className={`${THEME.components.typography.sectionTitle} text-2xl mb-1`}>Downloaded Resumes</h2>
+                  <p className={`${THEME.components.typography.body}`}>View and manage downloaded candidate resumes</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50 border-b border-gray-100">
+                        <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Candidate Name</th>
+                        <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Position</th>
+                        <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Downloaded On</th>
+                        <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {downloadedResumes.map((resume) => (
+                        <tr key={resume.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                          <td className={`p-4 text-sm font-medium ${THEME.components.typography.cardTitle}`}>{resume.name}</td>
+                          <td className={`p-4 text-sm ${THEME.components.typography.body}`}>{resume.position}</td>
+                          <td className={`p-4 text-sm ${THEME.components.typography.body}`}>{resume.downloadedOn}</td>
+                          <td className="p-4">
+                            <button 
+                              onClick={() => handleDownloadResume(resume.name)}
+                              className="flex items-center gap-2 text-purple-600 hover:text-purple-700 text-sm font-medium transition-colors"
+                            >
+                              <FiDownload size={16} />
+                              Download Again
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
             </div>
           )}
 
 
 
-          {activeTab === 'downloads' && (
-            <Card className="mt-8" noPadding>
-              <div className="p-6 border-b border-gray-100">
-                <h2 className={`${THEME.components.typography.sectionTitle} text-2xl mb-1`}>Downloaded Resumes</h2>
-                <p className={`${THEME.components.typography.body}`}>View and manage downloaded candidate resumes</p>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-gray-50 border-b border-gray-100">
-                      <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Candidate Name</th>
-                      <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Position</th>
-                      <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Downloaded On</th>
-                      <th className={`p-4 text-sm font-semibold ${THEME.components.typography.subheading}`}>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {downloadedResumes.map((resume) => (
-                      <tr key={resume.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                        <td className={`p-4 text-sm font-medium ${THEME.components.typography.cardTitle}`}>{resume.name}</td>
-                        <td className={`p-4 text-sm ${THEME.components.typography.body}`}>{resume.position}</td>
-                        <td className={`p-4 text-sm ${THEME.components.typography.body}`}>{resume.downloadedOn}</td>
-                        <td className="p-4">
-                          <button 
-                            onClick={() => handleDownloadResume(resume.name)}
-                            className="flex items-center gap-2 text-purple-600 hover:text-purple-700 text-sm font-medium transition-colors"
-                          >
-                            <FiDownload size={16} />
-                            Download Again
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-          )}
 
 
         </div>
