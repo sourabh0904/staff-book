@@ -81,6 +81,7 @@ export interface User {
     userBalance: UserBalance;
     resumeUpload: string;
     profileHeadline: string;
+    cover_image?: string;
 }
 
 export interface LoginResponse {
