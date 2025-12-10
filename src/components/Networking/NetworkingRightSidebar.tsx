@@ -4,6 +4,7 @@ import Image from "next/image";
 import { THEME } from '../../styles/theme';
 import { FiMapPin, FiUserPlus, FiMessageSquare } from "react-icons/fi";
 import MapComponent from "../shared/MapComponent";
+import ConnectButton from "../shared/ConnectButton";
 
 // Data for Map Section
 const mapProfiles = [
@@ -106,10 +107,12 @@ const NetworkingRightSidebar: React.FC = () => {
                   <p className={`${THEME.components.typography.meta} truncate`}>{profile.role}</p>
                 </div>
               </div>
-              <button className={`flex-shrink-0 px-4 py-1.5 rounded-full ${THEME.components.button.primary} text-xs font-medium flex items-center gap-1 shadow-sm`}>
-                <FiUserPlus size={14} />
-                Connect
-              </button>
+              <ConnectButton 
+                variant="outline"
+                className="flex-shrink-0 px-4 py-1.5 text-xs h-auto shadow-none hover:shadow-sm"
+                icon={<FiUserPlus size={14} />}
+                onClick={() => {}} // Add handler if needed
+              />
             </div>
           ))}
         </div>

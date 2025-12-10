@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { FiChevronRight, FiUserPlus, FiMail, FiFileText, FiSettings, FiSliders } from 'react-icons/fi';
 import Button from '../shared/Button';
+import ConnectButton from '../shared/ConnectButton';
 
 const ConnectionsSidebar: React.FC = () => {
 
@@ -317,14 +318,12 @@ const ConnectionsSidebar: React.FC = () => {
                     ✓ Pending
                   </Button>
                 ) : (
-                  <Button
+                  <ConnectButton
                     onClick={() => handleConnect(person.id)}
-                    variant="primary"
-                    className="px-4 py-1.5 rounded-full text-xs font-medium hover:opacity-90 transition-opacity flex items-center gap-1 h-auto"
-                  >
-                    <FiUserPlus className="w-3 h-3" />
-                    Connect
-                  </Button>
+                    variant="outline"
+                    className="px-4 py-1.5 h-auto text-xs shadow-none hover:shadow-sm"
+                    icon={<FiUserPlus className="w-3 h-3" />}
+                  />
                 )}
               </div>
             </div>

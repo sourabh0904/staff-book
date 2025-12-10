@@ -600,6 +600,26 @@ function JobManagementContent() {
   const removeSavedJob = (id: string) =>
     setSavedJobs((prev) => prev.filter((j) => j.id !== id));
 
+  const handleSaveApplication = (app: JobApplication) => {
+    // Convert JobApplication to JobRecommendation format for savedJobs
+    const jobToSave: JobRecommendation = {
+      id: app.id,
+      company: app.company,
+      position: app.position,
+      location: app.location,
+      salary: app.salary,
+      type: "Full-time", // Default
+      postedDate: "Recently", // Default
+      matchScore: 0, // Default
+      skills: [], // Default
+      logo: app.logo,
+      distance: 0, // Default
+    };
+
+    setSavedJobs((prev) => [jobToSave, ...prev]);
+    setApplications((prev) => prev.filter((a) => a.id !== app.id));
+  };
+
   // Seeker meetings management
   const [seekerMeetings, setSeekerMeetings] = useState<
     { id: string; datetime: string; with: string; notes?: string }[]
@@ -1064,6 +1084,8 @@ function JobManagementContent() {
                       Search
                     </button>
                   </div>
+
+
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1080,6 +1102,7 @@ function JobManagementContent() {
                       salary={app.salary}
                       onAccept={() => console.log("Accepted", app.id)}
                       onDecline={() => console.log("Declined", app.id)}
+                      onSave={() => handleSaveApplication(app)}
                     />
                   ))}
                 </div>
@@ -1177,20 +1200,41 @@ function JobManagementContent() {
                 <h2 className={`${THEME.components.typography.sectionTitle} text-2xl`}>
                   Saved Jobs
                 </h2>
-                <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
-                  <div className={`w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white flex items-center justify-center`}>
-                    <FiBookmark size={32} />
+                {savedJobs.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {savedJobs.map((job) => (
+                      <JobInviteCard
+                        key={job.id}
+                        companyName={job.company}
+                        companyLogo={job.logo}
+                        distance={`${job.distance || 0} km away`}
+                        jobTitle={job.position}
+                        workType="Work from office"
+                        jobType={job.type}
+                        location={job.location}
+                        salary={job.salary}
+                        primaryActionLabel="Apply Now"
+                        onAccept={() => applyFromRecommendation(job)}
+                        onSave={() => removeSavedJob(job.id)}
+                      />
+                    ))}
                   </div>
-                  <h3 className="text-2xl font-bold text-[#222] mb-2">
-                    No Saved Jobs Yet
-                  </h3>
-                  <p className="text-[#666] mb-6">
-                    Start saving jobs you're interested in to view them here
-                  </p>
-                  <button className={`px-6 py-3 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-bold rounded-lg transition-all duration-300`}>
-                   Find Jobs
-                  </button>
-                </div>
+                ) : (
+                  <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
+                    <div className={`w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white flex items-center justify-center`}>
+                      <FiBookmark size={32} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-[#222] mb-2">
+                      No Saved Jobs Yet
+                    </h3>
+                    <p className="text-[#666] mb-6">
+                      Start saving jobs you're interested in to view them here
+                    </p>
+                    <button className={`px-6 py-3 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-bold rounded-lg transition-all duration-300`}>
+                     Find Jobs
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
             )}
@@ -1506,19 +1550,48 @@ function JobManagementContent() {
             )}
 
             {activeTab === "saved" && (
-              <div className="text-center py-12">
-                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] text-white flex items-center justify-center">
-                  <FiBookmark size={32} />
-                </div>
-                <h3 className="text-2xl font-bold text-[#222] mb-2">
-                  No Saved Jobs Yet
-                </h3>
-                <p className="text-[#666] mb-6">
-                  Start saving jobs you're interested in to view them here
-                </p>
-                <button className="px-6 py-3 bg-gradient-to-r from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-bold rounded-lg transition-all duration-300">
-                 Find Jobs
-                </button>
+              <div className="space-y-6 mt-[4rem]">
+                 <h2 className={`${THEME.components.typography.sectionTitle} text-2xl`}>
+                    Saved Jobs
+                  </h2>
+                {savedJobs.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {savedJobs.map((job) => (
+                      <JobInviteCard
+                        key={job.id}
+                        companyName={job.company}
+                        companyLogo={job.logo}
+                        distance={`${job.distance || 0} km away`}
+                        jobTitle={job.position}
+                        workType="Work from office"
+                        jobType={job.type}
+                        location={job.location}
+                        salary={job.salary}
+                        primaryActionLabel="Apply Now"
+                        onAccept={() => applyFromRecommendation(job)}
+                        onSave={() => removeSavedJob(job.id)} // Allow unsaving
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] text-white flex items-center justify-center">
+                      <FiBookmark size={32} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-[#222] mb-2">
+                      No Saved Jobs Yet
+                    </h3>
+                    <p className="text-[#666] mb-6">
+                      Start saving jobs you're interested in to view them here
+                    </p>
+                    <button 
+                      onClick={() => setActiveTab('browse')}
+                      className="px-6 py-3 bg-gradient-to-r from-[${THEME.colors.gradient.start}] to-[${THEME.colors.gradient.end}] hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-bold rounded-lg transition-all duration-300"
+                    >
+                     Find Jobs
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 

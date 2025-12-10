@@ -117,14 +117,19 @@ const NetworkingLeftSidebar: React.FC = () => {
           <span className="text-sm text-[#666] font-medium">Switch to Employer</span>
           <button
             onClick={handleEmployerSwitch}
-            className={`relative w-11 h-6 rounded-full transition-colors ${
-              isEmployer ? 'bg-gradient-to-r from-indigo-300 to-purple-300' : 'bg-gray-200'
+            className={`p-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
+              isEmployer 
+                ? 'bg-gradient-to-r from-indigo-300 to-purple-300 ring-2 ring-purple-100' 
+                : 'bg-gradient-to-r from-gray-200 to-gray-300 hover:from-indigo-300 hover:to-purple-300'
             }`}
+            title={isEmployer ? "Switch to Job Seeker" : "Switch to Employer"}
           >
-            <span
-              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                isEmployer ? 'translate-x-5' : ''
-              }`}
+            <Image 
+              src="/icons/role-switch.png" 
+              alt="Switch Role" 
+              width={20} 
+              height={20} 
+              className={`w-5 h-5 transition-transform duration-500 brightness-0 invert ${isEmployer ? 'rotate-180' : ''}`}
             />
           </button>
         </div>

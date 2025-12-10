@@ -2,8 +2,9 @@
 
 import React, { useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import { FiLoader, FiMapPin, FiUserPlus } from "react-icons/fi";
+import { FiLoader, FiMapPin, FiUserPlus, FiPlus } from "react-icons/fi";
 import { THEME } from "../../styles/theme";
+import ConnectButton from "./ConnectButton";
 
 const containerStyle = {
   width: "100%",
@@ -147,10 +148,12 @@ const MapComponent: React.FC<MapComponentProps> = ({ users = [] }) => {
                   <p className={`${THEME.components.typography.meta} truncate`}>{user.role}</p>
                 </div>
               </div>
-              <button className={`flex-shrink-0 px-4 py-1.5 rounded-full ${THEME.components.button.primary} text-xs font-medium flex items-center gap-1 shadow-sm`}>
-                <FiUserPlus size={14} />
-                Connect
-              </button>
+              <ConnectButton 
+                variant="outline"
+                className="flex-shrink-0 px-4 py-1.5 text-xs h-auto shadow-none hover:shadow-sm"
+                icon={<FiUserPlus size={14} />}
+                onClick={() => {}} // Add handler if needed
+              />
             </div>
           ))
         ) : (

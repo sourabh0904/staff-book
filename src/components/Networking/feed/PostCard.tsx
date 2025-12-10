@@ -1,12 +1,13 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { FiMoreVertical, FiPlay, FiHeart, FiMessageCircle, FiShare2, FiSend } from 'react-icons/fi';
+import { FiMoreVertical, FiPlay, FiHeart, FiMessageCircle, FiShare2, FiSend, FiUserPlus } from 'react-icons/fi';
 import { Post } from '../../../data/networking';
 import { SITE_CONFIG } from '../../../constants/siteconfig';
 import PostActionsModal from './PostActionsModal';
 import { THEME } from '../../../styles/theme';
 import Card from '../../shared/Card';
+import ConnectButton from '../../shared/ConnectButton';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => {
   const [showActionsModal, setShowActionsModal] = React.useState(false);
@@ -34,9 +35,13 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               {post.canConnect && (
-                <button className={`${THEME.components.button.primary} text-[10px] sm:text-xs px-2 sm:px-3 py-1`}>
-                  {SITE_CONFIG.networking.connect}
-                </button>
+                <ConnectButton 
+                  label={SITE_CONFIG.networking.connect}
+                  variant="outline"
+                  className="h-8 px-3 text-xs shadow-none hover:shadow-sm"
+                  icon={<FiUserPlus size={14} />}
+                  onClick={() => {}} // Add handler if needed
+                />
               )}
               <button
                 ref={buttonRef}

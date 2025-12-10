@@ -4,6 +4,7 @@ import React, { useState, Suspense } from 'react';
 import ProfileLayout from '@/components/shared/ProfileLayout';
 import ProfileSubMenu from '@/components/shared/ProfileSubMenu';
 import Card from '@/components/shared/Card';
+import ConnectButton from '@/components/shared/ConnectButton';
 import { THEME } from '@/styles/theme';
 import {
   FiSearch,
@@ -19,6 +20,7 @@ import {
   FiMail,
   FiMessageCircle,
   FiUserPlus,
+  FiPlus,
   FiFileText,
   FiDownload,
   FiX,
@@ -170,7 +172,7 @@ const sentInvites = [
 ];
 
 const menuItems = [
-  { icon: <FiMapPin size={18} />, label: 'Nearby Candidates', key: 'nearby' },
+  { icon: <FiMapPin size={18} />, label: 'Find Candidates', key: 'find-candidates' },
   { icon: <FiUserPlus size={18} />, label: 'Candidate Invite', key: 'invites' },
   { icon: <FiFileText size={18} />, label: 'Resume Download', key: 'downloads' },
 ];
@@ -185,7 +187,7 @@ const inputLabels = [
 ];
 
 export default function FindCandidatesPage() {
-  const [activeTab, setActiveTab] = useState('nearby');
+  const [activeTab, setActiveTab] = useState('find-candidates');
   const [radiusValue, setRadiusValue] = useState(10);
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
@@ -305,9 +307,12 @@ export default function FindCandidatesPage() {
 
               </div>
                 {isChecked && (
-                  <button className={`${THEME.components.button.primary} mt-2 px-8`}>
-                    Connect
-                  </button>
+                  <ConnectButton 
+                    variant="outline"
+                    className="mt-2 h-8 px-3 text-xs shadow-none hover:shadow-sm"
+                    icon={<FiUserPlus size={14} />}
+                    onClick={() => {}} // Add handler if needed
+                  />
                 )}
             </div>
           </div>
@@ -435,7 +440,7 @@ export default function FindCandidatesPage() {
           </Card>
 
           {/* Section 1: Nearby Candidates (Consolidated) */}
-          {activeTab === 'nearby' && (
+          {activeTab === 'find-candidates' && (
             <div className="space-y-8 mt-8">
               {/* Nearby Candidates Section */}
               <div className="space-y-6">
