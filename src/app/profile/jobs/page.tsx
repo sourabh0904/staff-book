@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import JobInviteCard from '@/components/shared/JobInviteCard';
 import {
   FiBriefcase,
   FiClock,
@@ -1069,72 +1070,19 @@ function JobManagementContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {applications.map((app) => (
-                    <Card
+                    <JobInviteCard
                       key={app.id}
-                      className="hover:shadow-lg transition-all duration-300 overflow-hidden"
-                      noPadding
-                    >
-                      {/* Header Section */}
-                      <div className="p-4 pb-3">
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-1">
-                            <h3 className={`${THEME.components.typography.cardTitle} mb-1 leading-tight`}>
-                              {app.position}
-                            </h3>
-                            <div className={`flex items-center gap-2 ${THEME.components.typography.body} mb-2`}>
-                              <FiMapPin size={14} className="text-gray-400" />
-                              <span>{app.location}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Experience and Salary */}
-                        <div className={`flex items-center gap-4 ${THEME.components.typography.body} mb-3`}>
-                          <div className="flex items-center gap-1">
-                            <FiBriefcase size={14} className="text-gray-400" />
-                            <span>15 - 20 Years</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <FiDollarSign size={14} className="text-gray-400" />
-                            <span>{app.salary}</span>
-                          </div>
-                        </div>
-
-                        {/* Company Info */}
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white font-bold flex items-center justify-center text-xs`}>
-                            {app.logo}
-                          </div>
-                          <div className="flex-1">
-                            <p className={`${THEME.components.typography.subheading} font-semibold`}>
-                              {app.company}
-                            </p>
-                            <div className="flex items-center gap-1 text-xs text-gray-400">
-                              <FiStar size={12} className="text-yellow-500" />
-                              <span>3.9</span>
-                              <span className="text-gray-400">(778 Reviews)</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Posted By */}
-                        <p className="text-xs text-gray-400 mb-3">
-                          Posted by {app.company}
-                        </p>
-
-                        {/* Status Badge */}
-                        <div className="inline-block">
-                          <span
-                            className={`px-3 py-1 rounded-md text-xs font-semibold ${getStatusColor(
-                              app.status
-                            )}`}
-                          >
-                            {app.status.charAt(0).toUpperCase() +
-                              app.status.slice(1)}
-                          </span>
-                        </div>
-                      </div>
-                    </Card>
+                      companyName={app.company}
+                      companyLogo={app.logo} // Note: app.logo is currently a string (e.g., "G"), might need adjustment if it expects a URL
+                      distance="2.5 km away" // Mock data for now
+                      jobTitle={app.position}
+                      workType="Work from office" // Mock data
+                      jobType="Both" // Mock data
+                      location={app.location}
+                      salary={app.salary}
+                      onAccept={() => console.log("Accepted", app.id)}
+                      onDecline={() => console.log("Declined", app.id)}
+                    />
                   ))}
                 </div>
               </div>
