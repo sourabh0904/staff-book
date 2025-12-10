@@ -222,10 +222,12 @@ export default function ProfileSidebar() {
               <span className="block text-sm font-medium text-[#666]">Post</span>
               <span className="text-sm font-bold text-[#222]">0</span>
             </Link>
-            <Link href="/profile/jobs" className="bg-light-bg rounded-xl p-2.5 text-center border border-[#E8E4FF] flex flex-col items-center justify-center gap-1 hover:border-primary transition-colors cursor-pointer">
-              <span className="block text-sm font-medium text-[#666]">Posted Jobs</span>
-              <span className="text-sm font-bold text-[#222]">{totalJobPosts}</span>
-            </Link>
+            {isEmployer && (
+              <Link href="/profile/jobs" className="bg-light-bg rounded-xl p-2.5 text-center border border-[#E8E4FF] flex flex-col items-center justify-center gap-1 hover:border-primary transition-colors cursor-pointer">
+                <span className="block text-sm font-medium text-[#666]">Posted Jobs</span>
+                <span className="text-sm font-bold text-[#222]">{totalJobPosts}</span>
+              </Link>
+            )}
             <Link href="/profile/jobs?tab=recommendations" className="bg-light-bg rounded-xl p-2.5 text-center border border-[#E8E4FF] flex flex-col items-center justify-center gap-1 hover:border-primary transition-colors cursor-pointer">
               <span className="block text-sm font-medium text-[#666]">Applied Jobs</span>
               <span className="text-sm font-bold text-[#222]">0</span>

@@ -79,10 +79,12 @@ const NetworkingLeftSidebar: React.FC = () => {
               <span className={THEME.components.typography.meta}>Post</span>
               <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
             </div>
-            <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
-              <span className={THEME.components.typography.meta}>Posted Jobs</span>
-              <span className={`${THEME.components.typography.cardTitle} text-xs`}>{user.totalJobPost || 0}</span>
-            </div>
+            {isEmployer && (
+              <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                <span className={THEME.components.typography.meta}>Posted Jobs</span>
+                <span className={`${THEME.components.typography.cardTitle} text-xs`}>{user.totalJobPost || 0}</span>
+              </div>
+            )}
             <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
               <span className={THEME.components.typography.meta}>Applied Jobs</span>
               <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
