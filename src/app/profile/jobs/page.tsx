@@ -35,8 +35,6 @@ import { THEME } from "@/styles/theme";
 const menuItems = [
   { icon: <FiSearch size={18} />, label: 'Find Jobs', key: 'browse' },
   { icon: <FiBriefcase size={18} />, label: 'Job Invites', key: 'applications' },
-  { icon: <FiTarget size={18} />, label: 'Applied Jobs', key: 'recommendations' },
-  { icon: <FiBookmark size={18} />, label: 'Saved Jobs', key: 'saved' },
 ];
 
 const inputLabels = [
@@ -1085,7 +1083,116 @@ function JobManagementContent() {
                     />
                   ))}
                 </div>
+
+              {/* Applied Jobs Section */}
+              <div className="space-y-6">
+                <h2 className={`${THEME.components.typography.sectionTitle} text-2xl`}>
+                  Applied Jobs
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {recommendations.map((job) => (
+                    <Card
+                      key={job.id}
+                      className="hover:shadow-lg transition-all duration-300"
+                      noPadding
+                    >
+                      <div className="p-6 flex flex-col gap-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white font-bold flex items-center justify-center`}>
+                            {job.logo}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className={`${THEME.components.typography.cardTitle} mb-1 truncate`}>
+                              {job.position}
+                            </h3>
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs font-bold ${getMatchScoreColor(
+                                job.matchScore
+                              )}`}
+                            >
+                              {job.matchScore}% Match
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <p className={`${THEME.components.typography.body} font-medium truncate`}>
+                            {job.company}
+                          </p>
+                          <div className={`space-y-1 ${THEME.components.typography.body}`}>
+                            <div className="flex items-center gap-1">
+                              <FiMapPin size={14} />
+                              <span className="truncate">{job.location}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <FiDollarSign size={14} />
+                              <span>{job.salary}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <FiClock size={14} />
+                              <span>{job.postedDate}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-1">
+                          {job.skills.slice(0, 3).map((skill, index) => (
+                            <span
+                              key={index}
+                              className={`px-2 py-1 bg-[#F3EFFF] text-[${THEME.colors.primary}] text-xs font-medium rounded-lg`}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                          {job.skills.length > 3 && (
+                            <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-lg">
+                              +{job.skills.length - 3}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-auto">
+                          <button
+                            className={`w-full flex items-center justify-center gap-2 px-4 py-2 bg-white border ${THEME.colors.border} text-[${THEME.colors.primary}] rounded-lg hover:border-[${THEME.colors.primary}] transition-colors duration-300`}
+                            onClick={() => saveJob(job)}
+                          >
+                            <FiBookmark size={16} />
+                            Save
+                          </button>
+                          <button
+                            className={THEME.components.button.primary}
+                            onClick={() => applyFromRecommendation(job)}
+                          >
+                            Apply Now
+                          </button>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
               </div>
+
+              {/* Saved Jobs Section */}
+              <div className="space-y-6">
+                <h2 className={`${THEME.components.typography.sectionTitle} text-2xl`}>
+                  Saved Jobs
+                </h2>
+                <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
+                  <div className={`w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white flex items-center justify-center`}>
+                    <FiBookmark size={32} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#222] mb-2">
+                    No Saved Jobs Yet
+                  </h3>
+                  <p className="text-[#666] mb-6">
+                    Start saving jobs you're interested in to view them here
+                  </p>
+                  <button className={`px-6 py-3 bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} hover:from-[#4A4AD6] hover:to-[#A13BD3] text-white font-bold rounded-lg transition-all duration-300`}>
+                   Find Jobs
+                  </button>
+                </div>
+              </div>
+            </div>
             )}
 
             {activeTab === "recommendations" && (

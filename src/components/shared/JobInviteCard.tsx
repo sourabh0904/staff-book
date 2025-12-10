@@ -12,8 +12,11 @@ interface JobInviteCardProps {
   jobType: string; // e.g., "Both" (Full-time/Part-time?) or "Full Time"
   location: string;
   salary: string;
+  primaryActionLabel?: string;
+  secondaryActionLabel?: string;
   onAccept: () => void;
-  onDecline: () => void;
+  onDecline?: () => void;
+  onSave?: () => void;
 }
 
 const JobInviteCard: React.FC<JobInviteCardProps> = ({
@@ -25,8 +28,11 @@ const JobInviteCard: React.FC<JobInviteCardProps> = ({
   jobType,
   location,
   salary,
+  primaryActionLabel = "Accept Invite",
+  secondaryActionLabel = "Decline",
   onAccept,
   onDecline,
+  onSave,
 }) => {
   return (
     <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 w-full">
@@ -104,7 +110,10 @@ const JobInviteCard: React.FC<JobInviteCardProps> = ({
           <option value="resume1">Resume_v1.pdf</option>
           <option value="resume2">Resume_v2.pdf</option>
         </select>
-        <button className="h-full aspect-square flex items-center justify-center bg-gray-50 border border-gray-100 rounded-xl text-indigo-600 hover:bg-indigo-50 transition-colors">
+        <button 
+          onClick={onSave}
+          className="h-full aspect-square flex items-center justify-center bg-gray-50 border border-gray-100 rounded-xl text-indigo-600 hover:bg-indigo-50 transition-colors"
+        >
           <FiBookmark size={20} />
         </button>
       </div>
@@ -115,14 +124,16 @@ const JobInviteCard: React.FC<JobInviteCardProps> = ({
           onClick={onAccept}
           className={`w-full ${THEME.components.button.primary} text-sm`}
         >
-          Accept Invite
+          {primaryActionLabel}
         </button>
-        <button
-          onClick={onDecline}
-          className={`w-full py-2.5 ${THEME.components.button.danger} text-sm`}
-        >
-          Decline
-        </button>
+        {onDecline && (
+          <button
+            onClick={onDecline}
+            className={`w-full py-2.5 ${THEME.components.button.danger} text-sm`}
+          >
+            {secondaryActionLabel}
+          </button>
+        )}
       </div>
     </div>
   );
