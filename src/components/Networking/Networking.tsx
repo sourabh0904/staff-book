@@ -5,10 +5,14 @@ import CreatePostWidget from './feed/CreatePostWidget';
 import PostCard from './feed/PostCard';
 import ReelsWidget from './feed/ReelsWidget';
 import { THEME } from '../../styles/theme';
+import StorySection from '../shared/StorySection';
 
 const Networking: React.FC = () => {
   return (
     <div className={`flex flex-col w-full ${THEME.layout.spacing.sm}`}>
+      {/* Stories Section */}
+      <StorySection />
+      
       {/* Create Post Section */}
       <CreatePostWidget />
 
