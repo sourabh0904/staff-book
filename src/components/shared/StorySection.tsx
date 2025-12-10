@@ -121,7 +121,56 @@ const StorySection = () => {
     }
   };
 
-  // ... (rest of the component)
+  const handleStoryClick = (name: string) => {
+    if (storyData[name as keyof typeof storyData]) {
+      setSelectedStory(name);
+      setShowStoryModal(true);
+      setCurrentStoryIndex(0);
+      setProgress(0);
+    }
+  };
+
+  const closeStoryModal = () => {
+    setShowStoryModal(false);
+    setSelectedStory(null);
+    setCurrentStoryIndex(0);
+    setProgress(0);
+  };
+
+  const nextStory = () => {
+    if (selectedStory && storyData[selectedStory as keyof typeof storyData]) {
+      const stories = storyData[selectedStory as keyof typeof storyData];
+      if (currentStoryIndex < stories.length - 1) {
+        setCurrentStoryIndex(prev => prev + 1);
+        setProgress(0);
+      } else {
+        closeStoryModal();
+      }
+    }
+  };
+
+  const previousStory = () => {
+    if (currentStoryIndex > 0) {
+      setCurrentStoryIndex(prev => prev - 1);
+      setProgress(0);
+    }
+  };
+
+  React.useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (showStoryModal && selectedStory) {
+      timer = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            nextStory();
+            return 0;
+          }
+          return prev + 2;
+        });
+      }, 100);
+    }
+    return () => clearInterval(timer);
+  }, [showStoryModal, selectedStory, currentStoryIndex]);
 
   return (
     <>
