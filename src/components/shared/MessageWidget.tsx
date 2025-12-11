@@ -17,7 +17,7 @@ export default function MessageWidget() {
   const recentChats = useMemo(() => mockChats.slice(0, 5), []);
 
   return (
-    <div className="fixed bottom-6 right-36 z-50">
+    <div className="fixed bottom-6 right-36 z-50 hidden md:block">
       {/* Always visible buttons */}
       <div className="flex gap-2 mb-2">
         {/* Messages Toggle Button - Only when widget is closed */}

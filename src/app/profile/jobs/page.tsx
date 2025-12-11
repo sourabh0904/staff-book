@@ -3,25 +3,23 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import JobInviteCard from '@/components/shared/JobInviteCard';
-import {
-  FiBriefcase,
-  FiClock,
-  FiMapPin,
-  FiDollarSign,
-  FiTrendingUp,
-  FiBookmark,
-  FiEye,
-  FiFilter,
-  FiSearch,
-  FiCalendar,
-  FiUsers,
-  FiTarget,
-  FiStar,
-  FiExternalLink,
-  FiChevronRight,
-  FiNavigation,
-  FiMessageCircle,
+import { 
+  FiBriefcase, 
+  FiMapPin, 
+  FiClock, 
+  FiDollarSign, 
+  FiSearch, 
+  FiFilter, 
+  FiBookmark, 
+  FiChevronRight, 
+  FiEye, 
+  FiNavigation, 
+  FiCalendar, 
+  FiMessageCircle, 
+  FiUserPlus 
 } from "react-icons/fi";
+import AppliedJobCard from '@/components/shared/AppliedJobCard';
+import { FaWhatsapp } from 'react-icons/fa';
 import { useAuth } from "@/context/AuthContext";
 import ProfileSidebar from "@/components/shared/ProfileSidebar";
 import { useSearchParams } from "next/navigation";
@@ -29,6 +27,7 @@ import JobsContent from "./JobsContent";
 import ProfileSubMenu from "@/components/shared/ProfileSubMenu";
 import ProfileLayout from "@/components/shared/ProfileLayout";
 import Card from "@/components/shared/Card";
+import ConnectButton from "@/components/shared/ConnectButton";
 import { THEME } from "@/styles/theme";
 
 
@@ -1109,89 +1108,55 @@ function JobManagementContent() {
 
               {/* Applied Jobs Section */}
               <div className="space-y-6">
-                <h2 className={`${THEME.components.typography.sectionTitle} text-2xl`}>
-                  Applied Jobs
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {recommendations.map((job) => (
-                    <Card
-                      key={job.id}
-                      className="hover:shadow-lg transition-all duration-300"
-                      noPadding
-                    >
-                      <div className="p-6 flex flex-col gap-4">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white font-bold flex items-center justify-center`}>
-                            {job.logo}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 className={`${THEME.components.typography.cardTitle} mb-1 truncate`}>
-                              {job.position}
-                            </h3>
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs font-bold ${getMatchScoreColor(
-                                job.matchScore
-                              )}`}
-                            >
-                              {job.matchScore}% Match
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <p className={`${THEME.components.typography.body} font-medium truncate`}>
-                            {job.company}
-                          </p>
-                          <div className={`space-y-1 ${THEME.components.typography.body}`}>
-                            <div className="flex items-center gap-1">
-                              <FiMapPin size={14} />
-                              <span className="truncate">{job.location}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <FiDollarSign size={14} />
-                              <span>{job.salary}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <FiClock size={14} />
-                              <span>{job.postedDate}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap gap-1">
-                          {job.skills.slice(0, 3).map((skill, index) => (
-                            <span
-                              key={index}
-                              className={`px-2 py-1 bg-[#F3EFFF] text-[${THEME.colors.primary}] text-xs font-medium rounded-lg`}
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                          {job.skills.length > 3 && (
-                            <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-lg">
-                              +{job.skills.length - 3}
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="flex flex-col gap-2 mt-auto">
-                          <button
-                            className={`w-full flex items-center justify-center gap-2 px-4 py-2 bg-white border ${THEME.colors.border} text-[${THEME.colors.primary}] rounded-lg hover:border-[${THEME.colors.primary}] transition-colors duration-300`}
-                            onClick={() => saveJob(job)}
-                          >
-                            <FiBookmark size={16} />
-                            Save
-                          </button>
-                          <button
-                            className={THEME.components.button.primary}
-                            onClick={() => applyFromRecommendation(job)}
-                          >
-                            Apply Now
-                          </button>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
+                <div className="flex flex-col gap-1">
+                  <h2 className={`${THEME.components.typography.sectionTitle} text-2xl`}>
+                    Applied Jobs
+                  </h2>
+                  {/* <p className="text-gray-500 text-sm">Track your application status and recruiter activity</p> */}
+                </div>
+                
+                <div className="flex flex-col gap-4">
+                   <AppliedJobCard 
+                      recruiter={{
+                        name: "Rajesh Kumar",
+                        company: "TechCorp",
+                        avatar: "R",
+                        email: "rajesh.kumar@techcorp.com"
+                      }}
+                      job={{
+                        title: "Senior Frontend Developer",
+                        appliedDate: "Jan 15, 2024"
+                      }}
+                      timeline={[
+                        { title: "Profile Screening", date: "Jan 16, 2024" },
+                        { title: "Resume Downloaded", date: "Jan 17, 2024" },
+                        { title: "Viewed Phone Number", date: "Jan 18, 2024" },
+                        { title: "Shortlisted", date: "Jan 20, 2024" },
+                        { title: "Schedule Meet", date: "Jan 22, 2024 at 3:00 PM", isCurrent: true },
+                      ]}
+                      onWithdraw={() => console.log("Withdraw")}
+                      onContactPhone={() => console.log("Phone")}
+                   />
+                   
+                   {/* Example of another card to show grid layout */}
+                   <AppliedJobCard 
+                      recruiter={{
+                        name: "Sarah Smith",
+                        company: "DesignStudio",
+                        avatar: "S",
+                        email: "sarah@designstudio.com"
+                      }}
+                      job={{
+                        title: "Lead UI/UX Designer",
+                        appliedDate: "Feb 01, 2024"
+                      }}
+                      timeline={[
+                        { title: "Profile Screening", date: "Feb 02, 2024" },
+                        { title: "Resume Downloaded", date: "Feb 03, 2024", isCurrent: true },
+                      ]}
+                      onWithdraw={() => console.log("Withdraw")}
+                      onContactPhone={() => console.log("Phone")}
+                   />
                 </div>
               </div>
 
@@ -1613,156 +1578,7 @@ function JobManagementContent() {
                 {/* Nearby Jobs Map Section */}
                 <NearbyJobsMapView postings={postings} />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {postings.map((p) => (
-                    <Card
-                      key={p.id}
-                      className="hover:shadow-xl transition-all duration-300 overflow-hidden"
-                      noPadding
-                    >
-                      {/* Clickable Card Content Area */}
-                      <Link
-                        href={`/profile/jobs/${p.id}`}
-                        className="block relative group/card"
-                      >
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center pointer-events-none">
-                          <div className="bg-white px-6 py-3 rounded-full flex items-center gap-2 transform scale-90 group-hover/card:scale-100 transition-transform duration-300">
-                            <FiEye size={18} className={`text-[${THEME.colors.primary}]`} />
-                            <span className={`text-[${THEME.colors.primary}] font-bold`}>View Details</span>
-                          </div>
-                        </div>
 
-                        {/* Header with Profile */}
-                        <div className="p-4 pb-3 flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            {/* Profile Image with Online Status */}
-                            <div className="relative">
-                              <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[2px]`}>
-                                <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                                  <img
-                                    src={p.posterImage || "/homePage/profile.png"}
-                                    alt={p.posterName || "Poster"}
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                              </div>
-                              {/* Online Status Dot */}
-                              {p.isOnline && (
-                                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
-                              )}
-                            </div>
-                            
-                            {/* Name and Distance */}
-                            <div className="flex-1">
-                              <h3 className={`text-base font-bold ${THEME.colors.text.heading} leading-tight`}>
-                                {p.posterName || p.company}
-                              </h3>
-                              <div className={`flex items-center gap-1 text-xs text-[${THEME.colors.primary}]`}>
-                                <FiNavigation size={12} />
-                                <span>{p.distance?.toFixed(1) || "0.0"} km away</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Action Buttons */}
-                          <div className="flex items-center gap-2 relative z-20" onClick={(e) => e.preventDefault()}>
-                            {/* Connect Button */}
-                            <button 
-                              className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/connect relative"
-                              title="Send connection request"
-                            >
-                              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <path d="M9 4V14M4 9H14" stroke={THEME.colors.primary} strokeWidth="2" strokeLinecap="round"/>
-                              </svg>
-                              <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/connect:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                Send connection request
-                              </span>
-                            </button>
-                            
-                            {/* Video Call Button */}
-                            <button 
-                              className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/meet relative"
-                              title={`Schedule a meet with ${p.posterName || p.company}`}
-                            >
-                              <FiCalendar size={16} className={`text-[${THEME.colors.primary}]`} />
-                              <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/meet:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                Schedule a meet with {p.posterName || p.company}
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Company Logo Section */}
-                        <div className="px-4 pb-3">
-                          <div className="w-full h-20 bg-gradient-to-br ${THEME.colors.gradient.light} rounded-lg flex items-center justify-center">
-                            <div className={`text-3xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
-                              {p.company.charAt(0)}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Job Details */}
-                        <div className="px-4 pb-4">
-                          <div className="mb-2">
-                            <h4 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>
-                              {p.position}
-                            </h4>
-                            <p className="text-sm text-[#666]">
-                              {p.company}
-                            </p>
-                          </div>
-
-                          {/* Job Info */}
-                          <div className={`space-y-2 mt-4 text-sm ${THEME.colors.text.body}`}>
-                            <div className="flex items-center gap-2">
-                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="currentColor" className="text-gray-400" strokeWidth="1.5"/>
-                                <path d="M8 4V8L10.5 9.5" stroke="currentColor" className="text-gray-400" strokeWidth="1.5" strokeLinecap="round"/>
-                              </svg>
-                              <span>{p.workMode || "Work from office"}</span>
-                            </div>
-                            
-                            <div className="flex items-center gap-2">
-                              <FiBriefcase size={14} className="text-gray-400" />
-                              <span>{p.experienceLevel || "Both"}</span>
-                            </div>
-                            
-                            <div className="flex items-center gap-2">
-                              <FiMapPin size={14} className="text-gray-400" />
-                              <span>{p.location}</span>
-                            </div>
-                            
-                            <div className="flex items-center gap-2">
-                              <FiDollarSign size={14} className="text-gray-400" />
-                              <span className={`font-semibold ${THEME.colors.text.heading}`}>{p.salary}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-
-                      {/* Apply Button Row - Outside Link */}
-                      <div className="px-4 pb-4 flex items-center gap-2 relative z-20">
-                        <button 
-                          className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors group/save relative"
-                          onClick={() => saveJob(p as any)}
-                          title="Save the job"
-                        >
-                          <FiBookmark size={16} className={`text-[${THEME.colors.primary}]`} />
-                          <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/save:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                            Save the job
-                          </span>
-                        </button>
-                        <button
-                          onClick={() => applyToPosting(p)}
-                          className={`${THEME.components.button.primary} flex-1`}
-                        >
-                          Apply Now
-                        </button>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
 
                 {/* Jobs Matching your Skills Section */}
                 <div className="mt-12">
@@ -1796,7 +1612,7 @@ function JobManagementContent() {
                             </div>
                           </div>
 
-                          <div className="p-4 pb-3 flex items-center justify-between">
+                          <div className="p-4 pb-3 flex flex-col gap-3">
                             <div className="flex items-center gap-3">
                               <div className="relative">
                                 <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[2px]`}>
@@ -1824,24 +1640,19 @@ function JobManagementContent() {
                               </div>
                             </div>
 
-                            <div className="flex items-center gap-2 relative z-20" onClick={(e) => e.preventDefault()}>
-                              <button 
-                                className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/connect relative"
-                                title="Send connection request"
-                              >
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                  <path d="M9 4V14M4 9H14" stroke={THEME.colors.primary} strokeWidth="2" strokeLinecap="round"/>
-                                </svg>
-                                <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/connect:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                  Send connection request
-                                </span>
-                              </button>
+                            <div className="flex items-center justify-between w-full relative z-20" onClick={(e) => e.preventDefault()}>
+                              <ConnectButton 
+                                variant="outline"
+                                className="!px-3 !py-1 text-xs h-9 shadow-none hover:shadow-sm"
+                                icon={<FiUserPlus size={14} />}
+                                label="Connect"
+                              />
                               
                               <button 
                                 className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/meet relative"
                                 title={`Schedule a meet with ${p.posterName || p.company}`}
                               >
-                                <FiCalendar size={16} className={`text-[${THEME.colors.primary}]`} />
+                                <FiCalendar size={16} className="text-black" />
                                 <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/meet:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                                   Schedule a meet with {p.posterName || p.company}
                                 </span>
@@ -1900,7 +1711,7 @@ function JobManagementContent() {
                             onClick={() => saveJob(p as any)}
                             title="Save the job"
                           >
-                            <FiBookmark size={16} className={`text-[${THEME.colors.primary}]`} />
+                            <FiBookmark size={16} className="text-black" />
                             <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/save:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                               Save the job
                             </span>
@@ -1949,7 +1760,7 @@ function JobManagementContent() {
                             </div>
                           </div>
 
-                          <div className="p-4 pb-3 flex items-center justify-between">
+                          <div className="p-4 pb-3 flex flex-col gap-3">
                             <div className="flex items-center gap-3">
                               <div className="relative">
                                 <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[2px]`}>
@@ -1977,24 +1788,19 @@ function JobManagementContent() {
                               </div>
                             </div>
 
-                            <div className="flex items-center gap-2 relative z-20" onClick={(e) => e.preventDefault()}>
-                              <button 
-                                className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/connect relative"
-                                title="Send connection request"
-                              >
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                  <path d="M9 4V14M4 9H14" stroke={THEME.colors.primary} strokeWidth="2" strokeLinecap="round"/>
-                                </svg>
-                                <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/connect:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                  Send connection request
-                                </span>
-                              </button>
+                            <div className="flex items-center justify-between w-full relative z-20" onClick={(e) => e.preventDefault()}>
+                              <ConnectButton 
+                                variant="outline"
+                                className="!px-3 !py-1 text-xs h-9 shadow-none hover:shadow-sm"
+                                icon={<FiUserPlus size={14} />}
+                                label="Connect"
+                              />
                               
                               <button 
                                 className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/meet relative"
                                 title={`Schedule a meet with ${p.posterName || p.company}`}
                               >
-                                <FiCalendar size={16} className={`text-[${THEME.colors.primary}]`} />
+                                <FiCalendar size={16} className="text-black" />
                                 <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/meet:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                                   Schedule a meet with {p.posterName || p.company}
                                 </span>
@@ -2053,7 +1859,7 @@ function JobManagementContent() {
                             onClick={() => saveJob(p as any)}
                             title="Save the job"
                           >
-                            <FiBookmark size={16} className={`text-[${THEME.colors.primary}]`} />
+                            <FiBookmark size={16} className="text-black" />
                             <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/save:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                               Save the job
                             </span>
@@ -2174,7 +1980,7 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
             {filteredJobs.map((job) => (
               <div
                 key={job.id}
-                className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border ${THEME.colors.border} group`}
+                className={`bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border ${THEME.colors.border} group`}
               >
                 {/* Clickable Card Content Area */}
                 <Link
@@ -2182,47 +1988,56 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
                   className="block relative"
                 >
                   {/* Header with Profile */}
-                  <div className="p-4 pb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    {/* Profile Image with Online Status */}
-                    <div className="relative">
-                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[1.5px]`}>
-                        <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                          <img
-                            src={job.posterImage || "/homePage/profile.png"}
-                            alt={job.posterName || "Poster"}
-                            className="w-full h-full object-cover"
-                          />
+                  <div className="p-4 pb-3 flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      {/* Profile Image with Online Status */}
+                      <div className="relative">
+                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} p-[1.5px]`}>
+                          <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+                            <img
+                              src={job.posterImage || "/homePage/profile.png"}
+                              alt={job.posterName || "Poster"}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        {/* Online Status Dot */}
+                        {job.isOnline && (
+                          <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+                        )}
+                      </div>
+                      
+                      {/* Name and Distance */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className={`text-sm font-bold ${THEME.colors.text.heading} truncate`}>
+                          {job.posterName || job.company}
+                        </h3>
+                        <div className="flex items-center gap-1 text-xs text-purple-600">
+                          <FiNavigation size={12} />
+                          <span>{job.distance.toFixed(1)} km away</span>
                         </div>
                       </div>
-                      {/* Online Status Dot */}
-                      {job.isOnline && (
-                        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
-                      )}
                     </div>
-                    
-                    {/* Name and Distance */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className={`text-sm font-bold ${THEME.colors.text.heading} truncate`}>
-                        {job.posterName || job.company}
-                      </h3>
-                      <div className={`flex items-center gap-1 text-[10px] text-[${THEME.colors.primary}]`}>
-                        <FiNavigation size={10} />
-                        <span>{job.distance.toFixed(1)} km away</span>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-1 relative z-20" onClick={(e) => e.preventDefault()}>
-                    <button className="w-7 h-7 rounded-lg bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-600">
-                      <FiMessageCircle size={14} />
-                    </button>
-                    <button className="w-7 h-7 rounded-lg bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-600">
-                      <FiCalendar size={14} />
-                    </button>
+                    {/* Action Buttons */}
+                    <div className="flex items-center justify-between w-full relative z-20" onClick={(e) => e.preventDefault()}>
+                      <ConnectButton 
+                        variant="outline"
+                        className="!px-3 !py-1 text-xs h-9 shadow-none hover:shadow-sm"
+                        icon={<FiUserPlus size={14} />}
+                        label="Connect"
+                      />
+                      <button 
+                        className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/meet relative"
+                        title={`Schedule a meet with ${job.posterName || job.company}`}
+                      >
+                        <FiCalendar size={16} className="text-black" />
+                        <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/meet:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                          Schedule a meet with {job.posterName || job.company}
+                        </span>
+                      </button>
+                    </div>
                   </div>
-                </div>
 
                   {/* Company Logo Section - Smaller */}
                   <div className="px-4 py-2">
@@ -2267,9 +2082,9 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
                 {/* Apply Button Row */}
                 <div className="px-4 pb-4 flex items-center gap-2 relative z-20 border-t border-gray-50 pt-3 mt-1">
                   <button 
-                    className="w-8 h-8 flex items-center justify-center bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-gray-400 hover:text-[${THEME.colors.primary}]"
+                    className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors group/save relative"
                   >
-                    <FiBookmark size={14} />
+                    <FiBookmark size={16} className="text-black" />
                   </button>
                   <button
                     onClick={() => handleApply(job)}

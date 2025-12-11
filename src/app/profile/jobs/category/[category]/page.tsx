@@ -17,9 +17,11 @@ import {
   FiFilter,
   FiX,
   FiSearch,
+  FiUserPlus,
 } from "react-icons/fi";
 import { THEME } from "@/styles/theme";
 import Button from "@/components/shared/Button";
+import ConnectButton from "@/components/shared/ConnectButton";
 
 // Add custom styles for scrollbar
 if (typeof document !== 'undefined') {
@@ -819,7 +821,7 @@ export default function JobCategoryPage() {
                         </div>
                       </div>
 
-                      <div className="p-4 pb-3 flex items-center justify-between">
+                      <div className="p-4 pb-3 flex flex-col gap-3">
                         <div className="flex items-center gap-3">
                           <div className="relative">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gradient-start to-gradient-end p-[2px]">
@@ -848,36 +850,21 @@ export default function JobCategoryPage() {
                         </div>
 
                         <div
-                          className="flex items-center gap-2 relative z-20"
+                          className="flex items-center justify-between w-full relative z-20"
                           onClick={(e) => e.preventDefault()}
                         >
-                          <button
-                            className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/connect relative"
-                            title="Send connection request"
-                          >
-                            <svg
-                              width="18"
-                              height="18"
-                              viewBox="0 0 18 18"
-                              fill="none"
-                            >
-                              <path
-                                d="M9 4V14M4 9H14"
-                                stroke="#5B5BE7"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/connect:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                              Send connection request
-                            </span>
-                          </button>
+                          <ConnectButton 
+                            variant="outline"
+                            className="!px-3 !py-1 text-xs h-9 shadow-none hover:shadow-sm"
+                            icon={<FiUserPlus size={14} />}
+                            label="Connect"
+                          />
 
                           <button
                             className="w-9 h-9 rounded-lg bg-light-bg hover:bg-[#E5E3FF] flex items-center justify-center transition-colors group/meet relative"
                             title={`Schedule a meet with ${job.posterName}`}
                           >
-                            <FiCalendar size={16} className="text-primary" />
+                            <FiCalendar size={16} className="text-black" />
                             <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/meet:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                               Schedule a meet with {job.posterName}
                             </span>
@@ -949,7 +936,7 @@ export default function JobCategoryPage() {
                         className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors group/save relative"
                         title="Save the job"
                       >
-                        <FiBookmark size={16} className="text-[#7F37C9]" />
+                        <FiBookmark size={16} className="text-black" />
                         <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/save:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                           Save the job
                         </span>

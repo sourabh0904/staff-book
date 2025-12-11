@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { FiCheck, FiX, FiUserPlus, FiUserMinus, FiUsers, FiSearch, FiMessageCircle, FiMoreHorizontal, FiChevronDown, FiFilter } from 'react-icons/fi';
 import { THEME } from '@/styles/theme';
 import Card from '../shared/Card';
+import ConnectButton from '../shared/ConnectButton';
 import {
   connectionRequests,
   myConnections,
@@ -372,45 +373,47 @@ const RequestCard: React.FC<{
   onIgnore: (id: string) => void;
 }> = ({ request, onAccept, onIgnore }) => {
   return (
-    <Card noPadding hoverEffect className="overflow-hidden flex flex-col h-full">
+    <div className="bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#E8E4FF] flex flex-col h-full group">
       <div className="h-20 bg-gradient-to-r from-primary to-gradient-end relative">
         <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
-          <div className="w-20 h-20 rounded-full border-4 border-white bg-white shadow-sm overflow-hidden">
+          <div className="w-20 h-20 rounded-full border-4 border-white bg-white shadow-sm overflow-hidden p-0.5">
             <Image
               src={request.avatar}
               alt={request.name}
               width={80}
               height={80}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-full"
             />
           </div>
         </div>
       </div>
 
       <div className="pt-12 px-5 pb-5 flex flex-col items-center text-center flex-1">
-        <h3 className={`${THEME.components.typography.cardTitle} mb-1`}>{request.name}</h3>
-        <p className={`${THEME.components.typography.body} line-clamp-2 mb-3 h-10`}>{request.title}</p>
-        <p className="text-xs text-gray-500 mb-4 flex items-center gap-1">
+        <h3 className="text-base font-bold text-[#222] mb-1">{request.name}</h3>
+        <p className="text-xs text-[#666] line-clamp-2 mb-3 h-8">{request.title}</p>
+        <p className="text-[10px] text-[#999] mb-4 flex items-center gap-1 bg-light-bg px-2 py-1 rounded-full">
           <FiUsers className="w-3 h-3" />
           {request.mutualConnections} mutual connections
         </p>
         
-        <div className="flex gap-2 w-full mt-auto">
-          <button
+        <div className="flex gap-1 w-full mt-auto">
+          <ConnectButton
             onClick={() => onAccept(request.id)}
-            className="flex-1 bg-gradient-to-r from-primary to-gradient-end text-white px-3 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            Accept
-          </button>
-          <button
+            variant="outline"
+            label="Accept"
+            className="flex-1 justify-center !px-1 !text-xs"
+            icon={<FiCheck size={14} />}
+          />
+          <ConnectButton
             onClick={() => onIgnore(request.id)}
-            className="flex-1 border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
-          >
-            Ignore
-          </button>
+            variant="ghost"
+            label="Ignore"
+            className="flex-1 justify-center !text-gray-500 hover:!bg-gray-50 shadow-none border border-gray-100 !px-1 !text-xs"
+            icon={<FiX size={14} />}
+          />
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
@@ -420,38 +423,38 @@ const SuggestionCard: React.FC<{
   onConnect: (id: string) => void;
 }> = ({ person, onConnect }) => {
   return (
-    <Card noPadding hoverEffect className="overflow-hidden flex flex-col h-full">
+    <div className="bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#E8E4FF] flex flex-col h-full group">
       <div className={`h-20 bg-gradient-to-r ${THEME.colors.gradient.sky} relative`}>
         <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
-          <div className="w-20 h-20 rounded-full border-4 border-white bg-white shadow-sm overflow-hidden">
+          <div className="w-20 h-20 rounded-full border-4 border-white bg-white shadow-sm overflow-hidden p-0.5">
             <Image
               src={person.avatar}
               alt={person.name}
               width={80}
               height={80}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-full"
             />
           </div>
         </div>
       </div>
 
       <div className="pt-12 px-5 pb-5 flex flex-col items-center text-center flex-1">
-        <h3 className={`${THEME.components.typography.cardTitle} mb-1`}>{person.name}</h3>
-        <p className={`${THEME.components.typography.body} line-clamp-2 mb-2 h-10`}>{person.title}</p>
-        <p className="text-xs text-gray-500 mb-4 flex items-center gap-1">
+        <h3 className="text-base font-bold text-[#222] mb-1">{person.name}</h3>
+        <p className="text-xs text-[#666] line-clamp-2 mb-2 h-8">{person.title}</p>
+        <p className="text-[10px] text-[#999] mb-4 flex items-center gap-1 bg-light-bg px-2 py-1 rounded-full">
           <FiUsers className="w-3 h-3" />
           {person.mutualConnections} mutual connections
         </p>
         
-        <button
+        <ConnectButton
           onClick={() => onConnect(person.id)}
-          className="w-full mt-auto border border-primary text-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-2"
-        >
-          <FiUserPlus className="w-4 h-4" />
-          Connect
-        </button>
+          variant="outline"
+          label="Connect"
+          className="w-full justify-center"
+          icon={<FiUserPlus size={16} />}
+        />
       </div>
-    </Card>
+    </div>
   );
 };
 
@@ -461,37 +464,37 @@ const SentRequestCard: React.FC<{
   onWithdraw: (id: string) => void;
 }> = ({ request, onWithdraw }) => {
   return (
-    <Card noPadding hoverEffect className="overflow-hidden flex flex-col h-full">
+    <div className="bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#E8E4FF] flex flex-col h-full group">
       <div className="h-20 bg-gradient-to-r from-orange-400 to-red-400 relative">
         <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
-          <div className="w-20 h-20 rounded-full border-4 border-white bg-white shadow-sm overflow-hidden">
+          <div className="w-20 h-20 rounded-full border-4 border-white bg-white shadow-sm overflow-hidden p-0.5">
             <Image
               src={request.avatar}
               alt={request.name}
               width={80}
               height={80}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-full"
             />
           </div>
         </div>
       </div>
 
       <div className="pt-12 px-5 pb-5 flex flex-col items-center text-center flex-1">
-        <h3 className={`${THEME.components.typography.cardTitle} mb-1`}>{request.name}</h3>
-        <p className={`${THEME.components.typography.body} line-clamp-2 mb-2 h-10`}>{request.title}</p>
-        <p className="text-xs text-gray-500 mb-4">
+        <h3 className="text-base font-bold text-[#222] mb-1">{request.name}</h3>
+        <p className="text-xs text-[#666] line-clamp-2 mb-2 h-8">{request.title}</p>
+        <p className="text-[10px] text-[#999] mb-4 bg-gray-50 px-2 py-1 rounded-full">
           Request sent
         </p>
         
-        <button
+        <ConnectButton
           onClick={() => onWithdraw(request.id)}
-          className="w-full mt-auto border border-gray-300 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 hover:text-red-600 hover:border-red-200 transition-all flex items-center justify-center gap-2"
-        >
-          <FiX className="w-4 h-4" />
-          Withdraw
-        </button>
+          variant="ghost"
+          label="Withdraw"
+          className="w-full justify-center !text-gray-500 hover:!bg-gray-50 hover:!text-red-600 hover:!border-red-200 border border-gray-100"
+          icon={<FiX size={16} />}
+        />
       </div>
-    </Card>
+    </div>
   );
 };
 
