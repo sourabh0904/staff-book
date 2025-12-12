@@ -49,7 +49,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
               transition-transform duration-300 ease-in-out
               p-4 lg:p-0
             `}>
-              <div className="lg:sticky lg:top-[80px] max-h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
+              <div className="lg:sticky lg:top-[80px] max-h-[calc(100vh-80px)] overflow-y-auto">
                 <NetworkingLeftSidebar />
               </div>
             </div>

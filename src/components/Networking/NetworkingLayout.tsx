@@ -26,7 +26,7 @@ const NetworkingLayout: React.FC = () => {
         ${isRightSidebarOpen ? 'translate-x-0' : 'translate-x-full'}
         px-4 pt-4
       `}>
-        <div className="h-full overflow-y-auto scrollbar-hide pb-20">
+        <div className="h-full overflow-y-auto pb-20">
           <NetworkingRightSidebar />
         </div>
       </div>
@@ -53,7 +53,7 @@ const NetworkingLayout: React.FC = () => {
 
         {/* Right Sidebar (Desktop) */}
         <div className="hidden lg:block lg:col-span-4">
-          <div className="sticky top-[80px] max-h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
+          <div className="sticky top-[80px] max-h-[calc(100vh-80px)] overflow-y-auto">
             <NetworkingRightSidebar />
           </div>
         </div>

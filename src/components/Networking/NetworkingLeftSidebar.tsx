@@ -31,6 +31,28 @@ const NetworkingLeftSidebar: React.FC = () => {
 
   if (!user) return null;
 
+  // Calculate profile completion percentage
+  const calculateProgress = () => {
+    if (!user) return 0;
+    let completed = 0;
+    const total = 10;
+
+    if (user.first_name) completed++;
+    if (user.last_name) completed++;
+    if (user.email) completed++;
+    if (user.phone) completed++;
+    if (user.designation) completed++;
+    if (user.city) completed++;
+    if (user.bio) completed++;
+    if (user.description) completed++;
+    if (user.picture) completed++;
+    if (user.resume_upload) completed++;
+
+    return Math.round((completed / total) * 100);
+  };
+
+  const progress = calculateProgress();
+
   return (
     <div className="flex flex-col gap-2 pb-4">
       {/* Profile Card */}
@@ -48,14 +70,46 @@ const NetworkingLeftSidebar: React.FC = () => {
         {/* Profile Info */}
         <div className="px-4 pb-4 text-center relative">
           <div className="relative -mt-10 mb-3 inline-block">
-            <div className="p-1 bg-white rounded-full">
-              <Image
-                src={user.picture || "/homePage/profile.png"}
-                alt={`${user.first_name} ${user.last_name}`}
-                width={72}
-                height={72}
-                className="rounded-full object-cover border border-gray-100"
-              />
+            <div className="relative w-[84px] h-[84px] p-1 bg-white rounded-full mx-auto">
+               {/* Circular Progress Bar */}
+               <svg className="absolute inset-0 w-full h-full rotate-90 transform z-10 scale-110" viewBox="0 0 100 100">
+                {/* Track */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="46"
+                  fill="none"
+                  stroke="#F3F4F6"
+                  strokeWidth="4"
+                />
+                {/* Progress */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="46"
+                  fill="none"
+                  stroke="#22c55e"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  className="transition-all duration-1000 ease-out"
+                  strokeDasharray={289.03} // 2 * PI * 46
+                  strokeDashoffset={289.03 - (progress / 100) * 289.03}
+                />
+              </svg>
+
+              <div className="relative w-full h-full rounded-full overflow-hidden border border-gray-100 z-20">
+                <Image
+                  src={user.picture || "/homePage/profile.png"}
+                  alt={`${user.first_name} ${user.last_name}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+               {/* Progress badge */}
+               <div className={`absolute left-1/2 -bottom-3 -translate-x-1/2 bg-white rounded-full px-2 py-0.5 border border-green-200 text-green-600 font-bold text-[10px] shadow-sm text-center whitespace-nowrap z-30`}>
+                {progress}%
+              </div>
             </div>
           </div>
           
