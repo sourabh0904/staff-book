@@ -19,7 +19,7 @@ export const colors = {
   },
   border: 'border-gray-200',
   background: {
-    card: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150',
+    card: 'bg-white',
     page: 'bg-[#F7F7F8]',
     input: 'bg-[#f7f7fa]',
   }
@@ -46,11 +46,11 @@ export const layout = {
 
 export const components = {
   card: {
-    base: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150 border border-white/50 shadow-lg ring-1 ring-white/30 rounded-xl', // Mirror glass effect
+    base: 'bg-white border border-gray-200 shadow-sm rounded-xl', // Clean white card
     radius: 'rounded-xl',
     padding: 'p-4 sm:p-5',
     // Composite for convenience
-    default: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150 border border-white/50 shadow-lg ring-1 ring-white/30 rounded-xl p-4 sm:p-5',
+    default: 'bg-white border border-gray-200 shadow-sm rounded-xl p-4 sm:p-5',
   },
   button: {
     icon: 'w-9 h-9 rounded-full bg-light-bg flex items-center justify-center cursor-pointer',
@@ -84,7 +84,7 @@ export const components = {
     default: `w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#a259e6] focus:border-transparent ${colors.background.input} ${colors.text.main} ${colors.text.placeholder} text-sm transition-all outline-none`,
     search: `w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#a259e6] focus:border-transparent bg-white ${colors.text.main} ${colors.text.placeholder} text-sm transition-all outline-none`,
   },
-  glass: 'bg-gradient-to-br from-white/60 via-gray-200/40 to-gray-100/30 backdrop-blur-md backdrop-saturate-150 border border-white/60 shadow-xl ring-1 ring-white/40', // Mirror glass effect
+  glass: 'bg-white border border-gray-200 shadow-sm', // Clean white style (replacing glass)
 };
 
 export const THEME = {

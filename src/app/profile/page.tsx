@@ -18,7 +18,7 @@ import { THEME } from "@/styles/theme";
 export default function Page() {
   return (
     <ProfileLayout showSidebar={true} showStories={false} showJobSearchBar={false}>
-      <div className={`grid grid-cols-1 lg:grid-cols-3 ${THEME.layout.spacing.sm}`}>
+      <div className={`grid grid-cols-1 lg:grid-cols-3 ${THEME.layout.spacing.xl}`}>
         <div className={`lg:col-span-2 flex flex-col ${THEME.layout.spacing.sm}`}>
           <ProfileHeader />
           <ProfilePerformanceStats />
