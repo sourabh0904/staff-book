@@ -16,7 +16,8 @@ import {
   FiNavigation, 
   FiCalendar, 
   FiMessageCircle, 
-  FiUserPlus 
+  FiUserPlus,
+  FiFileText
 } from "react-icons/fi";
 import AppliedJobCard from '@/components/shared/AppliedJobCard';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -24,6 +25,7 @@ import { useAuth } from "@/context/AuthContext";
 import ProfileSidebar from "@/components/shared/ProfileSidebar";
 import { useSearchParams } from "next/navigation";
 import JobsContent from "./JobsContent";
+import ResumeContent from "@/components/profile/ResumeContent";
 import ProfileSubMenu from "@/components/shared/ProfileSubMenu";
 import ProfileLayout from "@/components/shared/ProfileLayout";
 import Card from "@/components/shared/Card";
@@ -34,6 +36,7 @@ import { THEME } from "@/styles/theme";
 const menuItems = [
   { icon: <FiSearch size={18} />, label: 'Find Jobs', key: 'browse' },
   { icon: <FiBriefcase size={18} />, label: 'Job Invites', key: 'applications' },
+  { icon: <FiFileText size={18} />, label: 'Resume & Portfolio', key: 'resume' },
 ];
 
 const inputLabels = [
@@ -167,16 +170,16 @@ function JobManagementContent() {
 
   // Seeker tabs (extended)
   const [activeTab, setActiveTab] = useState<
-    "applications" | "recommendations" | "saved" | "meetings" | "browse"
+    "applications" | "recommendations" | "saved" | "meetings" | "browse" | "resume"
   >(
-    searchParams.get("tab") as "applications" | "recommendations" | "saved" | "meetings" | "browse" || "browse"
+    searchParams.get("tab") as "applications" | "recommendations" | "saved" | "meetings" | "browse" | "resume" || "browse"
   );
 
   // Update activeTab when URL changes
   useEffect(() => {
     const tab = searchParams.get("tab");
     if (tab) {
-      setActiveTab(tab as "applications" | "recommendations" | "saved" | "meetings" | "browse");
+      setActiveTab(tab as "applications" | "recommendations" | "saved" | "meetings" | "browse" | "resume");
     }
   }, [searchParams]);
 
@@ -1067,6 +1070,10 @@ function JobManagementContent() {
 
 
             {/* Content based on active tab */}
+            {activeTab === 'resume' && (
+               <ResumeContent queryParam="resumeTab" />
+            )}
+
             {activeTab === "applications" && (
               <div className="space-y-6 mt-[4rem]">
                 <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">

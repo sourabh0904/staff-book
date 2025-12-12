@@ -337,7 +337,7 @@ export default function ProfileSidebar() {
           <div className="space-y-2">
             <span className="text-sm text-[#666] font-medium block mb-2">Profile Label</span>
             <div className="flex flex-col gap-2">
-              {['None', 'Job Seeking', 'Hiring'].map((label) => (
+              {(isEmployer ? ['None', 'Hiring'] : ['None', 'Job Seeking']).map((label) => (
                 <label key={label} className="flex items-center gap-2 cursor-pointer group">
                   <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                     profileLabel === label 

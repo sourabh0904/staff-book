@@ -5,6 +5,7 @@ import ProfileLayout from '@/components/shared/ProfileLayout';
 import ProfileSubMenu from '@/components/shared/ProfileSubMenu';
 import Card from '@/components/shared/Card';
 import ConnectButton from '@/components/shared/ConnectButton';
+import ManageJobsContent from '@/components/profile/ManageJobsContent';
 import { THEME } from '@/styles/theme';
 import {
   FiSearch,
@@ -174,6 +175,7 @@ const sentInvites = [
 const menuItems = [
   { icon: <FiMapPin size={18} />, label: 'Find Candidates', key: 'find-candidates' },
   { icon: <FiUserPlus size={18} />, label: 'Candidate Invite', key: 'invites' },
+  { icon: <FiBriefcase size={18} />, label: 'Manage Job Post', key: 'manage-jobs' },
 ];
 
 const inputLabels = [
@@ -675,6 +677,11 @@ export default function FindCandidatesPage() {
             </div>
           )}
 
+          {activeTab === 'manage-jobs' && (
+            <div className="mt-8">
+              <ManageJobsContent />
+            </div>
+          )}
 
 
 

@@ -96,10 +96,7 @@ const NetworkingLeftSidebar: React.FC = () => {
                 <FiBarChart2 className={`w-3.5 h-3.5 group-hover:text-indigo-300 transition-colors`} />
                 Profile Analytics
             </Link>
-            <Link href="/profile/resume" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-indigo-300 font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors group`}>
-                <FiFileText className={`w-3.5 h-3.5 group-hover:text-indigo-300 transition-colors`} />
-                Resume & Portfolio
-            </Link>
+
             <Link href="/subscription" className={`flex items-center gap-2 ${THEME.components.typography.meta} hover:text-indigo-300 font-medium p-2 hover:bg-gray-50 rounded-lg transition-colors group`}>
                 <FiCreditCard className={`w-3.5 h-3.5 group-hover:text-indigo-300 transition-colors`} />
                 My Subscriptions
@@ -155,7 +152,7 @@ const NetworkingLeftSidebar: React.FC = () => {
         <div className="space-y-2">
           <span className="text-sm text-[#666] font-medium block mb-2">Profile Label</span>
           <div className="flex flex-col gap-2">
-            {['None', 'Job Seeking', 'Hiring'].map((label) => (
+            {(isEmployer ? ['None', 'Hiring'] : ['None', 'Job Seeking']).map((label) => (
               <label key={label} className="flex items-center gap-2 cursor-pointer group">
                 <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                   profileLabel === label 

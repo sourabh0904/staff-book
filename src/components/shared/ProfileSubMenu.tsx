@@ -13,6 +13,8 @@ interface ProfileSubMenuProps {
   menuItems: MenuItem[];
   activeTab: string;
   onTabChange: (key: string) => void;
+  queryParam?: string;
+  variant?: 'primary' | 'secondary';
 }
 
 import { THEME } from "@/styles/theme";
@@ -21,6 +23,8 @@ export default function ProfileSubMenu({
   menuItems,
   activeTab,
   onTabChange,
+  queryParam = 'tab',
+  variant = 'primary',
 }: ProfileSubMenuProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -29,16 +33,20 @@ export default function ProfileSubMenu({
   const handleTabChange = (key: string) => {
     // Update URL with tab parameter
     const params = new URLSearchParams(searchParams.toString());
-    params.set('tab', key);
+    params.set(queryParam, key);
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
     
     // Also call the original onTabChange callback
     onTabChange(key);
   };
 
+  const containerClasses = variant === 'primary' 
+    ? `w-full bg-transparent py-0 md:py-2 relative mb-6 mt-0 md:mt-10 sticky top-[55px] md:top-[70px] z-40 transition-all duration-300`
+    : `w-full bg-transparent py-0 md:py-1 relative mb-4 mt-0 md:mt-4 z-30 transition-all duration-300`; // Secondary: less margin, not sticky
+
   return (
     <section
-      className={`w-full bg-transparent py-0 md:py-2 relative mb-6 mt-0 md:mt-10 sticky top-[55px] md:top-[70px] z-40 transition-all duration-300`}
+      className={containerClasses}
     >
       <div className="w-full md:max-w-[95%] mx-auto relative px-0">
         {/* Floating Menu */}
