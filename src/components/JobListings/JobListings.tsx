@@ -57,7 +57,7 @@ export default function JobListings() {
   const perPageOptions = [4, 8, 12, 16];
 
   return (
-    <div className="min-h-screen mt-16 bg-[#F7F7F8]">
+    <div className="min-h-screen mt-16 bg-[#f3f2ed]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Mobile Filter Toggle */}
         <div className="lg:hidden mb-6">

@@ -26,7 +26,7 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
   };
 
   return (
-    <nav className="hidden lg:flex items-center gap-8">
+    <nav className="hidden lg:flex items-center gap-6">
       {links.map((link) => (
         <div key={link.label} className="relative">
           {link.submenu ? (
@@ -34,14 +34,14 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
               <Button
                 variant="ghost"
                 onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
-                className={`text-black text-[16px] font-medium font-sans px-4 py-2 rounded-full transition-colors flex items-center gap-1 hover:bg-transparent ${
+                className={`text-black text-sm font-medium font-sans px-3 py-2 rounded-full transition-colors flex items-center gap-1 hover:bg-transparent ${
                   currentPath.includes(link.href)
                     ? "bg-light-bg text-black"
                     : "hover:text-primary"
                 }`}
               >
                 {link.label}
-                <FiChevronDown className={`transition-transform ${openDropdown === link.label ? 'rotate-180' : ''}`} />
+                <FiChevronDown className={`transition-transform w-4 h-4 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
               </Button>
               {openDropdown === link.label && (
                 <>
@@ -49,12 +49,12 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
                     className="fixed inset-0 z-[60]"
                     onClick={() => setOpenDropdown(null)}
                   />
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-[70]">
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-[70]">
                     {link.submenu.map((sublink) => (
                       <div key={sublink.label}>
                         {sublink.submenu ? (
                           <>
-                            <div className="px-4 py-2 text-black text-[14px] font-semibold border-b border-gray-100">
+                            <div className="px-4 py-2 text-gray-500 text-xs font-semibold uppercase tracking-wider bg-gray-50/50">
                               {sublink.label}
                             </div>
                             <div className="py-1">
@@ -62,7 +62,7 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
                                 <Link
                                   key={nestedLink.label}
                                   href={nestedLink.href}
-                                  className="flex items-center gap-2 px-6 py-2 text-black text-[13px] font-medium hover:bg-light-bg hover:text-primary transition-colors"
+                                  className="flex items-center gap-3 px-6 py-2 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:text-black transition-colors"
                                   onClick={() => setOpenDropdown(null)}
                                 >
                                   {getIcon(nestedLink.icon)}
@@ -74,7 +74,7 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
                         ) : (
                           <Link
                             href={sublink.href}
-                            className="flex items-center gap-2 px-4 py-2 text-black text-[14px] font-medium hover:bg-light-bg hover:text-primary transition-colors"
+                            className="flex items-center gap-3 px-4 py-2 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:text-black transition-colors"
                             onClick={() => setOpenDropdown(null)}
                           >
                             {getIcon(sublink.icon)}
@@ -90,7 +90,7 @@ const NavbarDesktop = ({ links, currentPath }: NavbarDesktopProps) => {
           ) : (
             <Link
               href={link.href}
-              className={`text-black text-[16px] font-medium font-sans px-4 py-2 rounded-full ${
+              className={`text-black text-sm font-medium font-sans px-3 py-2 rounded-full ${
                 link.href === currentPath
                   ? "bg-light-bg text-black"
                   : "hover:text-primary transition-colors"

@@ -26,7 +26,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
 
 
   return (
-    <div className="min-h-screen w-full bg-[#F7F7F8]">
+    <div className="min-h-screen w-full bg-[#f3f2ed]">
       <div className="max-w-7xl mx-auto pt-[90px] px-4 sm:px-6 lg:px-8">
 
 
@@ -45,7 +45,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
               ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
               lg:translate-x-0 lg:col-span-3 lg:block
               fixed lg:static top-[70px] left-0 h-[calc(100vh-70px)] lg:h-auto lg:z-0 z-50
-              w-80 lg:w-auto bg-[#F7F7F8] lg:bg-transparent shadow-lg lg:shadow-none
+              w-80 lg:w-auto bg-[#f3f2ed] lg:bg-transparent shadow-lg lg:shadow-none
               transition-transform duration-300 ease-in-out
               p-4 lg:p-0
             `}>

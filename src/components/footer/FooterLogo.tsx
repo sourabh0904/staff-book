@@ -3,7 +3,7 @@ import { SITE_CONFIG } from '@/constants/siteconfig';
 
 const FooterLogo = () => {
   return (
-    <div className="flex flex-col items-start gap-4 w-full md:w-[320px] lg:w-[420px]">
+    <div className="flex flex-col items-start gap-6 w-full">
       {/* Logo */}
       <Image
         src="/logo.png"

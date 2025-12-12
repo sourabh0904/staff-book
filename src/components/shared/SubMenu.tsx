@@ -15,7 +15,7 @@ export default function JobSearchBar({
   const router = useRouter();
   return (
     <section
-      className={`w-full  bg-[#F7F7F8] py-6 md:py-2 relative hidden md:block ${
+      className={`w-full  bg-transparent py-6 md:py-2 relative hidden md:block ${
         className ?? ""
       }`}
       style={bgColor ? { backgroundColor: bgColor } : undefined}

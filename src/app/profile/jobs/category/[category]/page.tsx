@@ -307,7 +307,7 @@ export default function JobCategoryPage() {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#F7F7F8]">
+    <div className="min-h-screen w-full bg-[#f3f2ed]">
       <div className="max-w-7xl mx-auto pt-[80px] px-4 sm:px-6 lg:px-8">
         <div className="flex gap-6 w-full">
         {/* Left Sidebar - 20% width to match main page */}

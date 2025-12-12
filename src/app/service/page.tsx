@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ServicePage() {
   return (
-    <div className="min-h-screen mt-16 bg-[#F7F7F8] flex items-center justify-center">
+    <div className="min-h-screen mt-16 bg-[#f3f2ed] flex items-center justify-center">
       <div className="text-center">
         <svg
           className="mx-auto h-16 w-16 text-gray-400"

@@ -20,7 +20,7 @@ export const colors = {
   border: 'border-gray-200',
   background: {
     card: 'bg-white',
-    page: 'bg-[#F7F7F8]',
+    page: 'bg-[#f3f2ed]',
     input: 'bg-[#f7f7fa]',
   }
 };
@@ -84,7 +84,7 @@ export const components = {
     default: `w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#a259e6] focus:border-transparent ${colors.background.input} ${colors.text.main} ${colors.text.placeholder} text-sm transition-all outline-none`,
     search: `w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#a259e6] focus:border-transparent bg-white ${colors.text.main} ${colors.text.placeholder} text-sm transition-all outline-none`,
   },
-  glass: 'bg-white border border-gray-200 shadow-sm', // Clean white style (replacing glass)
+  glass: 'bg-white/80 backdrop-blur-md border border-white/60 shadow-lg', // Restored glass effect
 };
 
 export const THEME = {

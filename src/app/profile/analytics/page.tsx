@@ -15,7 +15,7 @@ export default function ProfileAnalytics() {
       showStories={false}
       showJobSearchBar={false}
     >
-      <div className="min-h-screen bg-[#F7F7F8] p-4 md:p-6 -mt-[10px]">
+      <div className="min-h-screen bg-[#f3f2ed] p-4 md:p-6 -mt-[10px]">
         <div className="max-w-7xl mx-auto">
           <AnalyticsHeader />
           <MetricsGrid />
