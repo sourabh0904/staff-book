@@ -19,6 +19,7 @@ import {
   FiPlus,
   FiBarChart,
 } from "react-icons/fi";
+import ScrollableSection from "@/components/shared/ScrollableSection";
 
 interface ResumeVersion {
   id: string;
@@ -128,12 +129,19 @@ export default function ResumeContent({ queryParam = 'tab' }: ResumeContentProps
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <CreateResumeCard />
+          <ScrollableSection>
+            <div className="flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:snap-align-none">
+              <CreateResumeCard />
+            </div>
             {resumeVersions.map((resume) => (
-              <ResumeVersionCard key={resume.id} resume={resume} />
+              <div 
+                key={resume.id} 
+                className="flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:snap-align-none"
+              >
+                <ResumeVersionCard resume={resume} />
+              </div>
             ))}
-          </div>
+          </ScrollableSection>
         </div>
       )}
 

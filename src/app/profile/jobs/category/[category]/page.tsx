@@ -834,11 +834,11 @@ export default function JobCategoryPage() {
                 {paginatedJobs.map((job) => (
                   <div
                     key={job.id}
-                    className="bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+                    className="bg-white h-full rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col group"
                   >
                     <Link
                       href={`/profile/jobs/${job.id}`}
-                      className="block relative group/card"
+                      className="block relative flex-1 flex flex-col group/card"
                     >
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center pointer-events-none">
                         <div className="bg-white px-6 py-3 rounded-full flex items-center gap-2 transform scale-90 group-hover/card:scale-100 transition-transform duration-300">
@@ -908,7 +908,7 @@ export default function JobCategoryPage() {
                         </div>
                       </div>
 
-                      <div className="px-4 pb-4">
+                      <div className="px-4 pb-4 flex-1">
                         <div className="mb-2">
                           <h4 className="text-lg font-bold text-[#222] mb-1">
                             {job.position}
@@ -959,7 +959,7 @@ export default function JobCategoryPage() {
                       </div>
                     </Link>
 
-                    <div className="px-4 pb-4 flex items-center gap-2 relative z-20">
+                    <div className="px-4 pb-6 flex items-center gap-2 relative z-20">
                       <button
                         className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors group/save relative"
                         title="Save the job"

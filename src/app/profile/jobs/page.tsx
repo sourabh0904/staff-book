@@ -12,6 +12,8 @@ import {
   FiFilter, 
   FiBookmark, 
   FiChevronRight, 
+  FiChevronLeft,
+  FiChevronDown,
   FiEye, 
   FiNavigation, 
   FiCalendar, 
@@ -666,7 +668,7 @@ function JobManagementContent() {
     <ProfileLayout showSidebar={true} showStories={false} showJobSearchBar={false}>
     <div className={`profile-page min-h-screen ${THEME.colors.background.page} pt-4 md:pt-6 lg:pt-8 -mt-[30px]`}>
       <div className="flex gap-6 w-full px-6">
-        <div className="w-[80%] flex-1">
+        <div className="w-full flex-1">
         {/* Enhanced Breadcrumb */}
         {/* Enhanced Breadcrumb */}
         {/* <Card className="mb-6 p-4 shadow-sm border border-gray-100" noPadding>
@@ -1094,24 +1096,41 @@ function JobManagementContent() {
 
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <ScrollableSection>
                   {applications.map((app) => (
-                    <JobInviteCard
-                      key={app.id}
-                      companyName={app.company}
-                      companyLogo={app.logo} // Note: app.logo is currently a string (e.g., "G"), might need adjustment if it expects a URL
-                      distance="2.5 km away" // Mock data for now
-                      jobTitle={app.position}
-                      workType="Work from office" // Mock data
-                      jobType="Both" // Mock data
-                      location={app.location}
-                      salary={app.salary}
-                      onAccept={() => console.log("Accepted", app.id)}
-                      onDecline={() => console.log("Declined", app.id)}
-                      onSave={() => handleSaveApplication(app)}
-                    />
+                    <div 
+                      key={app.id} 
+                      className="flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:snap-align-none"
+                    >
+                      <JobInviteCard
+                        companyName={app.company}
+                        companyLogo={app.logo} // Note: app.logo is currently a string (e.g., "G"), might need adjustment if it expects a URL
+                        distance="2.5 km away" // Mock data for now
+                        jobTitle={app.position}
+                        workType="Work from office" // Mock data
+                        jobType="Both" // Mock data
+                        location={app.location}
+                        salary={app.salary}
+                        onAccept={() => console.log("Accepted", app.id)}
+                        onDecline={() => console.log("Declined", app.id)}
+                        onSave={() => handleSaveApplication(app)}
+                      />
+                    </div>
                   ))}
-                </div>
+                  
+                  {/* See More Card */}
+                  <div className={`flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:hidden bg-gradient-to-br from-purple-50 to-white rounded-[1.25rem] shadow-sm border border-purple-100 flex items-center justify-center group cursor-pointer hover:shadow-md transition-all`}>
+                    <button 
+                      className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <FiChevronRight size={32} className={`text-[${THEME.colors.primary}]`} />
+                      </div>
+                      <h3 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>See All</h3>
+                      <p className={`text-sm ${THEME.colors.text.body}`}>View all applications</p>
+                    </button>
+                  </div>
+                </ScrollableSection>
 
               {/* Applied Jobs Section */}
               <div className="space-y-6">
@@ -1122,49 +1141,66 @@ function JobManagementContent() {
                   {/* <p className="text-gray-500 text-sm">Track your application status and recruiter activity</p> */}
                 </div>
                 
-                <div className="flex flex-col gap-4">
-                   <AppliedJobCard 
-                      recruiter={{
-                        name: "Rajesh Kumar",
-                        company: "TechCorp",
-                        avatar: "R",
-                        email: "rajesh.kumar@techcorp.com"
-                      }}
-                      job={{
-                        title: "Senior Frontend Developer",
-                        appliedDate: "Jan 15, 2024"
-                      }}
-                      timeline={[
-                        { title: "Profile Screening", date: "Jan 16, 2024" },
-                        { title: "Resume Downloaded", date: "Jan 17, 2024" },
-                        { title: "Viewed Phone Number", date: "Jan 18, 2024" },
-                        { title: "Shortlisted", date: "Jan 20, 2024" },
-                        { title: "Schedule Meet", date: "Jan 22, 2024 at 3:00 PM", isCurrent: true },
-                      ]}
-                      onWithdraw={() => console.log("Withdraw")}
-                      onContactPhone={() => console.log("Phone")}
-                   />
+                <ScrollableSection desktopLayout="list">
+                   {/* Wrapping manual items in divs for correct sizing */}
+                   <div className="flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:snap-align-none w-full">
+                     <AppliedJobCard 
+                        recruiter={{
+                          name: "Rajesh Kumar",
+                          company: "TechCorp",
+                          avatar: "R",
+                          email: "rajesh.kumar@techcorp.com"
+                        }}
+                        job={{
+                          title: "Senior Frontend Developer",
+                          appliedDate: "Jan 15, 2024"
+                        }}
+                        timeline={[
+                          { title: "Profile Screening", date: "Jan 16, 2024" },
+                          { title: "Resume Downloaded", date: "Jan 17, 2024" },
+                          { title: "Viewed Phone Number", date: "Jan 18, 2024" },
+                          { title: "Shortlisted", date: "Jan 20, 2024" },
+                          { title: "Schedule Meet", date: "Jan 22, 2024 at 3:00 PM", isCurrent: true },
+                        ]}
+                        onWithdraw={() => console.log("Withdraw")}
+                        onContactPhone={() => console.log("Phone")}
+                     />
+                   </div>
                    
-                   {/* Example of another card to show grid layout */}
-                   <AppliedJobCard 
-                      recruiter={{
-                        name: "Sarah Smith",
-                        company: "DesignStudio",
-                        avatar: "S",
-                        email: "sarah@designstudio.com"
-                      }}
-                      job={{
-                        title: "Lead UI/UX Designer",
-                        appliedDate: "Feb 01, 2024"
-                      }}
-                      timeline={[
-                        { title: "Profile Screening", date: "Feb 02, 2024" },
-                        { title: "Resume Downloaded", date: "Feb 03, 2024", isCurrent: true },
-                      ]}
-                      onWithdraw={() => console.log("Withdraw")}
-                      onContactPhone={() => console.log("Phone")}
-                   />
-                </div>
+                   <div className="flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:snap-align-none w-full">
+                     <AppliedJobCard 
+                        recruiter={{
+                          name: "Sarah Smith",
+                          company: "DesignStudio",
+                          avatar: "S",
+                          email: "sarah@designstudio.com"
+                        }}
+                        job={{
+                          title: "Lead UI/UX Designer",
+                          appliedDate: "Feb 01, 2024"
+                        }}
+                        timeline={[
+                          { title: "Profile Screening", date: "Feb 02, 2024" },
+                          { title: "Resume Downloaded", date: "Feb 03, 2024", isCurrent: true },
+                        ]}
+                        onWithdraw={() => console.log("Withdraw")}
+                        onContactPhone={() => console.log("Phone")}
+                     />
+                   </div>
+
+                   {/* See More Card */}
+                   <div className={`flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:hidden bg-gradient-to-br from-purple-50 to-white rounded-[1.25rem] shadow-sm border border-purple-100 flex items-center justify-center group cursor-pointer hover:shadow-md transition-all`}>
+                    <button 
+                      className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <FiChevronRight size={32} className={`text-[${THEME.colors.primary}]`} />
+                      </div>
+                      <h3 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>See All</h3>
+                      <p className={`text-sm ${THEME.colors.text.body}`}>View all applied jobs</p>
+                    </button>
+                  </div>
+                </ScrollableSection>
               </div>
 
               {/* Saved Jobs Section */}
@@ -1173,24 +1209,42 @@ function JobManagementContent() {
                   Saved Jobs
                 </h2>
                 {savedJobs.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <ScrollableSection>
                     {savedJobs.map((job) => (
-                      <JobInviteCard
-                        key={job.id}
-                        companyName={job.company}
-                        companyLogo={job.logo}
-                        distance={`${job.distance || 0} km away`}
-                        jobTitle={job.position}
-                        workType="Work from office"
-                        jobType={job.type}
-                        location={job.location}
-                        salary={job.salary}
-                        primaryActionLabel="Apply Now"
-                        onAccept={() => applyFromRecommendation(job)}
-                        onSave={() => removeSavedJob(job.id)}
-                      />
+                      <div 
+                        key={job.id} 
+                        className="flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:snap-align-none"
+                      >
+                        <JobInviteCard
+                          companyName={job.company}
+                          companyLogo={job.logo}
+                          distance={`${job.distance || 0} km away`}
+                          jobTitle={job.position}
+                          workType="Work from office"
+                          jobType={job.type}
+                          location={job.location}
+                          salary={job.salary}
+                          primaryActionLabel="Apply Now"
+                          onAccept={() => applyFromRecommendation(job)}
+                          onSave={() => removeSavedJob(job.id)}
+                        />
+                      </div>
                     ))}
-                  </div>
+                    
+                    {/* See More Card */}
+                    <div className={`flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:hidden bg-gradient-to-br from-purple-50 to-white rounded-[1.25rem] shadow-sm border border-purple-100 flex items-center justify-center group cursor-pointer hover:shadow-md transition-all`}>
+                      <button 
+                         onClick={() => setActiveTab('saved')} // Link to the main Saved tab
+                        className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
+                      >
+                        <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <FiChevronRight size={32} className={`text-[${THEME.colors.primary}]`} />
+                        </div>
+                        <h3 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>See All</h3>
+                        <p className={`text-sm ${THEME.colors.text.body}`}>View all saved jobs</p>
+                      </button>
+                    </div>
+                  </ScrollableSection>
                 ) : (
                   <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
                     <div className={`w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} text-white flex items-center justify-center`}>
@@ -1602,12 +1656,12 @@ function JobManagementContent() {
                     </Link>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <ScrollableSection>
                     {postings.map((p) => (
-                      <div
-                        key={`skill-${p.id}`}
-                        className={`bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border ${THEME.colors.border}`}
-                      >
+                      <div 
+                      key={p.id} 
+                      className="flex-shrink-0 min-w-[85vw] sm:min-w-[380px] md:min-w-0 w-full h-full snap-center md:snap-align-none bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col group"
+                    >
                         <Link
                           href={`/profile/jobs/${p.id}`}
                           className="block relative group/card"
@@ -1712,7 +1766,7 @@ function JobManagementContent() {
                           </div>
                         </Link>
 
-                        <div className="px-4 pb-4 flex items-center gap-2 relative z-20">
+                        <div className="px-4 pb-6 flex items-center gap-2 relative z-20">
                           <button 
                             className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors group/save relative"
                             onClick={() => saveJob(p as any)}
@@ -1732,7 +1786,21 @@ function JobManagementContent() {
                         </div>
                       </div>
                     ))}
-                  </div>
+                    
+                    {/* See More Card */}
+                    <div className={`flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:hidden bg-gradient-to-br from-purple-50 to-white rounded-[1.25rem] shadow-sm border border-purple-100 flex items-center justify-center group cursor-pointer hover:shadow-md transition-all`}>
+                      <Link 
+                        href="/profile/jobs/category/skills-match"
+                        className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
+                      >
+                        <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <FiChevronRight size={32} className={`text-[${THEME.colors.primary}]`} />
+                        </div>
+                        <h3 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>See All Jobs</h3>
+                        <p className={`text-sm ${THEME.colors.text.body}`}>View all matching jobs</p>
+                      </Link>
+                    </div>
+                  </ScrollableSection>
                 </div>
 
                 {/* Recently Posted Jobs Section */}
@@ -1750,11 +1818,11 @@ function JobManagementContent() {
                     </Link>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <ScrollableSection>
                     {postings.map((p) => (
                       <div
                         key={`recent-${p.id}`}
-                        className={`bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border ${THEME.colors.border}`}
+                        className={`flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border ${THEME.colors.border}`}
                       >
                         <Link
                           href={`/profile/jobs/${p.id}`}
@@ -1860,7 +1928,7 @@ function JobManagementContent() {
                           </div>
                         </Link>
 
-                        <div className="px-4 pb-4 flex items-center gap-2 relative z-20">
+                        <div className="px-4 pb-6 flex items-center gap-2 relative z-20">
                           <button 
                             className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors group/save relative"
                             onClick={() => saveJob(p as any)}
@@ -1880,7 +1948,21 @@ function JobManagementContent() {
                         </div>
                       </div>
                     ))}
-                  </div>
+
+                    {/* See More Card */}
+                    <div className={`flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:hidden bg-gradient-to-br from-purple-50 to-white rounded-[1.25rem] shadow-sm border border-purple-100 flex items-center justify-center group cursor-pointer hover:shadow-md transition-all`}>
+                      <Link 
+                        href="/profile/jobs/category/recent"
+                        className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
+                      >
+                        <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <FiChevronRight size={32} className={`text-[${THEME.colors.primary}]`} />
+                        </div>
+                        <h3 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>See All Jobs</h3>
+                        <p className={`text-sm ${THEME.colors.text.body}`}>View all recent jobs</p>
+                      </Link>
+                    </div>
+                  </ScrollableSection>
                 </div>
               </div>
             )}
@@ -1892,6 +1974,10 @@ function JobManagementContent() {
   </ProfileLayout>
   );
 }
+
+// Reusable Scrollable Section Wrapper - Removed local definition in favor of shared component
+import ScrollableSection from "@/components/shared/ScrollableSection";
+
 
 // Nearby Jobs Map View Component
 function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
@@ -1983,19 +2069,19 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ScrollableSection>
             {filteredJobs.map((job) => (
               <div
                 key={job.id}
-                className={`bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border ${THEME.colors.border} group`}
+                className="flex-shrink-0 min-w-[85vw] sm:min-w-[380px] md:min-w-0 w-full h-full snap-center md:snap-align-none bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col group"
               >
                 {/* Clickable Card Content Area */}
                 <Link
                   href={`/profile/jobs/${job.id}`}
-                  className="block relative"
+                  className="block relative flex-1 flex flex-col"
                 >
                   {/* Header with Profile */}
-                  <div className="p-4 pb-3 flex flex-col gap-3">
+                  <div className="p-3 pb-2 flex flex-col gap-2">
                     <div className="flex items-center gap-3">
                       {/* Profile Image with Online Status */}
                       <div className="relative">
@@ -2047,16 +2133,16 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
                   </div>
 
                   {/* Company Logo Section - Smaller */}
-                  <div className="px-4 py-2">
-                    <div className="w-full h-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center border border-gray-100">
-                      <div className={`text-2xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
+                  <div className="px-3 py-1">
+                    <div className="w-full h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center border border-gray-100">
+                      <div className={`text-xl font-bold bg-gradient-to-r ${THEME.colors.gradient.start} ${THEME.colors.gradient.end} bg-clip-text text-transparent`}>
                         {job.company.charAt(0)}
                       </div>
                     </div>
                   </div>
 
                   {/* Job Details */}
-                  <div className="px-4 pb-4">
+                  <div className="px-3 pb-3 flex-1">
                     <div className="mb-2">
                       <h4 className={`text-base font-bold ${THEME.colors.text.heading} mb-0.5 truncate`}>
                         {job.position}
@@ -2067,7 +2153,7 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
                     </div>
 
                     {/* Job Info */}
-                    <div className={`space-y-1.5 mt-3 text-xs ${THEME.colors.text.body}`}>
+                    <div className={`space-y-1.5 mt-2 text-xs ${THEME.colors.text.body}`}>
                       <div className="flex items-center gap-2">
                         <FiBriefcase size={12} className="text-gray-400" />
                         <span>{job.workMode || "Work from office"} • {job.experienceLevel || "Both"}</span>
@@ -2087,7 +2173,8 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
                 </Link>
 
                 {/* Apply Button Row */}
-                <div className="px-4 pb-4 flex items-center gap-2 relative z-20 border-t border-gray-50 pt-3 mt-1">
+                {/* Apply Button Row */}
+                <div className="px-3 pb-5 flex items-center gap-2 relative z-20 border-t border-gray-50 pt-3 mt-auto">
                   <button 
                     className="w-9 h-9 flex items-center justify-center bg-light-bg hover:bg-[#E5E3FF] rounded-lg transition-colors group/save relative"
                   >
@@ -2095,14 +2182,28 @@ function NearbyJobsMapView({ postings }: { postings: EmployerPosting[] }) {
                   </button>
                   <button
                     onClick={() => handleApply(job)}
-                    className={`${THEME.components.button.primary} flex-1`}
+                    className={`${THEME.components.button.primary} flex-1 !py-0 h-9 flex items-center justify-center text-sm`}
                   >
                     Apply Now
                   </button>
                 </div>
               </div>
             ))}
-          </div>
+
+            {/* See More Card - For Nearby Jobs we can either link to map or hide it. Linking to map view toggler for now or leaving empty if no specific 'all' page exists. The user asked for "See More" at end of scroll. Let's redirect to map view for "See More" context or just a general jobs link. Given specific category page doesn't exist, I will use a simple "View on Map" action effectively. */}
+            <div className={`flex-shrink-0 min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center md:hidden bg-gradient-to-br from-purple-50 to-white rounded-[1.25rem] shadow-sm border border-purple-100 flex items-center justify-center group cursor-pointer hover:shadow-md transition-all`}>
+              <button 
+                onClick={() => setViewMode("map")}
+                className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <FiMapPin size={32} className={`text-[${THEME.colors.primary}]`} />
+                </div>
+                <h3 className={`text-lg font-bold ${THEME.colors.text.heading} mb-1`}>View on Map</h3>
+                <p className={`text-sm ${THEME.colors.text.body}`}>Explore jobs in map view</p>
+              </button>
+            </div>
+          </ScrollableSection>
         )}
       </div>
     </Card>

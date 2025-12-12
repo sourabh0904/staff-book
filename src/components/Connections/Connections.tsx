@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FiCheck, FiX, FiUserPlus, FiUserMinus, FiUsers, FiSearch, FiMessageCircle, FiMoreHorizontal, FiChevronDown, FiFilter } from 'react-icons/fi';
 import { THEME } from '@/styles/theme';
@@ -198,18 +198,19 @@ const Connections: React.FC = () => {
           />
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <ScrollableSection>
               {requests.slice(0, showAllRequests ? undefined : INITIAL_DISPLAY_COUNT).map((request) => (
-                <RequestCard
-                  key={request.id}
-                  request={request}
-                  onAccept={handleAccept}
-                  onIgnore={handleIgnore}
-                />
+                <div key={request.id} className="min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center">
+                  <RequestCard
+                    request={request}
+                    onAccept={handleAccept}
+                    onIgnore={handleIgnore}
+                  />
+                </div>
               ))}
-            </div>
+            </ScrollableSection>
             {requests.length > INITIAL_DISPLAY_COUNT && (
-              <div className="flex justify-center">
+              <div className="flex justify-center hidden md:flex">
                 <button
                   onClick={() => setShowAllRequests(!showAllRequests)}
                   className="text-sm font-medium text-purple-600 hover:text-purple-700 flex items-center gap-1"
@@ -236,17 +237,18 @@ const Connections: React.FC = () => {
           />
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <ScrollableSection>
               {sent.slice(0, showAllSent ? undefined : INITIAL_DISPLAY_COUNT).map((request) => (
-                <SentRequestCard
-                  key={request.id}
-                  request={request}
-                  onWithdraw={handleWithdraw}
-                />
+                <div key={request.id} className="min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center">
+                  <SentRequestCard
+                    request={request}
+                    onWithdraw={handleWithdraw}
+                  />
+                </div>
               ))}
-            </div>
+            </ScrollableSection>
             {sent.length > INITIAL_DISPLAY_COUNT && (
-              <div className="flex justify-center">
+              <div className="flex justify-center hidden md:flex">
                 <button
                   onClick={() => setShowAllSent(!showAllSent)}
                   className="text-sm font-medium text-purple-600 hover:text-purple-700 flex items-center gap-1"
@@ -265,17 +267,18 @@ const Connections: React.FC = () => {
         <h2 className={THEME.components.typography.sectionTitle}>
           People You May Know
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <ScrollableSection>
           {suggestions.slice(0, showAllSuggestions ? undefined : INITIAL_DISPLAY_COUNT).map((person) => (
-            <SuggestionCard
-              key={person.id}
-              person={person}
-              onConnect={handleConnect}
-            />
+            <div key={person.id} className="min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center">
+              <SuggestionCard
+                person={person}
+                onConnect={handleConnect}
+              />
+            </div>
           ))}
-        </div>
+        </ScrollableSection>
         {suggestions.length > INITIAL_DISPLAY_COUNT && (
-          <div className="flex justify-center">
+          <div className="flex justify-center hidden md:flex">
             <button
               onClick={() => setShowAllSuggestions(!showAllSuggestions)}
               className="text-sm font-medium text-purple-600 hover:text-purple-700 flex items-center gap-1"
@@ -497,5 +500,13 @@ const SentRequestCard: React.FC<{
     </div>
   );
 };
+
+// Reusable Scrollable Section Wrapper
+
+import ScrollableSection from "@/components/shared/ScrollableSection";
+
+// Reusable Scrollable Section Wrapper - Removed local definition
+
+
 
 export default Connections;
