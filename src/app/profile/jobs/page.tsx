@@ -35,7 +35,7 @@ import { THEME } from "@/styles/theme";
 
 const menuItems = [
   { icon: <FiSearch size={18} />, label: 'Find Jobs', key: 'browse' },
-  { icon: <FiBriefcase size={18} />, label: 'Job Invites', key: 'applications' },
+  { icon: <FiBriefcase size={18} />, label: 'Recruiters Interest', key: 'applications' },
   { icon: <FiFileText size={18} />, label: 'Resume & Portfolio', key: 'resume' },
 ];
 

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef } from "react";
-import { FiMenu, FiX, FiBell, FiMessageSquare, FiCalendar, FiMoreVertical, FiSearch } from "react-icons/fi";
+import { FiMenu, FiX, FiBell, FiMessageSquare, FiCalendar, FiMoreVertical, FiSearch, FiChevronDown, FiUser, FiBriefcase } from "react-icons/fi";
 import { LOGGED_IN_LINKS, SITE_CONFIG } from "../constants/siteconfig";
 import GradientButton from "./shared/GradientButton";
 import { useAuth } from "../context/AuthContext";
@@ -134,11 +134,48 @@ const Navbar = () => {
           ) : (
             <div className="hidden lg:flex items-center gap-6">
               <NavbarDesktop links={navLinks} currentPath={path} />
-              <Link key={"signup"} href={"/signup"}>
-                <GradientButton className="w-[100px] h-[40px] ml-2 text-sm font-medium font-sans">
-                  {signUpText}
-                </GradientButton>
-              </Link>
+              
+              {/* Signup Dropdown */}
+              <div className="relative group ml-2">
+                <button className="relative">
+                  <div className={`${THEME.components.button.primary} w-[120px] h-[40px] !p-0 text-sm font-medium flex items-center justify-center gap-1 group-hover:shadow-lg`}>
+                    {signUpText}
+                    <FiChevronDown className="transition-transform group-hover:rotate-180" />
+                  </div>
+                </button>
+
+                {/* Dropdown Menu */}
+                <div className="absolute top-full right-0 w-52 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2 z-50">
+                  <div className={`bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden ${THEME.components.card.radius}`}>
+                    <div className="p-1">
+                      <Link 
+                        href="/signup?role=job-seeker"
+                        className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 rounded-lg transition-colors"
+                      >
+                        <div className="p-2 bg-indigo-50 rounded-lg text-indigo-600">
+                          <FiUser size={16} />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Job Seeker</div>
+                          <div className="text-xs text-gray-500 font-normal">Find your dream job</div>
+                        </div>
+                      </Link>
+                      <Link 
+                        href="/signup?role=employer"
+                        className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-purple-600 rounded-lg transition-colors"
+                      >
+                         <div className="p-2 bg-purple-50 rounded-lg text-purple-600">
+                          <FiBriefcase size={16} />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Employer</div>
+                          <div className="text-xs text-gray-500 font-normal">Hire top talent</div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 

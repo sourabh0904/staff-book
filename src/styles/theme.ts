@@ -4,8 +4,8 @@ export const colors = {
   gradient: {
     start: '#a5b4fc',
     end: '#d8b4fe',
-    sky: 'from-theme-bg-start to-theme-bg-end', // Theme gradient (Centralized)
-    light: 'from-light-bg to-light-bg', // Light purple gradient
+    sky: 'from-indigo-300 to-purple-300', // Theme gradient (Centralized)
+    light: 'from-purple-50 to-purple-50', // Light purple gradient
   },
   text: {
     main: 'text-gray-900', // Default for headings
@@ -55,7 +55,7 @@ export const components = {
   button: {
     icon: 'w-9 h-9 rounded-full bg-light-bg flex items-center justify-center cursor-pointer',
     iconSmall: 'w-8 h-8 rounded-full bg-light-bg flex items-center justify-center cursor-pointer',
-    primary: 'font-semibold py-2 px-6 rounded-full transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-opacity-50 shadow-lg hover:shadow-xl text-white bg-gradient-to-r from-indigo-300 to-purple-300 hover:from-indigo-400 hover:to-purple-400 focus:ring-indigo-100',
+    primary: 'font-semibold py-2 px-6 rounded-full transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-opacity-50 shadow-lg hover:shadow-xl text-white bg-purple-700 hover:bg-purple-800 focus:ring-purple-400',
     secondary: 'bg-purple-100 text-purple-700 hover:bg-purple-200 rounded-lg font-medium transition-colors',
     outline: 'border border-gray-200 bg-transparent hover:bg-gray-50 text-gray-700 rounded-lg font-medium transition-colors',
     ghost: 'bg-transparent hover:bg-gray-100 text-gray-700 rounded-lg font-medium transition-colors',
@@ -73,7 +73,7 @@ export const components = {
     cardTitle: `font-semibold ${colors.text.heading} text-base`,
     subheading: `font-medium ${colors.text.subheading} text-sm`,
     body: `text-sm ${colors.text.body}`,
-    caption: `text-xs ${colors.text.muted}`, // Added caption
+    caption: `text-xs ${colors.text.muted}`, 
     meta: `text-xs ${colors.text.muted}`,
     link: `text-sm ${colors.text.link} hover:underline`,
   },
