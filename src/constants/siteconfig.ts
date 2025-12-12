@@ -1,4 +1,5 @@
 export const SITE_CONFIG = {
+  name: 'Staff Book',
   homepage: {
     heroTitle: 'India First AI-Powered Job Portal with Real-Time Hiring Near You.',
     heroHighlight: 'Job Portal',
