@@ -58,7 +58,7 @@ const NetworkingLeftSidebar: React.FC = () => {
   const progress = calculateProgress();
 
   return (
-    <div className="flex flex-col gap-2 pb-4">
+    <div className="flex flex-col gap-2 pb-28 lg:pb-4">
       {/* Profile Card */}
       <div className={`${THEME.components.card.default} overflow-hidden relative p-0`}>
         {/* Cover Image */}

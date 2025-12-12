@@ -92,7 +92,7 @@ const NavbarMobile = ({
           
           {/* Main Navigation Links */}
           <div className="space-y-2">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Menu</h3>
+
             {links.map((link) => (
               <div key={link.label} className="group">
                 {link.submenu ? (

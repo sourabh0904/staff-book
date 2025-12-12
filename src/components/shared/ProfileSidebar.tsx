@@ -237,7 +237,7 @@ export default function ProfileSidebar() {
       </div>
 
       {/* Sidebar Menu with Sections and Submenus */}
-      <div className="flex-1 w-full pb-4">
+      <div className="flex-1 w-full pb-28 lg:pb-4">
         <nav className="w-full font-Montserrat">
           {menuSections.map((section, index) => (
             <div key={section.id} className="mb-3">

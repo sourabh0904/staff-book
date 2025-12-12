@@ -209,7 +209,7 @@ const Navbar = () => {
       <NavbarMobile 
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
-        links={user ? filteredLinks : navLinks}
+        links={(user ? filteredLinks : navLinks).filter(link => !['Networking', 'Jobs', 'My Connections', 'Services'].includes(link.label))}
         user={user}
         signUpText={signUpText}
         onNotificationsClick={() => setNotificationsOpen(true)}

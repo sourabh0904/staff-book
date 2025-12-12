@@ -7,6 +7,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import ClientLayout from "./ClientLayout";
 import MessageWidget from '@/components/shared/MessageWidget';
 import ChatbotWidget from '@/components/shared/ChatbotWidget';
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,12 +37,13 @@ export default function RootLayout({
         <AuthProvider>
           <Navbar />
           {/* <main className={`pb-24 bg-gradient-to-br ${THEME.colors.gradient.sky} min-h-screen`}></main> */}
-          <main className="pb-24 min-h-screen">
+          <main className="min-h-screen">
             {children}
           </main>
           <Footer />
           <MessageWidget />
           <ChatbotWidget />
+          <MobileBottomNav />
         </AuthProvider>
       </body>
     </html>

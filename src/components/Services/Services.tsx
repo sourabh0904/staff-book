@@ -94,16 +94,17 @@ export default function Services() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4 md:mx-0 md:px-0">
             {services.recruiterPlans.plans.map((plan, index) => (
-              <ServiceCard
-                key={index}
-                title={plan.title}
-                features={plan.features}
-                price={plan.price}
-                image={plan.image}
-                popular={plan.popular}
-              />
+              <div key={index} className="min-w-[85vw] sm:min-w-[350px] md:min-w-0 snap-center h-full">
+                <ServiceCard
+                  title={plan.title}
+                  features={plan.features}
+                  price={plan.price}
+                  image={plan.image}
+                  popular={plan.popular}
+                />
+              </div>
             ))}
           </div>
         </section>
@@ -121,32 +122,34 @@ export default function Services() {
                 </p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4 md:mx-0 md:px-0">
                 {services.jobSeekerPlans.plans.map((plan, index) => (
-                  <ServiceCard
-                    key={index}
-                    title={plan.title}
-                    features={plan.features}
-                    price={plan.price}
-                    image={plan.image}
-                    popular={plan.popular}
-                  />
+                  <div key={index} className="min-w-[85vw] sm:min-w-[350px] md:min-w-0 snap-center h-full">
+                    <ServiceCard
+                      title={plan.title}
+                      features={plan.features}
+                      price={plan.price}
+                      image={plan.image}
+                      popular={plan.popular}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
 
             {/* Additional Plans */}
             <div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4 md:mx-0 md:px-0">
                 {services.additionalPlans.plans.map((plan, index) => (
-                  <ServiceCard
-                    key={index}
-                    title={plan.title}
-                    features={plan.features}
-                    price={plan.price}
-                    image={plan.image}
-                    popular={plan.popular}
-                  />
+                  <div key={index} className="min-w-[85vw] sm:min-w-[350px] md:min-w-0 snap-center h-full">
+                    <ServiceCard
+                      title={plan.title}
+                      features={plan.features}
+                      price={plan.price}
+                      image={plan.image}
+                      popular={plan.popular}
+                    />
+                  </div>
                 ))}
               </div>
             </div>

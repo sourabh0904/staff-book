@@ -4,7 +4,7 @@ import FooterContact from './footer/FooterContact';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#f3f2ed] border-t border-gray-200 py-12 md:py-16">
+    <footer className="w-full bg-[#f3f2ed] border-t border-gray-200 pt-12 pb-28 lg:py-16">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Column 1: Logo & Branding */}

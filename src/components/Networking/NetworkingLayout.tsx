@@ -22,7 +22,7 @@ const NetworkingLayout: React.FC = () => {
 
       {/* Mobile Right Sidebar Container */}
       <div className={`
-        lg:hidden fixed top-[70px] bottom-0 right-0 z-40 w-80 bg-[#f3f2ed] shadow-xl transform transition-transform duration-300 ease-in-out
+        lg:hidden fixed top-[70px] bottom-[72px] right-0 z-40 w-80 bg-[#f3f2ed] shadow-xl transform transition-transform duration-300 ease-in-out
         ${isRightSidebarOpen ? 'translate-x-0' : 'translate-x-full'}
         px-4 pt-4
       `}>
