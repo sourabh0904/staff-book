@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../context/AuthContext';
-import { FiUser, FiFileText, FiCreditCard, FiBarChart2 } from 'react-icons/fi';
+import { FiUser, FiFileText, FiCreditCard, FiBarChart2, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { THEME } from '../../styles/theme';
 import EmployerVerificationModal from '../shared/EmployerVerificationModal';
 
@@ -14,6 +14,10 @@ const NetworkingLeftSidebar: React.FC = () => {
   const [isOnline, setIsOnline] = useState(true);
   const [profileLabel, setProfileLabel] = useState<'None' | 'Job Seeking' | 'Hiring'>('None');
   const [showVerificationModal, setShowVerificationModal] = useState(false);
+  
+  // Accordion State
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isSubscriptionsOpen, setIsSubscriptionsOpen] = useState(false);
 
   const handleEmployerSwitch = () => {
     if (!isEmployer) {
@@ -161,110 +165,130 @@ const NetworkingLeftSidebar: React.FC = () => {
 
       {/* Profile Display Settings */}
       <div className={`${THEME.components.card.default} p-4`}>
-        <h3 className="text-sm font-bold text-[#222] mb-4">Profile Display Settings</h3>
+        <button 
+          onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+          className="w-full flex items-center justify-between group"
+        >
+          <h3 className="text-sm font-bold text-[#222]">Profile Display Settings</h3>
+          {isSettingsOpen ? <FiChevronUp className="text-gray-400" /> : <FiChevronDown className="text-gray-400" />}
+        </button>
         
-        {/* Switch to Employer */}
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm text-[#666] font-medium">Switch to Employer</span>
-          <button
-            onClick={handleEmployerSwitch}
-            className={`p-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
-              isEmployer 
-                ? 'bg-gradient-to-r from-indigo-300 to-purple-300 ring-2 ring-purple-100' 
-                : 'bg-gradient-to-r from-gray-200 to-gray-300 hover:from-indigo-300 hover:to-purple-300'
-            }`}
-            title={isEmployer ? "Switch to Job Seeker" : "Switch to Employer"}
-          >
-            <Image 
-              src="/icons/role-switch.png" 
-              alt="Switch Role" 
-              width={20} 
-              height={20} 
-              className={`w-5 h-5 transition-transform duration-500 brightness-0 invert ${isEmployer ? 'rotate-180' : ''}`}
-            />
-          </button>
-        </div>
-
-        {/* Show as Online */}
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm text-[#666] font-medium">Show as Online</span>
-          <button
-            onClick={() => setIsOnline(!isOnline)}
-            className={`relative w-11 h-6 rounded-full transition-colors ${
-              isOnline ? 'bg-gradient-to-r from-indigo-300 to-purple-300' : 'bg-gray-200'
-            }`}
-          >
-            <span
-              className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                isOnline ? 'translate-x-5' : ''
-              }`}
-            />
-          </button>
-        </div>
-
-        {/* Profile Label */}
-        <div className="space-y-2">
-          <span className="text-sm text-[#666] font-medium block mb-2">Profile Label</span>
-          <div className="flex flex-col gap-2">
-            {(isEmployer ? ['None', 'Hiring'] : ['None', 'Job Seeking']).map((label) => (
-              <label key={label} className="flex items-center gap-2 cursor-pointer group">
-                <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                  profileLabel === label 
-                    ? 'border-indigo-300' 
-                    : 'border-gray-300 group-hover:border-indigo-300'
-                }`}>
-                  {profileLabel === label && (
-                    <div className="w-2 h-2 rounded-full bg-indigo-300" />
-                  )}
-                </div>
-                <input
-                  type="radio"
-                  name="profileLabel"
-                  value={label}
-                  checked={profileLabel === label}
-                  onChange={(e) => setProfileLabel(e.target.value as any)}
-                  className="hidden"
+        {isSettingsOpen && (
+          <div className="mt-4 pt-4 border-t border-gray-100">
+            {/* Switch to Employer */}
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm text-[#666] font-medium">Switch to Employer</span>
+              <button
+                onClick={handleEmployerSwitch}
+                className={`p-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
+                  isEmployer 
+                    ? 'bg-gradient-to-r from-indigo-300 to-purple-300 ring-2 ring-purple-100' 
+                    : 'bg-gradient-to-r from-gray-200 to-gray-300 hover:from-indigo-300 hover:to-purple-300'
+                }`}
+                title={isEmployer ? "Switch to Job Seeker" : "Switch to Employer"}
+              >
+                <Image 
+                  src="/icons/role-switch.png" 
+                  alt="Switch Role" 
+                  width={20} 
+                  height={20} 
+                  className={`w-5 h-5 transition-transform duration-500 brightness-0 invert ${isEmployer ? 'rotate-180' : ''}`}
                 />
-                <span className={`text-sm ${
-                  profileLabel === label ? 'text-indigo-500 font-medium' : 'text-gray-600'
-                }`}>
-                  {label}
-                </span>
-              </label>
-            ))}
+              </button>
+            </div>
+
+            {/* Show as Online */}
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm text-[#666] font-medium">Show as Online</span>
+              <button
+                onClick={() => setIsOnline(!isOnline)}
+                className={`relative w-11 h-6 rounded-full transition-colors ${
+                  isOnline ? 'bg-gradient-to-r from-indigo-300 to-purple-300' : 'bg-gray-200'
+                }`}
+              >
+                <span
+                  className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                    isOnline ? 'translate-x-5' : ''
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Profile Label */}
+            <div className="space-y-2">
+              <span className="text-sm text-[#666] font-medium block mb-2">Profile Label</span>
+              <div className="flex flex-col gap-2">
+                {(isEmployer ? ['None', 'Hiring'] : ['None', 'Job Seeking']).map((label) => (
+                  <label key={label} className="flex items-center gap-2 cursor-pointer group">
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                      profileLabel === label 
+                        ? 'border-indigo-300' 
+                        : 'border-gray-300 group-hover:border-indigo-300'
+                    }`}>
+                      {profileLabel === label && (
+                        <div className="w-2 h-2 rounded-full bg-indigo-300" />
+                      )}
+                    </div>
+                    <input
+                      type="radio"
+                      name="profileLabel"
+                      value={label}
+                      checked={profileLabel === label}
+                      onChange={(e) => setProfileLabel(e.target.value as any)}
+                      className="hidden"
+                    />
+                    <span className={`text-sm ${
+                      profileLabel === label ? 'text-indigo-500 font-medium' : 'text-gray-600'
+                    }`}>
+                      {label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Subscription Balance */}
-      <div className={THEME.components.card.default}>
-        <h4 className={`${THEME.components.typography.cardTitle} mb-3 border-b border-gray-100 pb-2`}>Subscriptions</h4>
+      <div className={`${THEME.components.card.default} p-4`}>
+        <button 
+          onClick={() => setIsSubscriptionsOpen(!isSubscriptionsOpen)}
+          className="w-full flex items-center justify-between group"
+        >
+          <h4 className={`${THEME.components.typography.cardTitle}`}>Subscriptions</h4>
+          {isSubscriptionsOpen ? <FiChevronUp className="text-gray-400" /> : <FiChevronDown className="text-gray-400" />}
+        </button>
         
-        <div className="mb-4">
-            <p className={`${THEME.components.typography.meta} mb-1`}>Your Remaining Subscription Balance</p>
-            <div className="flex items-center gap-2">
-                <span className={`text-sm font-bold text-[${THEME.colors.primary}]`}>VIP</span>
+        {isSubscriptionsOpen && (
+          <div className="mt-3 pt-3 border-t border-gray-100">
+            <div className="mb-4">
+                <p className={`${THEME.components.typography.meta} mb-1`}>Your Remaining Subscription Balance</p>
+                <div className="flex items-center gap-2">
+                    <span className={`text-sm font-bold text-[${THEME.colors.primary}]`}>VIP</span>
+                </div>
             </div>
-        </div>
 
-        <div className="space-y-1">
-            <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
-              <span className={THEME.components.typography.meta}>Contact Views</span>
-              <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
+            <div className="space-y-1">
+                <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                  <span className={THEME.components.typography.meta}>Contact Views</span>
+                  <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
+                </div>
+                <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                  <span className={THEME.components.typography.meta}>Video Conferencing</span>
+                  <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
+                </div>
+                <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                  <span className={THEME.components.typography.meta}>Resume Downloads</span>
+                  <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
+                </div>
+                <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                  <span className={THEME.components.typography.meta}>Advertisment Banners</span>
+                  <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
+                </div>
             </div>
-            <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
-              <span className={THEME.components.typography.meta}>Video Conferencing</span>
-              <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
-            </div>
-            <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
-              <span className={THEME.components.typography.meta}>Resume Downloads</span>
-              <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
-            </div>
-            <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
-              <span className={THEME.components.typography.meta}>Advertisment Banners</span>
-              <span className={`${THEME.components.typography.cardTitle} text-xs`}>0</span>
-            </div>
-        </div>
+          </div>
+        )}
       </div>
       <EmployerVerificationModal
         isOpen={showVerificationModal}
