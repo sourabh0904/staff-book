@@ -11,6 +11,7 @@ import {
   FiBookmark,
   FiCalendar,
   FiChevronRight,
+  FiChevronLeft,
   FiArrowLeft,
   FiNavigation,
   FiEye,
@@ -206,6 +207,10 @@ export default function JobCategoryPage() {
   // Accordion state - only one section open at a time
   const [openSection, setOpenSection] = useState<string | null>("radius");
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
   // Filter options
   const locations = ["Bangalore", "Mumbai", "Hyderabad", "Pune", "Chennai"];
   const workModes = ["Work from office", "Hybrid", "Remote"];
@@ -249,6 +254,28 @@ export default function JobCategoryPage() {
       matchesIndustry
     );
   });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
+  const paginatedJobs = filteredJobs.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Reset page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    searchQuery,
+    selectedLocation,
+    selectedWorkMode,
+    selectedExperience,
+    selectedIndustry,
+    selectedDepartments,
+    salaryRange,
+    radiusValue,
+    experienceYears,
+  ]);
 
   const toggleFilter = (
     value: string,
@@ -802,8 +829,9 @@ export default function JobCategoryPage() {
                 </Button>
               </div>
             ) : (
+              <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredJobs.map((job) => (
+                {paginatedJobs.map((job) => (
                   <div
                     key={job.id}
                     className="bg-white rounded-[1.25rem] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
@@ -948,6 +976,50 @@ export default function JobCategoryPage() {
                   </div>
                 ))}
               </div>
+              
+              {/* Pagination Controls */}
+              {filteredJobs.length > 0 && (
+                <div className="flex items-center justify-center gap-2 mt-8 pb-8">
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className={`p-2 rounded-lg border border-gray-200 transition-colors ${
+                      currentPage === 1 
+                        ? 'text-gray-300 cursor-not-allowed' 
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
+                    }`}
+                  >
+                    <FiChevronLeft size={20} />
+                  </button>
+                  
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-10 h-10 rounded-lg font-bold text-sm transition-all ${
+                        currentPage === page
+                          ? `${THEME.components.button.primary} shadow-md`
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className={`p-2 rounded-lg border border-gray-200 transition-colors ${
+                      currentPage === totalPages 
+                        ? 'text-gray-300 cursor-not-allowed' 
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
+                    }`}
+                  >
+                    <FiChevronRight size={20} />
+                  </button>
+                </div>
+              )}
+              </>
             )}
           </div>
         </div>
